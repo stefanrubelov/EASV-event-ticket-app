@@ -35,7 +35,7 @@ public class QueryBuilder {
     final private Logger logger = Logger.getAnonymousLogger();
 
     public QueryBuilder() {
-        this.dbConnection = new DatabaseConnection();
+        this.dbConnection = DatabaseConnection.getInstance();
         insertColumnsPlaceholders = new ArrayList<>();
     }
 
@@ -71,6 +71,12 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param column String
+     * @param operator
+     * @param value
+     * @return
+     */
     public QueryBuilder where(String column, String operator, Object value) {
         whereClauses.add(column + " " + operator + " ?");
         parameters.add(value);
