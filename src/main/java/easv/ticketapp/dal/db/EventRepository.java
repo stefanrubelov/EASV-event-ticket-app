@@ -35,6 +35,13 @@ public class EventRepository {
         return events;
     }
 
+    public void delete(int id) {
+        queryBuilder
+                .table("events")
+                .where("id", "=", id)
+                .delete();
+    }
+
     private Event mapModel(ResultSet resultSet, int id) throws SQLException {
         String name = resultSet.getString("name");
         java.sql.Date startDate = resultSet.getDate("start_date");
