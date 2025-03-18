@@ -3,14 +3,11 @@ package easv.ticketapp.gui;
 import easv.ticketapp.be.User;
 import easv.ticketapp.bll.UserService;
 import easv.ticketapp.security.Auth;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import net.synedra.validatorfx.Validator;
 
 public class LoginController {
@@ -24,15 +21,12 @@ public class LoginController {
     @FXML
     private Label errorLbl;
 
-    public void intialize() {
-        Platform.runLater(() -> {
-            Scene scene = emailField.getScene();
-            if (scene != null) {
-                scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                    if (event.getCode() == KeyCode.ENTER) {
-                        handleLogin();
-                    }
-                });
+    @FXML
+    public void initialize() {
+        System.out.println("test");
+        passwordField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleLogin();
             }
         });
     }
