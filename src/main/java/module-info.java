@@ -10,5 +10,6 @@ module easv.ticketapp {
     requires com.microsoft.sqlserver.jdbc;
 
     opens easv.ticketapp to javafx.fxml;
+    opens easv.ticketapp.be to javafx.base;
     exports easv.ticketapp;
 }
