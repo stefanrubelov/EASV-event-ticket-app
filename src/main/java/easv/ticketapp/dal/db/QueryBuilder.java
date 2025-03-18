@@ -39,6 +39,10 @@ public class QueryBuilder {
         insertColumnsPlaceholders = new ArrayList<>();
     }
 
+    /**
+     * @param columns String...
+     * @return QueryBuilder
+     */
     public QueryBuilder select(String... columns) {
         if (this.selectClause == null) {
             this.selectClause = "";
@@ -61,11 +65,19 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param table String
+     * @return QueryBuilder
+     */
     public QueryBuilder from(String table) {
         this.fromClause = table;
         return this;
     }
 
+    /**
+     * @param table String
+     * @return QueryBuilder
+     */
     public QueryBuilder table(String table) {
         this.fromClause = table;
         return this;
@@ -73,9 +85,9 @@ public class QueryBuilder {
 
     /**
      * @param column String
-     * @param operator
-     * @param value
-     * @return
+     * @param operator String
+     * @param value Object
+     * @return QueryBuilder
      */
     public QueryBuilder where(String column, String operator, Object value) {
         whereClauses.add(column + " " + operator + " ?");
@@ -83,6 +95,29 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param column String
+     * @param operator String
+     * @param value Object
+     * @return QueryBuilder
+     */
+    public QueryBuilder orWhere(String column, String operator, Object value) {
+        // If this is the first where condition, treat it as a regular WHERE
+        if (whereClauses.isEmpty()) {
+            return where(column, operator, value);
+        }
+
+        whereClauses.add(column + " " + operator + " ?");
+        parameters.add(value);
+
+        return this;
+    }
+
+    /**
+     * @param column String
+     * @param values List<Integer>
+     * @return QueryBuilder
+     */
     public QueryBuilder whereIn(String column, List<Integer> values) {
         if (values == null || values.isEmpty()) {
             // log
@@ -95,6 +130,12 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param column String
+     * @param subquery String
+     * @param subqueryParams List<Integer>
+     * @return QueryBuilder
+     */
     public QueryBuilder whereInSubquery(String column, String subquery, List<Integer> subqueryParams) {
         if (subquery == null || subquery.isEmpty()) {
             throw new IllegalArgumentException("Subquery cannot be null or empty");
@@ -110,6 +151,12 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param table String
+     * @param condition String
+     * @param type String
+     * @return QueryBuilder
+     */
     public QueryBuilder join(String table, String condition, String type) {
         if (type.isEmpty() || type.equals(" ")) {
             this.joinClauses.add("JOIN " + table + " ON " + condition);
@@ -119,33 +166,66 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param table String
+     * @param condition String
+     * @return QueryBuilder
+     */
     public QueryBuilder innerJoin(String table, String condition) {
         return join(table, condition, "INNER");
     }
 
+    /**
+     * @param table String
+     * @param condition String
+     * @return QueryBuilder
+     */
     public QueryBuilder leftJoin(String table, String condition) {
         return join(table, condition, "LEFT");
     }
 
+    /**
+     * @param table String
+     * @param condition String
+     * @return QueryBuilder
+     */
     public QueryBuilder rightJoin(String table, String condition) {
         return join(table, condition, "RIGHT");
     }
 
+    /**
+     * @param otherQuery QueryBuilder
+     * @return QueryBuilder
+     */
     public QueryBuilder union(QueryBuilder otherQuery) {
         this.unionClauses.add(otherQuery.build());
         return this;
     }
 
+    /**
+     * @param column String
+     * @param direction String
+     * @return QueryBuilder
+     */
     public QueryBuilder orderBy(String column, String direction) {
         this.orderByClause = column + " " + direction.toUpperCase();
         return this;
     }
 
+    /**
+     * @param top int
+     * @return QueryBuilder
+     */
     public QueryBuilder top(int top) {
         this.top = top;
         return this;
     }
 
+    /**
+     * @param column String
+     * @param value Object
+     * @return QueryBuilder
+     */
     public QueryBuilder set(String column, Object value) {
         String valueString;
 
@@ -164,6 +244,12 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param column String
+     * @param value Object
+     * @param raw boolean
+     * @return QueryBuilder
+     */
     public QueryBuilder set(String column, Object value, boolean raw) {
         String valueString;
 
@@ -182,10 +268,20 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param column String
+     * @param value Object
+     * @return QueryBuilder
+     */
     public QueryBuilder insert(String column, Object value) {
         return insert(new String[]{column}, new Object[]{value});
     }
 
+    /**
+     * @param columns String[]
+     * @param values Object[]
+     * @return QueryBuilder
+     */
     public QueryBuilder insert(String[] columns, Object[] values) {
         if (columns.length != values.length) {
             throw new IllegalArgumentException("Columns and values must have the same length.");
@@ -201,6 +297,10 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @param columns String...
+     * @return QueryBuilder
+     */
     public QueryBuilder groupBy(String... columns) {
         if (columns.length == 0) {
             return this;
@@ -211,6 +311,9 @@ public class QueryBuilder {
         return this;
     }
 
+    /**
+     * @return String
+     */
     public String build() {
         if (fromClause.isEmpty()) {
             throw new IllegalStateException("FROM clause is required.");
@@ -250,7 +353,13 @@ public class QueryBuilder {
         }
 
         if (!whereClauses.isEmpty()) {
-            query.append(" WHERE ").append(String.join(" AND ", whereClauses));
+            query.append(" WHERE ");
+
+            if (whereClauses.size() > 1) {
+                query.append("(").append(String.join(" OR ", whereClauses)).append(")");
+            } else {
+                query.append(whereClauses.get(0));
+            }
         }
 
         if (!groupByClauses.isEmpty()) {
@@ -268,6 +377,9 @@ public class QueryBuilder {
         return query.toString();
     }
 
+    /**
+     * @return boolean
+     */
     public boolean save() {
         this.get = false;
         this.delete = false;
@@ -293,6 +405,9 @@ public class QueryBuilder {
         }
     }
 
+    /**
+     * @return boolean
+     */
     public ResultSet saveAndReturn() {
         this.get = false;
         this.update = false;
@@ -328,6 +443,9 @@ public class QueryBuilder {
     }
 
 
+    /**
+     * @return ResultSet
+     */
     public ResultSet get() {
         this.insert = false;
         this.update = false;
@@ -352,6 +470,9 @@ public class QueryBuilder {
         }
     }
 
+    /**
+     * @return boolean
+     */
     public boolean update() {
         this.insert = false;
         this.get = false;
@@ -378,6 +499,9 @@ public class QueryBuilder {
         }
     }
 
+    /**
+     * @return boolean
+     */
     public boolean delete() {
         this.insert = false;
         this.update = false;

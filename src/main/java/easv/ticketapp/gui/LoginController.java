@@ -23,7 +23,6 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        System.out.println("test");
         passwordField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 handleLogin();
@@ -39,7 +38,7 @@ public class LoginController {
 
         User auth = userService.authenticate(email, password);
         if (auth == null) {
-            errorLbl.setText("Invalid email or password");
+            errorLbl.setText("Invalid username/email or password");
         } else {
             System.out.println("logged in");
             System.out.println(Auth.getUser().isAdmin());
