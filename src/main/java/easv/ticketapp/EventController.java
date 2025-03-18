@@ -5,8 +5,7 @@ import easv.ticketapp.bll.EventManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Date;
@@ -25,6 +24,14 @@ public class EventController {
     private TableColumn<Event, String> locationColumn;
     @FXML
     private TableColumn<Event, String> descriptionColumn;
+    @FXML
+    private ContextMenu contextMenu;
+    @FXML
+    private MenuItem delete;
+    @FXML
+    private MenuItem edit;
+    @FXML
+    private MenuItem add;
 
     private final ObservableList<Event> eventList = FXCollections.observableArrayList();
 
@@ -32,6 +39,7 @@ public class EventController {
     public void initialize() {
         fetchEvents();
         setupTableColumns();
+        setUpContextMenu();
     }
 
     private void setupTableColumns() {
@@ -55,6 +63,24 @@ public class EventController {
         if (events.isEmpty()) {
             System.out.println("No events found in the database!");
         }
+    }
+
+    private void setUpContextMenu() {
+
+        delete.setOnAction(_ -> {
+           Event selectedEvent = eventTable.getSelectionModel().getSelectedItem();
+            if (selectedEvent != null) {
+                eventManager.deleteEvent(selectedEvent);
+                ObservableList<Event> currentItems = eventTable.getItems();
+                currentItems.remove(selectedEvent);
+            }
+        });
+
+        eventTable.setRowFactory(_ -> {
+            TableRow<Event> row = new TableRow<>();
+            row.setContextMenu(contextMenu);
+            return row;
+        });
     }
 
 }
