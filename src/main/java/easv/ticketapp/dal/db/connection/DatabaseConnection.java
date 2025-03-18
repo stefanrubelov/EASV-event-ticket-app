@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DatabaseConnection implements AutoCloseable {
+    private static DatabaseConnection INSTANCE;
+
     public Connection getConnection() throws SQLServerException {
         SQLServerDataSource ds;
         ds = new SQLServerDataSource();
@@ -25,6 +27,14 @@ public class DatabaseConnection implements AutoCloseable {
             return true;
         }
     }
+
+    public static DatabaseConnection getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new DatabaseConnection();
+        }
+        return INSTANCE;
+    }
+
 
     @Override
     public void close() throws Exception {

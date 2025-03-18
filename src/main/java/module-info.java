@@ -8,8 +8,11 @@ module easv.ticketapp {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
+    requires net.synedra.validatorfx;
 
     opens easv.ticketapp to javafx.fxml;
     opens easv.ticketapp.be to javafx.base;
+    opens easv.ticketapp.gui to javafx.fxml;
+
     exports easv.ticketapp;
 }
