@@ -31,15 +31,15 @@ public class PageManager {
     }
 
     public static void adminView(ActionEvent event) {
-        switchView("/easv/ticketapp/coordinatorsScene.fxml", event);
+        switchView("/easv/ticketapp/coordinators-scene.fxml", event);
     }
     public static void coordinatorsView(ActionEvent event) {
-        switchView("/easv/ticketapp/eventScene.fxml", event);
+        switchView("/easv/ticketapp/event-scene.fxml", event);
     }
     public static void ticketView(ActionEvent event) {
-        switchView("/easv/ticketapp/ticketScene.fxml", event);
+        switchView("/easv/ticketapp/ticket-scene.fxml", event);
     }
     public static void addCoordinatorView(ActionEvent event) {
-        switchView("/easv/ticketapp/addCoordinatorScene.fxml", event);
+        switchView("/easv/ticketapp/add-coordinator-scene.fxml", event);
     }
 }
