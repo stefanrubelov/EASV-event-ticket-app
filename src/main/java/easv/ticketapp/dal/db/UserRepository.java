@@ -20,6 +20,7 @@ public class UserRepository {
         User user = null;
         ResultSet result = queryBuilder.from("users")
                 .where("email", "=", email)
+                .orWhere("email", "like", email + "%")
                 .get();
 
         try {
