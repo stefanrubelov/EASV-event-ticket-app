@@ -26,8 +26,8 @@ public class AddCoordinatorController {
         String name = coordinatorName.getText();
         String email = coordinatorEmail.getText();
         String password = coordinatorPassword.getText();
-
-        User user = new User(name, email, password);
+        Integer user_type = 2;
+        User user = new User(name, email, password, user_type);
         userService.addUser(user);
     }
 }

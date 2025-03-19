@@ -86,7 +86,7 @@ public class UserRepository {
                 .insert("name", user.getName())
                 .insert("email", user.getEmail())
                 .insert("password", user.getPassword())
-                //.insert("user_type", user.getUserType())
+                .insert("user_type", user.getUserType())
                 .saveAndReturn();
 
         try {
