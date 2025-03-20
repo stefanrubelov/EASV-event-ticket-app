@@ -31,6 +31,16 @@ public class User {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+    public User (int id){
+        this.id = id;
+    }
+
+    public User(String name, String email, String password,Integer userType) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+    }
 
     public int getId() {
         return id;

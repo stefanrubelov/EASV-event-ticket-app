@@ -3,6 +3,7 @@ package easv.ticketapp.gui;
 import easv.ticketapp.be.User;
 import easv.ticketapp.bll.UserService;
 import easv.ticketapp.security.Auth;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -22,16 +23,16 @@ public class LoginController {
     private Label errorLbl;
 
     @FXML
-    public void initialize() {
+    public void initialize(ActionEvent actionEvent) {
         passwordField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                handleLogin();
+                handleLogin(actionEvent);
             }
         });
     }
 
     @FXML
-    private void handleLogin() {
+    private void handleLogin(ActionEvent event) {
         validate();
         String email = emailField.getText();
         String password = passwordField.getText();
@@ -40,8 +41,11 @@ public class LoginController {
         if (auth == null) {
             errorLbl.setText("Invalid username/email or password");
         } else {
-            System.out.println("logged in");
-            System.out.println(Auth.getUser().isAdmin());
+            if(Auth.getUser().isAdmin()){
+                PageManager.adminView(event);
+            }else{
+                PageManager.coordinatorsView(event);
+            }
             //TODO redirect
         }
     }

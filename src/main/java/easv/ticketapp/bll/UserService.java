@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.List;
 
 public class UserService {
 
@@ -33,5 +34,17 @@ public class UserService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void deleteUser(User user) {
+        userRepository.delete(user.getId());
+    }
+
+    public List<User> getCoordinators() {
+        return userRepository.getAllCoordinators();
+    }
+
+    public void addUser(User user) {
+        User newCoordinator = userRepository.create(user);
     }
 }
