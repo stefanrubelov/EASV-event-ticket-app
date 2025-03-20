@@ -4,25 +4,48 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.LoginController">
     <children>
-      <VBox alignment="CENTER" prefHeight="300.0" prefWidth="300.0">
-         <children>
-              <Pane fx:id="root" prefHeight="300.0" prefWidth="300.0">
-               <children>
-                  <Button layoutX="127.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
-                  <TextField fx:id="emailField" layoutX="76.0" layoutY="59.0" />
-                  <PasswordField fx:id="passwordField" layoutX="76.0" layoutY="125.0" />
-                  <Label layoutX="76.0" layoutY="43.0" text="Email" />
-                  <Label layoutX="76.0" layoutY="108.0" text="Password" />
-                  <Label fx:id="errorLbl" layoutX="136.0" layoutY="165.0" />
-               </children>
-            </Pane>
-         </children>
-      </VBox>
+        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="300.0">
+            <children>
+                <Pane fx:id="root" prefHeight="300.0" prefWidth="300.0">
+                    <children>
+                        <Rectangle arcHeight="5.0" fill="#545657" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
+                        <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@../../images/Animation%20-%201738315984207.gif" />
+                            </image>
+                        </ImageView>
+                        <TextField fx:id="emailField" layoutX="75.0" layoutY="106.0" promptText="email" />
+                        <PasswordField fx:id="passwordField" layoutX="75" layoutY="177.0" promptText="password" />
+                        <Label layoutX="78.0" layoutY="79.0" text="Email">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font></Label>
+                        <Label layoutX="78.0" layoutY="150.0" text="Password">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font></Label>
+                        <Label fx:id="errorLbl" layoutX="55.0" layoutY="210" textFill="RED" />
+                        <Text fill="WHITE" layoutX="120.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Text>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="7.0" layoutX="92.0" layoutY="57.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" />
+                        <Button layoutX="84.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleLogin" onMouseClicked="#handleLogin" prefHeight="25.0" prefWidth="136.0" text="Login" />
+                    </children>
+                </Pane>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>

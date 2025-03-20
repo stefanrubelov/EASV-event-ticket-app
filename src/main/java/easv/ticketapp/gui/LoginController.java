@@ -46,7 +46,6 @@ public class LoginController {
             }else{
                 PageManager.coordinatorsView(event);
             }
-            //TODO redirect
         }
     }
 
