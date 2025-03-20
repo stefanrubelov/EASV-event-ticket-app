@@ -9,6 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import net.synedra.validatorfx.Validator;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class LoginController {
     private final UserService userService = new UserService();
