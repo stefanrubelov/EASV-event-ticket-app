@@ -4,21 +4,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.AddCoordinatorController">
    <children>
-      <Label layoutX="80.0" layoutY="85.0" text="Name" />
-      <Label layoutX="82.0" layoutY="176.0" text="Email" />
-      <Label layoutX="85.0" layoutY="275.0" text="Password" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#414141" height="406.0" layoutX="-7.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="611.0" />
+      <Label layoutX="80.0" layoutY="85.0" text="Name" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="81.0" layoutY="176.0" text="Email" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="71.0" layoutY="275.0" text="Password" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <TextField fx:id="coordinatorName" layoutX="140.0" layoutY="81.0" prefHeight="25.0" prefWidth="320.0" promptText="Enter the name" />
       <TextField fx:id="coordinatorEmail" layoutX="140.0" layoutY="172.0" prefHeight="25.0" prefWidth="320.0" promptText="Enter the email" />
       <TextField fx:id="coordinatorPassword" layoutX="140.0" layoutY="271.0" prefHeight="25.0" prefWidth="320.0" promptText="Enter a new password" />
-      <Text layoutX="227.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new coordinator">
+      <Text fill="WHITE" layoutX="197.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add New Coordinator">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
       <Button layoutX="22.0" layoutY="345.0" mnemonicParsing="false" onAction="#onReturn" text="Return" />
