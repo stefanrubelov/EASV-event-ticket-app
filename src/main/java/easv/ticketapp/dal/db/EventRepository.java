@@ -35,6 +35,7 @@ public class EventRepository {
         return events;
     }
 
+
     public void delete(int id) {
         queryBuilder
                 .table("events")
