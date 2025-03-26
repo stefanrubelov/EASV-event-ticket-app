@@ -22,7 +22,7 @@
                         <Rectangle arcHeight="5.0" fill="#545657" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
                         <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true">
                             <image>
-                                <Image url="@../../images/Animation - 1738315984207.gif" />
+                                <Image url="@../../images/Animation%20-%201738315984207.gif" />
                             </image>
                         </ImageView>
                         <TextField fx:id="emailField" layoutX="75.0" layoutY="106.0" promptText="email" />

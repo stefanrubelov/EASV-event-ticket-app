@@ -12,6 +12,7 @@ module easv.ticketapp {
     requires java.desktop;
 
     opens easv.ticketapp to javafx.fxml;
+    opens easv.ticketapp.be to javafx.base;
     opens easv.ticketapp.gui to javafx.fxml;
 
     exports easv.ticketapp;
