@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="easv.ticketapp.gui.EventController">
+   <children>
+      <Label layoutX="251.0" layoutY="28.0" text="Event List">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="eventTable" layoutX="23.0" layoutY="85.0" prefHeight="282.0" prefWidth="556.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="122.97849655151367" text="name" />
+          <TableColumn fx:id="dateColumn" prefWidth="94.156494140625" text="date" />
+            <TableColumn fx:id="locationColumn" prefWidth="91.65472412109375" text="location" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="243.77536010742188" text="description" />
+        </columns>
+         <contextMenu>
+            <ContextMenu fx:id="contextMenu">
+              <items>
+                <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete" />
+                  <MenuItem fx:id="edit"  mnemonicParsing="false" text="Edit" />
+                  <MenuItem fx:id="add"  mnemonicParsing="false" text="Add" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
+   </children>
+</Pane>
