@@ -64,5 +64,6 @@ public class EventController {
         allEvents.remove(event);
         eventManager.deleteEvent(event);
         setupPagination();
+        loadPage(pagination.getCurrentPageIndex());
     }
 }
