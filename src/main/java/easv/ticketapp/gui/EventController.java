@@ -13,7 +13,7 @@ import java.util.List;
 
 public class EventController {
     private final EventManager eventManager = new EventManager();
-    private static final int ITEMS_PER_PAGE = 5;  // Adjust based on your UI design
+    private static final int ITEMS_PER_PAGE = 5;
 
     @FXML
     private VBox eventContainer;
@@ -30,7 +30,7 @@ public class EventController {
 
     private void setupPagination() {
         int pageCount = (int) Math.ceil((double) allEvents.size() / ITEMS_PER_PAGE);
-        pagination.setPageCount(Math.max(pageCount, 1)); // Ensure at least one page
+        pagination.setPageCount(Math.max(pageCount, 1));
         pagination.setCurrentPageIndex(0);
         pagination.currentPageIndexProperty().addListener((obs, oldIndex, newIndex) -> loadPage(newIndex.intValue()));
         loadPage(0);
@@ -50,6 +50,7 @@ public class EventController {
 
                 EventCellController eventCellController = childLoader.getController();
                 eventCellController.setEvent(event);
+                eventCellController.setEventController(this);
 
                 eventContainer.getChildren().add(eventCell);
             } catch (IOException e) {
@@ -57,5 +58,11 @@ public class EventController {
                 System.out.println("Error loading event-cell.fxml");
             }
         }
+    }
+
+    public void deleteEvent(Event event) {
+        allEvents.remove(event);
+        eventManager.deleteEvent(event);
+        setupPagination();
     }
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
    <children>
       <Rectangle height="86.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1000.0" />
       <Label layoutX="455.0" layoutY="27.0" text="Event List" textFill="WHITE">
@@ -74,9 +74,9 @@
             <Image url="@../../images/events gif.gif" />
          </image>
       </ImageView>
-      <VBox fx:id="eventContainer" layoutX="85.0" layoutY="84.0" prefHeight="306.0" prefWidth="828.0">
+      <VBox fx:id="eventContainer" layoutX="85.0" layoutY="84.0" prefHeight="234.0" prefWidth="828.0">
          <fx:include source="event-cell.fxml" />
       </VBox>
-      <Pagination fx:id="pagination" layoutX="397.0" layoutY="471.0" prefHeight="60.0" prefWidth="200.0"  VBox.vgrow="ALWAYS" maxPageIndicatorCount="5"/>
+      <Pagination fx:id="pagination" layoutX="411.0" layoutY="325.0" maxPageIndicatorCount="5" prefHeight="60.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
    </children>
 </Pane>
