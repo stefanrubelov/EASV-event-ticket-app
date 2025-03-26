@@ -17,7 +17,4 @@ module easv.ticketapp {
 
     exports easv.ticketapp;
     exports easv.ticketapp.gui;
-
-    opens easv.ticketapp.gui to javafx.fxml;
 }
-
