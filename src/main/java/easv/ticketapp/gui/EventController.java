@@ -13,6 +13,7 @@ import java.util.List;
 
 public class EventController {
     private final EventManager eventManager = new EventManager();
+    private static final int ITEMS_PER_PAGE = 5;
 
     @FXML
     private TableView<Event> eventTable;
