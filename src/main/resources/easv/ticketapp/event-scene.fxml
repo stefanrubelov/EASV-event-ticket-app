@@ -11,21 +11,21 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
    <children>
-      <Rectangle height="86.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="612.0" />
+      <Rectangle height="75.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="612.0" />
       <Label layoutX="251.0" layoutY="25.0" text="Event List" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="eventTable" layoutX="87.0" layoutY="75.0" prefHeight="300.0" prefWidth="439.0">
+      <TableView fx:id="eventTable" layoutX="47.0" layoutY="75.0" prefHeight="325.0" prefWidth="504.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="122.97849655151367" text="Name" />
           <TableColumn fx:id="dateColumn" prefWidth="94.156494140625" text="Date" />
             <TableColumn fx:id="locationColumn" prefWidth="91.65472412109375" text="Location" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="128.5" text="Description" />
-            <TableColumn fx:id="dateColumn1" prefWidth="255.5" text="date" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="193.5" text="Description" />
+            <TableColumn fx:id="dateColumn1" prefWidth="190.5" text="date" />
         </columns>
          <contextMenu>
             <ContextMenu fx:id="contextMenu">
@@ -37,61 +37,66 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="306.0" layoutX="-3.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="89.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="306.0" layoutX="525.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="87.0" />
-      <ImageView fitHeight="82.0" fitWidth="79.0" layoutX="8.0">
+      <Rectangle fill="#00aaff" height="325.0" layoutX="551.0" layoutY="75.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc300" height="400.0" layoutX="-3.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+      <ImageView fitHeight="75.0" fitWidth="93.0" layoutX="-1.0">
          <image>
             <Image url="@../../images/events%20gif.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="14.0" layoutY="120.0" rotate="30.0">
+      <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="3.0" layoutY="90.0" rotate="30.0">
          <image>
             <Image url="@../../images/Beer_Mug_PNG_Vector_Clipart_Imag.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="48.0" layoutY="164.0" rotate="-20.0">
+      <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="4.0" layoutY="150.0" rotate="-20.0">
          <image>
             <Image url="@../../images/burger%20png.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="31.0" layoutX="7.0" layoutY="207.0">
+      <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="553.0" layoutY="211.0">
          <image>
             <Image url="@../../images/music%20png.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="34.0" layoutY="251.0">
+      <ImageView fitHeight="45.0" fitWidth="50.0" layoutX="-1.0" layoutY="278.0">
          <image>
             <Image url="@../../images/image-removebg-preview%20(6).png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="9.0" layoutY="314.0">
+      <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="5.0" layoutY="336.0">
          <image>
             <Image url="@../../images/book%20png.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="569.0" layoutY="117.0" rotate="-20.0">
+      <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="557.0" layoutY="90.0" rotate="-20.0">
          <image>
             <Image url="@../../images/controllerpng.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="37.0" layoutX="532.0" layoutY="154.0" rotate="20.0">
+      <ImageView fitHeight="46.0" fitWidth="37.0" layoutX="558.0" layoutY="145.0" rotate="20.0">
          <image>
             <Image url="@../../images/ticketpng.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="47.0" layoutX="564.0" layoutY="191.0" rotate="40.0">
+      <ImageView fitHeight="67.0" fitWidth="47.0" layoutX="-1.0" layoutY="198.0" rotate="40.0">
          <image>
             <Image url="@../../images/carpng.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="525.0" layoutY="254.0">
+      <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="557.0" layoutY="284.0">
          <image>
             <Image url="@../../images/cocktailpng.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="51.0" layoutX="550.0" layoutY="308.0" rotate="20.0">
+      <ImageView fitHeight="38.0" fitWidth="51.0" layoutX="551.0" layoutY="335.0" rotate="20.0">
          <image>
             <Image url="@../../images/surf%20boardpng.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="197.0" fitWidth="244.0" layoutX="466.0" layoutY="-61.0">
+         <image>
+            <Image url="@../../images/easvlogo.png" />
          </image>
       </ImageView>
    </children>
