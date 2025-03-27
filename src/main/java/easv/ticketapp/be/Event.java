@@ -1,15 +1,15 @@
 package easv.ticketapp.be;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Event {
     private final Integer id;
     private String name;
-    private String date;
+    private LocalDateTime date;
     private String location;
     private String description;
 
-    public Event(Integer id, String name, String date, String location, String description) {
+    public Event(Integer id, String name, LocalDateTime date, String location, String description) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -29,12 +29,12 @@ public class Event {
         this.name = name;
     }
 
-    public String getDate() {
+    public LocalDateTime getStart_date() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = String.valueOf(date);
+    public void setStart_date(LocalDateTime date) {
+        this.date = date;
     }
 
     public String getLocation() {

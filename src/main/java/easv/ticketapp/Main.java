@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("event-scene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ticket-factory-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
