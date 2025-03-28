@@ -30,7 +30,7 @@ public class EventCellController {
     public void setEvent(Event event) {
         this.event = event;
         nameLabel.setText(event.getName());
-        dateLabel.setText(event.getDate().toString());
+        dateLabel.setText(event.getStart_date().toString());
         locationLabel.setText(event.getLocation());
         descriptionLabel.setText(event.getDescription());
     }

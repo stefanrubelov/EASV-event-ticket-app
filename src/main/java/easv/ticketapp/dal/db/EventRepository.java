@@ -2,6 +2,7 @@ package easv.ticketapp.dal.db;
 
 import easv.ticketapp.be.Event;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -44,14 +45,13 @@ public class EventRepository {
 
     private Event mapModel(ResultSet resultSet, int id) throws SQLException {
         String name = resultSet.getString("name");
-        java.sql.Date startDate = resultSet.getDate("date");
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(startDate);
+        LocalDateTime date = resultSet.getTimestamp("date").toLocalDateTime();
         String location = resultSet.getString("location");
         String description = resultSet.getString("description");
 
 
 
-        return new Event(id, name, formattedDate, location, description);
+        return new Event(id, name, date, location, description);
     }
 
     public void updateEvent(Event event) {
