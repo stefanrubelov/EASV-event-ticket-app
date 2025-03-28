@@ -20,7 +20,7 @@ public class Main extends Application {
 
         DatabaseConnection DB = new DatabaseConnection();
         try {
-            if(DB.testConnection()){
+            if (DB.testConnection()) {
                 System.out.println("Connection successful");
             }
         } catch (SQLException e) {

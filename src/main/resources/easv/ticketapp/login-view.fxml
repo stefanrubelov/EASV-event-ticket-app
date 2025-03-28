@@ -12,40 +12,43 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.LoginController">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" styleClass="login-screen-AnchorPane" stylesheets="@../../main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.LoginController">
     <children>
-        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="300.0">
+        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="300.0" styleClass="login-screen-vBox">
             <children>
-                <Pane fx:id="root" prefHeight="300.0" prefWidth="300.0">
+                <Pane fx:id="root" prefHeight="300.0" prefWidth="300.0" styleClass="login-screen-pane">
                     <children>
-                        <Rectangle arcHeight="5.0" fill="#545657" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
-                        <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true">
+                        <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true">
                             <image>
                                 <Image url="@../../images/Animation%20-%201738315984207.gif" />
                             </image>
                         </ImageView>
-                        <TextField fx:id="emailField" layoutX="44.0" layoutY="106.0" prefHeight="25.0" prefWidth="210.0" promptText="email" />
-                        <PasswordField fx:id="passwordField" layoutX="44.0" layoutY="177.0" prefHeight="25.0" prefWidth="210.0" promptText="password" />
-                        <TextField fx:id="passwordTextField" layoutX="44.0" layoutY="177.0" managed="false" prefWidth="210.0" promptText="password" visible="false" />
-                        <Button fx:id="togglePasswordVisibilityBtn" layoutX="214.0" layoutY="177.0" mnemonicParsing="false" prefWidth="40.0" text="👁" />
-                        <Label layoutX="44.0" layoutY="89.0" text="Email/Username">
+                        <TextField fx:id="emailField" layoutX="75.0" layoutY="133.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="email" styleClass="main-input" />
+                        <PasswordField fx:id="passwordField" layoutX="75.0" layoutY="210.0" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="password" styleClass="main-input" />
+                        <TextField fx:id="passwordTextField" layoutX="75.0" layoutY="210.0" managed="false" prefWidth="210.0" promptText="password" styleClass="main-input" visible="false" />
+                        <Button fx:id="togglePasswordVisibilityBtn" layoutX="283.0" layoutY="213.0" mnemonicParsing="false" onMouseClicked="#togglePasswordVisibility" prefHeight="26.0" prefWidth="42.0" styleClass="toggle-password-btn" stylesheets="@../../main.css" text="👁" />
+                        <Label layoutX="91.0" layoutY="118.0" text="Email">
+                            <font>
+                                <Font name="Arial Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="91.0" layoutY="192.0" text="Password" textFill="#484848">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </Label>
-                        <Label layoutX="44.0" layoutY="160.0" text="Password">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="errorLbl" layoutX="55.0" layoutY="210" textFill="RED" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="4.0" layoutX="107.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="91.0" />
-                        <Button layoutX="84.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleLogin" onMouseClicked="#handleLogin" prefHeight="25.0" prefWidth="136.0" text="Login" />
-                        <ImageView fitHeight="58.0" fitWidth="53.0" layoutX="126.0" layoutY="7.0">
+                        <Label fx:id="errorLbl" ellipsisString="" layoutX="44.0" layoutY="142.0" prefHeight="17.0" prefWidth="0.0" textFill="RED" textOverrun="CLIP" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="4.0" layoutX="150.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                        <Button layoutX="132.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="25.0" prefWidth="136.0" styleClass="main-btn" text="Login" />
+                        <ImageView fitHeight="80.0" fitWidth="65.0" layoutX="168.0">
                             <image>
                                 <Image url="@../../images/EASV.png" />
                             </image>
                         </ImageView>
+                  <Button layoutX="138.0" layoutY="276.0" mnemonicParsing="false" onAction="#forgotPasswordBtn" prefHeight="4.0" prefWidth="124.0" styleClass="forgot-password" text="Forgot password?">
+                     <font>
+                        <Font size="10.0" />
+                     </font></Button>
                     </children>
                 </Pane>
             </children>

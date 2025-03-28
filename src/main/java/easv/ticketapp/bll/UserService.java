@@ -25,6 +25,10 @@ public class UserService {
         return null;
     }
 
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     private String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-512");
@@ -34,6 +38,13 @@ public class UserService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public boolean updatePassword(User user, String password) {
+        System.out.println(user.getEmail());
+        System.out.println(hashPassword(password));
+
+        return userRepository.updatePassword(user, hashPassword(password));
     }
 
     public void deleteUser(User user) {
