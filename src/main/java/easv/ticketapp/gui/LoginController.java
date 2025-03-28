@@ -34,23 +34,22 @@ public class LoginController {
     }
 
     private void togglePasswordVisibility() {
-        // Simple direct toggle mechanism
         if (passwordField.isVisible()) {
-            // Switch to visible text field
             passwordTextField.setText(passwordField.getText());
             passwordField.setVisible(false);
             passwordField.setManaged(false);
             passwordTextField.setVisible(true);
             passwordTextField.setManaged(true);
             passwordTextField.requestFocus();
+            passwordTextField.positionCaret(passwordTextField.getText().length()); // Move caret to end
         } else {
-            // Switch back to password field
             passwordField.setText(passwordTextField.getText());
             passwordTextField.setVisible(false);
             passwordTextField.setManaged(false);
             passwordField.setVisible(true);
             passwordField.setManaged(true);
             passwordField.requestFocus();
+            passwordField.positionCaret(passwordField.getText().length()); // Move caret to end
         }
     }
 
