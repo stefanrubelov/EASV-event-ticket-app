@@ -24,24 +24,28 @@
                                 <Image url="@../../images/Animation%20-%201738315984207.gif" />
                             </image>
                         </ImageView>
-                        <TextField fx:id="emailField" layoutX="75.0" layoutY="106.0" promptText="email" />
-                        <PasswordField fx:id="passwordField" layoutX="75" layoutY="177.0" promptText="password" />
-                        <Label layoutX="78.0" layoutY="79.0" text="Email">
+                        <TextField fx:id="emailField" layoutX="44.0" layoutY="106.0" prefHeight="25.0" prefWidth="210.0" promptText="email" />
+                        <PasswordField fx:id="passwordField" layoutX="44.0" layoutY="177.0" prefHeight="25.0" prefWidth="210.0" promptText="password" />
+                        <TextField fx:id="passwordTextField" layoutX="75.0" layoutY="177.0" managed="false" prefWidth="200.0" promptText="password" visible="false" />
+                        <Button fx:id="togglePasswordVisibilityBtn" layoutX="214.0" layoutY="177.0" mnemonicParsing="false" prefWidth="40.0" text="👁" />
+                        <Label layoutX="44.0" layoutY="89.0" text="Email/Username">
                             <font>
                                 <Font name="System Bold" size="12.0" />
-                            </font></Label>
-                        <Label layoutX="78.0" layoutY="150.0" text="Password">
+                            </font>
+                        </Label>
+                        <Label layoutX="44.0" layoutY="160.0" text="Password">
                             <font>
                                 <Font name="System Bold" size="12.0" />
-                            </font></Label>
+                            </font>
+                        </Label>
                         <Label fx:id="errorLbl" layoutX="55.0" layoutY="210" textFill="RED" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" height="4.0" layoutX="107.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="91.0" />
                         <Button layoutX="84.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleLogin" onMouseClicked="#handleLogin" prefHeight="25.0" prefWidth="136.0" text="Login" />
-                  <ImageView fitHeight="58.0" fitWidth="53.0" layoutX="126.0" layoutY="7.0">
-                     <image>
-                        <Image url="@../../images/EASV.png" />
-                     </image>
-                  </ImageView>
+                        <ImageView fitHeight="58.0" fitWidth="53.0" layoutX="126.0" layoutY="7.0">
+                            <image>
+                                <Image url="@../../images/EASV.png" />
+                            </image>
+                        </ImageView>
                     </children>
                 </Pane>
             </children>
