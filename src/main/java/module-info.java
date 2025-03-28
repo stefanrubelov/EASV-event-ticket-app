@@ -9,7 +9,8 @@ module easv.ticketapp {
     requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
     requires net.synedra.validatorfx;
-    requires java.desktop;
+    requires com.google.zxing;
+    requires javafx.swing;
 
     opens easv.ticketapp to javafx.fxml;
     opens easv.ticketapp.be to javafx.base;
