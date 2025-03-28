@@ -48,7 +48,7 @@
         </HBox>
         <HBox alignment="CENTER_RIGHT" layoutX="661.0" layoutY="5.0" prefHeight="40.0" prefWidth="112.0" spacing="10">
             <children>
-                <Button fx:id="editBtn" mnemonicParsing="false" text="Edit" />
+                <Button fx:id="editBtn" onAction="#handleEditEvent" mnemonicParsing="false" text="Edit" />
                 <Button fx:id="deleteBtn" mnemonicParsing="false" text="Delete" />
             </children>
         </HBox>

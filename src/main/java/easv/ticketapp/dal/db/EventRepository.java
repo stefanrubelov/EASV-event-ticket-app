@@ -44,7 +44,7 @@ public class EventRepository {
 
     private Event mapModel(ResultSet resultSet, int id) throws SQLException {
         String name = resultSet.getString("name");
-        java.sql.Date startDate = resultSet.getDate("start_date");
+        java.sql.Date startDate = resultSet.getDate("date");
         String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(startDate);
         String location = resultSet.getString("location");
         String description = resultSet.getString("description");
@@ -53,4 +53,44 @@ public class EventRepository {
 
         return new Event(id, name, formattedDate, location, description);
     }
+
+    public void updateEvent(Event event) {
+        // Use QueryBuilder to construct the update query
+        queryBuilder
+                .table("events")  // Table to update
+                .set("name", event.getName())  // Set the name column
+                .set("date", event.getDate())  // Set the date column
+                .set("location", event.getLocation())  // Set the location column
+                .set("description", event.getDescription())  // Set the description column
+                .where("id", "=", event.getId());  // Only update where the event ID matches
+
+        // Execute the update
+        boolean success = queryBuilder.update();
+
+        if (success) {
+            logger.log(Level.INFO, "Event with ID " + event.getId() + " updated successfully.");
+        } else {
+            logger.log(Level.WARNING, "Failed to update event with ID " + event.getId());
+        }
+    }
+
+    public void createEvent(Event event) {
+        // Use QueryBuilder to construct the update query
+        queryBuilder
+                .table("events")  // Table to update
+                .insert("name", event.getName())  // Set the name column
+                .insert("date", event.getDate())  // Set the date column
+                .insert("location", event.getLocation())  // Set the location column
+                .insert("description", event.getDescription());  // Set the description column
+        // Execute the update
+        boolean success = queryBuilder.save();
+
+        if (success) {
+            logger.log(Level.INFO, "Event with ID " + event.getId() + " updated successfully.");
+        } else {
+            logger.log(Level.WARNING, "Failed to update event with ID " + event.getId());
+        }
+    }
+
+
 }
