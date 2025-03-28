@@ -14,32 +14,46 @@ public class PageManager {
         primaryStage = stage;
     }
 
-    public static void switchView(String fxmlPath, ActionEvent event) {
+    public static FXMLLoader switchView(String fxmlPath, ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(PageManager.class.getResource(fxmlPath));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = primaryStage != null ? primaryStage : (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+            return fxmlLoader;  // Return the FXMLLoader instance
         } catch (IOException e) {
             throw new RuntimeException("Failed to load view: " + fxmlPath, e);
         }
     }
 
-    public static void loginView(ActionEvent event) {
-        switchView("/easv/ticketapp/login-view.fxml", event);
+    // Switch to the login view
+    public static FXMLLoader loginView(ActionEvent event) {
+        return switchView("/easv/ticketapp/login-view.fxml", event);
     }
 
-    public static void adminView(ActionEvent event) {
-        switchView("/easv/ticketapp/coordinators-scene.fxml", event);
+    // Switch to the admin view
+    public static FXMLLoader  adminView(ActionEvent event) {
+        return switchView("/easv/ticketapp/coordinators-scene.fxml", event);
     }
-    public static void coordinatorsView(ActionEvent event) {
-        switchView("/easv/ticketapp/event-scene.fxml", event);
+
+    // Switch to the coordinators view
+    public static FXMLLoader  coordinatorsView(ActionEvent event) {
+       return switchView("/easv/ticketapp/event-scene.fxml", event);
     }
-    public static void ticketView(ActionEvent event) {
-        switchView("/easv/ticketapp/ticket-scene.fxml", event);
+
+    // Switch to the ticket view
+    public static FXMLLoader  ticketView(ActionEvent event) {
+       return switchView("/easv/ticketapp/ticket-scene.fxml", event);
     }
-    public static void addCoordinatorView(ActionEvent event) {
-        switchView("/easv/ticketapp/add-coordinator-scene.fxml", event);
+
+    // Switch to the edit event view
+    public static FXMLLoader  editEventView(ActionEvent event) {
+       return switchView("/easv/ticketapp/edit-event.fxml", event);
+    }
+
+    // Switch to the add coordinator view
+    public static FXMLLoader addCoordinatorView(ActionEvent event) {
+       return switchView("/easv/ticketapp/add-coordinator-scene.fxml", event);
     }
 }
