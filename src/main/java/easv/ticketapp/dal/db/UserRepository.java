@@ -1,6 +1,5 @@
 package easv.ticketapp.dal.db;
 
-import easv.ticketapp.be.Event;
 import easv.ticketapp.be.User;
 
 import java.sql.ResultSet;
@@ -20,7 +19,6 @@ public class UserRepository {
         User user = null;
         ResultSet result = queryBuilder.from("users")
                 .where("email", "=", email)
-                .orWhere("email", "like", email + "%")
                 .get();
 
         try {
@@ -42,13 +40,13 @@ public class UserRepository {
         return user;
     }
 
-    public List<User> getAllCoordinators(){
+    public List<User> getAllCoordinators() {
         List<User> users = new ArrayList<>();
 
         try (ResultSet rs = queryBuilder
                 .select("*")
                 .from("users")
-                .where("user_type", "=",User.COORDINATOR_TYPE)
+                .where("user_type", "=", User.COORDINATOR_TYPE)
                 .get()) {
 
             while (rs != null && rs.next()) {
@@ -77,7 +75,7 @@ public class UserRepository {
         Timestamp createdAt = rs.getTimestamp("created_at");
         Timestamp updatedAt = rs.getTimestamp("updated_at");
 
-        return new User(id,name,email,password,userType, createdAt.toLocalDateTime(), updatedAt.toLocalDateTime());
+        return new User(id, name, email, password, userType, createdAt.toLocalDateTime(), updatedAt.toLocalDateTime());
     }
 
     public User create(User user) {
@@ -100,5 +98,12 @@ public class UserRepository {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return newCoordinator;
+    }
+
+    public boolean updatePassword(User user, String password) {
+        return queryBuilder.table("users")
+                .set("password", password)
+                .where("email", "=", user.getEmail())
+                .update();
     }
 }
