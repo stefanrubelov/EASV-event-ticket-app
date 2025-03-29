@@ -4,10 +4,14 @@ import easv.ticketapp.be.User;
 import easv.ticketapp.bll.Email.EmailService;
 import easv.ticketapp.bll.PasswordResetService;
 import easv.ticketapp.bll.UserService;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import net.synedra.validatorfx.Validator;
 
 public class PasswordEmailController {
@@ -25,6 +29,24 @@ public class PasswordEmailController {
 
     @FXML
     Label messageLbl;
+
+    @FXML
+    Label emailMessageLbl;
+
+    @FXML
+    Label tokenMessageLbl;
+
+    @FXML
+    private AnchorPane rootAnchorPane;
+    @FXML
+    public void initialize() {
+        Platform.runLater(() -> {
+            Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
+            if (stage != null) {
+                stage.setResizable(false);
+            }
+        });
+    }
 
     @FXML
     public void submitBtn(ActionEvent event) {
@@ -46,23 +68,43 @@ public class PasswordEmailController {
             this.user = user;
             int userId = user.getId();
 
-            String token = passwordResetService.createToken(userId);
+            Task<Boolean> sendEmailTask = new Task<>() {
+                @Override
+                protected Boolean call() throws Exception {
+                    String token = passwordResetService.createToken(userId);
 
-            EmailService email = new EmailService()
-                    .to(user.getEmail())
-                    .subject("Your password reset token")
-                    .html(true)
-                    .body("Token:  <b>: " + token + "</b>" +
-                            "<br> <span>This token expires in 10 minutes</span>");
+                    EmailService email = new EmailService()
+                            .to(user.getEmail())
+                            .subject("Your password reset token")
+                            .html(true)
+                            .body("Token:  <b>: " + token + "</b>" +
+                                    "<br> <span>This token expires in 10 minutes</span>");
 
-            if (email.send()) {
-                emailSent = true;
-                tokenField.setVisible(true);
-                messageLbl.setText("Email sent");
-                emailField.setDisable(true);
-            } else {
-                messageLbl.setText("Email not sent, try again");
-            }
+                    return email.send();
+                }
+
+                @Override
+                protected void succeeded() {
+                    super.succeeded();
+                    if (getValue()) {
+                        emailSent = true;
+                        tokenField.setVisible(true);
+                        messageLbl.setText("Email sent");
+                        emailField.setDisable(true);
+                    } else {
+                        emailMessageLbl.setText("Email not sent, try again");
+                    }
+                }
+
+                @Override
+                protected void failed() {
+                    super.failed();
+                    emailMessageLbl.setText("Email not sent, try again");
+                }
+            };
+
+            // Start the task in the background
+            new Thread(sendEmailTask).start();
         } else {
             if (!validateTokenField()) {
                 return;
@@ -74,7 +116,7 @@ public class PasswordEmailController {
             if (exists) {
                 PageManager.passwordResetView(event, user);
             } else {
-                messageLbl.setText("Invalid or expired token");
+                tokenMessageLbl.setText("Invalid or expired token");
                 tokenField.setStyle("-fx-border-color: red;");
             }
         }
@@ -87,15 +129,16 @@ public class PasswordEmailController {
      */
     private boolean validateEmailField() {
         String email = emailField.getText();
+        emailMessageLbl.setText("");
 
         if (email == null || email.trim().isEmpty()) {
-            messageLbl.setText("Email is required");
+            emailMessageLbl.setText("Email is required");
             emailField.setStyle("-fx-border-color: red;");
             return false;
         }
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         if (!email.matches(emailRegex)) {
-            messageLbl.setText("Please enter a valid email address");
+            emailMessageLbl.setText("Please enter a valid email address");
             emailField.setStyle("-fx-border-color: red;");
             return false;
         }
@@ -110,9 +153,10 @@ public class PasswordEmailController {
      */
     private boolean validateTokenField() {
         String token = tokenField.getText();
+        tokenMessageLbl.setText("");
 
         if (token == null || token.trim().isEmpty()) {
-            messageLbl.setText("Token is required");
+            tokenMessageLbl.setText("Token is required");
             tokenField.setStyle("-fx-border-color: red;");
             return false;
         }
@@ -128,24 +172,8 @@ public class PasswordEmailController {
         tokenField.setStyle("");
     }
 
-    private void validateToken() {
-        validator.createCheck()
-                .dependsOn("tokenField", tokenField.textProperty())
-                .withMethod(c -> {
-                    String tokenValue = c.get("tokenField");
-                    if (tokenValue.isEmpty()) {
-                        c.error("Token is required");
-                    }
-                })
-                .decorates(tokenField)
-                .immediate()
-                .immediateClear();
-    }
-
     @FXML
     public void backBtn(ActionEvent event) {
         PageManager.loginView(event);
     }
-
-
 }

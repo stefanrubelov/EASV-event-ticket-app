@@ -23,13 +23,13 @@
 
 .main-btn {
     -fx-background-color: #f0f0f0;
-    -fx-background-radius: 25px;
+    -fx-background-radius: 10px;
     -fx-text-fill: #333333;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
     -fx-padding: 5 10 5 10;
     -fx-border-color: #cccccc;
     -fx-border-width: 1px;
-    -fx-border-radius: 25px;
+    -fx-border-radius: 10px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 0, 2);
 }
 
@@ -47,13 +47,13 @@
     -fx-pref-width: 250px !important;
     -fx-min-width: 250px !important;
     -fx-background-color: #f0f0f0;
-    -fx-background-radius: 25px;
+    -fx-background-radius: 10px;
     -fx-text-fill: #333333;
     -fx-font-size: 14px;
     -fx-padding: 7px;
     -fx-border-color: #cccccc;
     -fx-border-width: 1px;
-    -fx-border-radius: 25px;
+    -fx-border-radius: 10px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 0, 2);
 }
 
@@ -68,4 +68,9 @@
 .login-screen-pane {
     -fx-pref-width: 400px;
     -fx-pref-height: 400px;
+}
+
+.input-label {
+    -fx-text-fill: #484848;
+    -fx-font-size: 12px;
 }
