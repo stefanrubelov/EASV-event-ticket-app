@@ -3,6 +3,8 @@ package easv.ticketapp.gui;
 import easv.ticketapp.be.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -11,69 +13,115 @@ import java.io.IOException;
 public class PageManager {
     private static Stage primaryStage;
 
-    public static void setPrimaryStage(Stage stage) {
-        primaryStage = stage;
-    }
+    private static BaseLayoutController baseLayoutController;
 
-    public static FXMLLoader switchView(String fxmlPath, ActionEvent event) {
+    private static String currentView = null;
+
+    public static FXMLLoader switchView(String fxmlPath, ActionEvent event, String title) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(PageManager.class.getResource(fxmlPath));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = primaryStage != null ? primaryStage : (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-            return fxmlLoader;  // Return the FXMLLoader instance
+            if (primaryStage == null) {
+                primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            }
+
+            if (baseLayoutController == null) {
+                FXMLLoader baseLoader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/base-layout.fxml"));
+                Parent root = baseLoader.load();
+                baseLayoutController = baseLoader.getController();
+                primaryStage.setScene(new Scene(root));
+                primaryStage.setTitle(title);
+            }
+
+            FXMLLoader sceneLoader = new FXMLLoader(PageManager.class.getResource(fxmlPath));
+            Node sceneView = sceneLoader.load();
+            baseLayoutController.setCenterNode(sceneView);
+
+            primaryStage.sizeToScene();
+            primaryStage.setResizable(sceneView.prefWidth(-1) > 0 || sceneView.prefHeight(-1) > 0);
+            primaryStage.show();
+            return sceneLoader;
         } catch (IOException e) {
             throw new RuntimeException("Failed to load view: " + fxmlPath, e);
         }
     }
 
-    // Switch to the login view
+    public static FXMLLoader switchViewNewScene(String fxmlPath, ActionEvent event, String title) {
+        try {
+            FXMLLoader sceneLoader = new FXMLLoader(PageManager.class.getResource(fxmlPath));
+            Parent root = sceneLoader.load();
+            Scene scene = new Scene(root);
+
+            Stage stage = primaryStage != null ? primaryStage : (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle(title);
+
+            stage.sizeToScene();
+            stage.setResizable(root.prefWidth(-1) > 0 || root.prefHeight(-1) > 0);
+
+            stage.centerOnScreen();
+            stage.show();
+
+            return sceneLoader;
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load view: " + fxmlPath, e);
+        }
+    }
+
     public static FXMLLoader loginView(ActionEvent event) {
-        return switchView("/easv/ticketapp/login-view.fxml", event);
+        return switchViewNewScene("/easv/ticketapp/auth/login-view.fxml", event, "Login");
     }
 
-    // Switch to the admin view
     public static FXMLLoader adminView(ActionEvent event) {
-        return switchView("/easv/ticketapp/coordinators-scene.fxml", event);
+        currentView = "coordinators";
+        return switchView("/easv/ticketapp/coordinators-scene.fxml", event, "Coordinators");
     }
 
-    // Switch to the coordinators view
     public static FXMLLoader coordinatorsView(ActionEvent event) {
-        return switchView("/easv/ticketapp/event-scene.fxml", event);
+        currentView = "events";
+        return switchView("/easv/ticketapp/event-scene.fxml", event, "Events");
     }
 
-    // Switch to the ticket view
     public static FXMLLoader ticketView(ActionEvent event) {
-        return switchView("/easv/ticketapp/ticket-scene.fxml", event);
+        return switchView("/easv/ticketapp/ticket-scene.fxml", event, "Tickets");
     }
 
-    // Switch to the edit event view
     public static FXMLLoader editEventView(ActionEvent event) {
-        return switchView("/easv/ticketapp/edit-event.fxml", event);
+        return switchView("/easv/ticketapp/edit-event.fxml", event, "Edit event");
     }
 
-    // Switch to the add coordinator view
     public static FXMLLoader addCoordinatorView(ActionEvent event) {
-        return switchView("/easv/ticketapp/add-coordinator-scene.fxml", event);
+        return switchView("/easv/ticketapp/add-coordinator-scene.fxml", event, "Add coordinator");
     }
 
     public static FXMLLoader passwordEmailView(ActionEvent event) {
-        return switchView("/easv/ticketapp/password-email.fxml", event);
+        return switchViewNewScene("/easv/ticketapp/auth/password-email.fxml", event, "Password Reset");
     }
 
     public static FXMLLoader passwordResetView(ActionEvent event, User user) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/password-reset.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            PasswordResetController controller = fxmlLoader.getController();
+            FXMLLoader sceneLoader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/auth/password-reset.fxml"));
+            Parent root = sceneLoader.load();
+
+            PasswordResetController controller = sceneLoader.getController();
             controller.setUser(user);
-            Stage stage = primaryStage != null ? primaryStage : (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            Stage stage = primaryStage != null ? primaryStage : (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
+            stage.setTitle("Password Reset");
+
+            stage.sizeToScene();
+            stage.setResizable(root.prefWidth(-1) > 0 || root.prefHeight(-1) > 0);
+
+            stage.centerOnScreen();
             stage.show();
-            return fxmlLoader;
+
+            return sceneLoader;
         } catch (IOException e) {
             throw new RuntimeException("Failed to load view: /easv/ticketapp/password-reset.fxml", e);
         }
+    }
+
+    public static String getCurrentView() {
+        return currentView;
     }
 }

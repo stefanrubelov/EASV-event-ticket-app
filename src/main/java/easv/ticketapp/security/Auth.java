@@ -11,12 +11,16 @@ public class Auth {
 
     private static AuthenticationContext user() {
         if (sessionId == null) {
-            throw new IllegalStateException("Session ID not set!");
+            return null;
+//            throw new IllegalStateException("Session ID not set!");
         }
         return AuthenticationManager.getSession(sessionId);
     }
 
     public static boolean check() {
+        if(user() == null) {
+            return false;
+        }
         return user().check();
     }
 
