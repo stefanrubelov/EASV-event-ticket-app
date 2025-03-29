@@ -3,12 +3,15 @@ package easv.ticketapp.gui;
 import easv.ticketapp.be.User;
 import easv.ticketapp.bll.PasswordResetService;
 import easv.ticketapp.bll.UserService;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import net.synedra.validatorfx.Validator;
 
 public class PasswordResetController {
@@ -36,7 +39,17 @@ public class PasswordResetController {
     private Label messageLbl;
 
     @FXML
+    private AnchorPane rootAnchorPane;
+
+    @FXML
     public void initialize() {
+        Platform.runLater(() -> {
+            Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
+            if (stage != null) {
+                stage.setResizable(false);
+            }
+        });
+
         togglePasswordVisibilityBtn.setOnMouseClicked(event -> togglePasswordVisibility(passwordField, passwordTextField));
         toggleConfirmationPasswordVisibilityBtn.setOnMouseClicked(event -> togglePasswordVisibility(confirmationPasswordField, confirmationPasswordTextField));
     }
