@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="96.0" fitWidth="101.0" layoutX="50.0" layoutY="51.0">
+         <image>
+            <Image url="@../../images/EASV.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="50.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Manager" wrappingWidth="140.65625">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="43.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Coordinator Manager" wrappingWidth="153.15625">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="46.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="101.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="43.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="37.0" fitWidth="35.0" layoutX="12.0" layoutY="166.0">
+         <image>
+            <Image url="@../../images/eventmanager.symbol.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="19.0" fitWidth="16.0" layoutX="22.0" layoutY="209.0">
+         <image>
+            <Image url="@../../images/eventcoordinator.symbol.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="37.0" fitWidth="35.0" layoutX="12.0" layoutY="234.0">
+         <image>
+            <Image url="@../../images/settings.symbol.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="19.0" fitWidth="16.0" layoutX="21.0" layoutY="327.0">
+         <image>
+            <Image url="@../../images/logout.symbol.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
