@@ -21,13 +21,13 @@
                     <children>
                         <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true">
                             <image>
-                                <Image url="@../../images/Animation%20-%201738315984207.gif" />
+                                <Image url="@../../../images/Animation%20-%201738315984207.gif" />
                             </image>
                         </ImageView>
                         <TextField fx:id="emailField" layoutX="75.0" layoutY="133.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="foo@bar.dk" styleClass="main-input" />
                         <PasswordField fx:id="passwordField" layoutX="75.0" layoutY="210.0" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="password" styleClass="main-input" />
                         <TextField fx:id="passwordTextField" layoutX="75.0" layoutY="210.0" managed="false" prefWidth="210.0" promptText="password" styleClass="main-input" visible="false" />
-                        <Button fx:id="togglePasswordVisibilityBtn" layoutX="283.0" layoutY="213.0" mnemonicParsing="false" onMouseClicked="#togglePasswordVisibility" prefHeight="26.0" prefWidth="42.0" styleClass="toggle-password-btn" stylesheets="@../../css/login-screen.css" text="👁" />
+                        <Button fx:id="togglePasswordVisibilityBtn" layoutX="283.0" layoutY="213.0" mnemonicParsing="false" onMouseClicked="#togglePasswordVisibility" prefHeight="26.0" prefWidth="42.0" styleClass="toggle-password-btn" stylesheets="@../../../css/login-screen.css" text="👁" />
                         <Label layoutX="91.0" layoutY="118.0" styleClass="input-label" text="Email">
                             <font>
                                 <Font name="Arial Bold" size="12.0" />
@@ -42,7 +42,7 @@
                         <Button layoutX="75.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="25.0" prefWidth="250.0" styleClass="main-btn" text="Login" />
                         <ImageView fitHeight="80.0" fitWidth="65.0" layoutX="168.0">
                             <image>
-                                <Image url="@../../images/EASV.png" />
+                                <Image url="@../../../images/EASV.png" />
                             </image>
                         </ImageView>
                   <Button layoutX="138.0" layoutY="350.0" mnemonicParsing="false" onAction="#forgotPasswordBtn" prefHeight="4.0" prefWidth="124.0" styleClass="forgot-password" text="Forgot password?">
@@ -56,7 +56,7 @@
         </VBox>
     </children>
    <stylesheets>
-      <URL value="@../../css/login-screen.css" />
-      <URL value="@../../css/main.css" />
+      <URL value="@../../../css/login-screen.css" />
+      <URL value="@../../../css/main.css" />
    </stylesheets>
 </AnchorPane>

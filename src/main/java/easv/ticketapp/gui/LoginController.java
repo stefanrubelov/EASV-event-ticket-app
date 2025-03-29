@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -33,10 +34,18 @@ public class LoginController {
 
     @FXML
     public void initialize() {
+        System.out.println("Auth? " + Auth.check());
         Platform.runLater(() -> {
             Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
             if (stage != null) {
                 stage.setResizable(false);
+            }
+        });
+
+        rootAnchorPane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                ActionEvent actionEvent = new ActionEvent(emailField, null);
+                handleLogin(actionEvent);
             }
         });
 
@@ -84,7 +93,6 @@ public class LoginController {
             errorLbl.setText("Invalid username/email or password");
         } else {
             if (Auth.getUser().isAdmin()) {
-                System.out.println(Auth.getUser().getEmail());
                 PageManager.adminView(event);
             } else {
                 PageManager.coordinatorsView(event);
