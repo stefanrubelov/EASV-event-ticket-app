@@ -3,42 +3,36 @@ package easv.ticketapp.security;
 import easv.ticketapp.be.User;
 
 public class Auth {
-        /**
-         * Get the AuthenticationContext instance
-         * @return AuthenticationContext instance
-         */
-        public static AuthenticationContext user() {
-            return AuthenticationContext.getInstance();
-        }
+    private static String sessionId;
 
-        /**
-         * Check if a user is authenticated
-         * @return true if a user is authenticated, false otherwise
-         */
-        public static boolean check() {
-            return user().check();
-        }
-
-        /**
-         * Get the current authenticated user
-         * @return The current user or null if not authenticated
-         */
-        public static User getUser() {
-            return user().user();
-        }
-
-        /**
-         * Log in a user
-         * @param user The user to log in
-         */
-        public static void login(User user) {
-            user().setUser(user);
-        }
-
-        /**
-         * Log out the current user
-         */
-        public static void logout() {
-            user().logout();
-        }
+    public static void setSessionId(String id) {
+        sessionId = id;
     }
+
+    private static AuthenticationContext user() {
+        if (sessionId == null) {
+            throw new IllegalStateException("Session ID not set!");
+        }
+        return AuthenticationManager.getSession(sessionId);
+    }
+
+    public static boolean check() {
+        return user().check();
+    }
+
+    public static User getUser() {
+        return user().user();
+    }
+
+    public static void login(User user) {
+        String sessionId = String.valueOf(user.getId());
+        setSessionId(sessionId);
+        user().setUser(user);
+    }
+
+    public static void logout() {
+        user().logout();
+        AuthenticationManager.removeSession(sessionId);
+        sessionId = null;
+    }
+}

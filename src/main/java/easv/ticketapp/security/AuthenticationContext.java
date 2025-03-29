@@ -8,8 +8,7 @@ public class AuthenticationContext {
     private User currentUser;
     private boolean authenticated = false;
 
-    private AuthenticationContext() {
-        // Private constructor to prevent instantiation
+    public AuthenticationContext() {
     }
 
     public static synchronized AuthenticationContext getInstance() {

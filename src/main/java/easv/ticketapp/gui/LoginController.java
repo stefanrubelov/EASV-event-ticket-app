@@ -72,6 +72,7 @@ public class LoginController {
             errorLbl.setText("Invalid username/email or password");
         } else {
             if (Auth.getUser().isAdmin()) {
+                System.out.println(Auth.getUser().getEmail());
                 PageManager.adminView(event);
             } else {
                 PageManager.coordinatorsView(event);
