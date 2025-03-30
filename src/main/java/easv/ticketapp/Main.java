@@ -12,14 +12,16 @@ import java.sql.SQLException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ticket-factory-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("auth/login-view.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
 
         DatabaseConnection DB = new DatabaseConnection();
         try {
-            if(DB.testConnection()){
+            if (DB.testConnection()) {
                 System.out.println("Connection successful");
             }
         } catch (SQLException e) {

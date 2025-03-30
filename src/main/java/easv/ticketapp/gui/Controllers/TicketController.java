@@ -52,7 +52,7 @@ public class TicketController implements Initializable {
     @FXML
     private ComboBox<TicketType> ticketBox;
 
-    private final static String IMAGES_DIRECTORY_PATH = "src/main/resources/images";
+    private final static String IMAGES_DIRECTORY_PATH = "src/EmailClient/resources/images";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

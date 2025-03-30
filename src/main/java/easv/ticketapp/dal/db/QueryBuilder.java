@@ -489,7 +489,9 @@ public class QueryBuilder {
             for (int i = 0; i < parameters.size(); i++) {
                 preparedStatement.setObject(i + 1, parameters.get(i));
             }
-            return preparedStatement.execute();
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             logger.log(Level.SEVERE, e.getMessage(), e);
