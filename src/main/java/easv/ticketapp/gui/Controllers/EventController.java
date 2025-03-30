@@ -1,4 +1,4 @@
-package easv.ticketapp.gui;
+package easv.ticketapp.gui.Controllers;
 
 import easv.ticketapp.be.Event;
 import easv.ticketapp.bll.EventManager;

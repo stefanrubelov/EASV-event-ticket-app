@@ -1,14 +1,17 @@
-package easv.ticketapp.gui;
+package easv.ticketapp.gui.Controllers;
 
 import easv.ticketapp.be.Event;
 import easv.ticketapp.be.ticket.Ticket;
 import easv.ticketapp.be.ticket.TicketType;
 import easv.ticketapp.bll.EventManager;
 import easv.ticketapp.bll.TicketManager;
+import easv.ticketapp.gui.PageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -20,7 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -45,11 +48,7 @@ public class TicketController implements Initializable {
     @FXML
     private TextField locationTxtfield;
     @FXML
-    private Button previewBtn;
-    @FXML
     private TextField price;
-    @FXML
-    private Button submitBtn;
     @FXML
     private ComboBox<TicketType> ticketBox;
 
@@ -82,6 +81,7 @@ public class TicketController implements Initializable {
         if (selectedFile != null) {
             lblPath.setText("Selected Path: " + selectedFile.getAbsolutePath());
             setFilePath(selectedFile.getAbsolutePath());
+
         } else {
             lblPath.setText("No file selected");
         }
@@ -97,5 +97,65 @@ public class TicketController implements Initializable {
 
         this.filePath = destinationPath.toString();
     }
+    @FXML
+    void onPreview(ActionEvent event) {
+        if (eventBox.getValue() == null || ticketBox.getValue() == null || datePicker.getValue() == null ||
+                locationTxtfield.getText().isEmpty() || price.getText().isEmpty()) {
+            System.out.println("Please fill in all fields before previewing.");
+            return;
+        }
+        Ticket ticket = new Ticket(1, "name name ", 39.0, "1f", "test", "description", "locaiton", LocalDateTime.now(), new TicketType("vip"), "default.jpg");
+        PageManager.ticketPreview(event,ticket,filePath);
+    }
 
+    @FXML
+    void onSubmit(ActionEvent event) {
+        try {
+            // Validation of the input fields
+            if (eventBox.getValue() == null || ticketBox.getValue() == null || datePicker.getValue() == null ||
+                    locationTxtfield.getText().isEmpty() || price.getText().isEmpty() || descriptionTxtfield.getText().isEmpty()) {
+                System.out.println("Please fill in all fields before previewing.");
+                return;
+            }
+
+            // Get the input values
+            Event selectedEvent = eventBox.getValue();
+            TicketType selectedTicketType = ticketBox.getValue();
+            String location = locationTxtfield.getText();
+            String description = descriptionTxtfield.getText();
+            LocalDateTime eventDate = datePicker.getValue().atStartOfDay();
+            double ticketPrice = Double.parseDouble(price.getText());
+            String ticketImage = lblPath.getText();
+
+            // Creates new ticket
+            Ticket newTicket = new Ticket(
+                    0, // Generates automatically
+                    selectedEvent.getName(),
+                    ticketPrice,
+                    "1A", // TODO
+                    "General", // TODO
+                    description,
+                    location,
+                    eventDate,
+                    selectedTicketType,
+                    ticketImage
+            );
+
+            ticketManager.addTicket(newTicket);
+
+            // Testing
+            System.out.println("Ticket added!");
+
+
+        } catch (NumberFormatException e) {
+            System.out.println("Error: The ticket price should have a valid number");
+        } catch (Exception e) {
+            System.out.println("Error adding the ticket: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void onPrint(ActionEvent event) {
+
+    }
 }

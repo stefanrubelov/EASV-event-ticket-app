@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.TicketController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.Controllers.TicketController">
    <children>
       <VBox fx:id="vBoxInputContainer" fillWidth="false" layoutX="14.0" layoutY="14.0" prefHeight="369.0" prefWidth="471.0" spacing="20.0">
          <children>
@@ -95,7 +95,8 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="previewBtn" layoutX="496.0" layoutY="41.0" mnemonicParsing="false" text="Preview" />
-      <Button fx:id="submitBtn" layoutX="499.0" layoutY="87.0" mnemonicParsing="false" text="Submit" />
+      <Button layoutX="496.0" layoutY="41.0" mnemonicParsing="false" onAction="#onPreview" text="Preview" />
+      <Button layoutX="499.0" layoutY="87.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
+      <Button layoutX="505.0" layoutY="317.0" mnemonicParsing="false" onAction="#onPrint" text="Print" />
    </children>
 </Pane>

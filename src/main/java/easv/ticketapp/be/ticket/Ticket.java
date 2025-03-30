@@ -15,9 +15,9 @@ public class Ticket {
     private String location;
     private LocalDateTime date;
     private TicketType ticketType;
-    private Image ticketImage;
+    private String ticketImage;
 
-    public Ticket(Integer id, String eventName, double price, String seatNumber, String perks, String description, String location, LocalDateTime date, TicketType ticketType, Image ticketImage) {
+    public Ticket(Integer id, String eventName, double price, String seatNumber, String perks, String description, String location, LocalDateTime date, TicketType ticketType, String ticketImage) {
         this.id = id;
         this.eventName = eventName;
         this.price = price;
@@ -28,6 +28,10 @@ public class Ticket {
         this.location = location;
         this.date = date;
         this.ticketType = ticketType;
+        this.ticketImage = ticketImage;
+    }
+    public Ticket(Integer id) {
+        this.id = id;
     }
 
     private String generateBarCode() {
@@ -64,7 +68,7 @@ public class Ticket {
     public TicketType getTicketType() {
         return ticketType;
     }
-    public Image getTicketImage() {
+    public String getTicketImage() {
         return ticketImage;
     }
 }

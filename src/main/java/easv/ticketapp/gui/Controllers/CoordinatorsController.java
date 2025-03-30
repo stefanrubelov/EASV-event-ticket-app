@@ -1,7 +1,8 @@
-package easv.ticketapp.gui;
+package easv.ticketapp.gui.Controllers;
 
 import easv.ticketapp.be.User;
 import easv.ticketapp.bll.UserService;
+import easv.ticketapp.gui.PageManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
