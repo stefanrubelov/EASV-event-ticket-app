@@ -1,8 +1,6 @@
 package easv.ticketapp.be;
 
 import java.time.LocalDateTime;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Event {
     private Integer id; // Remove 'final' to allow setting later
@@ -20,7 +18,7 @@ public class Event {
     }
 
     // Constructor without ID (for new events, letting the DB auto-generate it)
-    public Event(String name, String location, LocalDateTime date, String description) {
+    public Event() {
         this.id = null; // Default to null since it's auto-generated
         this.name = name;
         this.date = date;
@@ -44,17 +42,12 @@ public class Event {
         this.name = name;
     }
 
-    public LocalDateTime getStart_date() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setStart_date(LocalDateTime date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
-    }
-    // Fix: Properly format Date when setting
-    public void setDate(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        this.date = sdf.format(date);
     }
 
     public String getLocation() {
@@ -71,9 +64,5 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Object getDate() {
-        return date;
     }
 }

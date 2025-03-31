@@ -8,62 +8,105 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import tornadofx.control.DateTimePicker?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="131.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EditEventController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EditEventController">
     <children>
-        <HBox alignment="CENTER" layoutX="7.0" layoutY="46.0" prefHeight="40.0" prefWidth="576.0" spacing="20.0">
-            <children>
-                <VBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="175.0">
-                    <children>
-                  <TextField fx:id="nameField" prefHeight="26.0" prefWidth="148.0" promptText="Name" />
-                    </children>
-                    <HBox.margin>
-                        <Insets left="5.0" />
-                    </HBox.margin>
-                </VBox>
-                <Line endX="99" endY="16" startX="99" startY="49" />
-                <VBox alignment="CENTER" prefHeight="40.0" prefWidth="143.0">
+      <VBox prefHeight="280.0" prefWidth="484.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="99.0" prefWidth="484.0">
                <children>
-                  <TextField fx:id="dateField" prefHeight="26.0" prefWidth="134.0" promptText="Date DD/MM/YYYY" />
+                  <VBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="221.0">
+                     <children>
+                        <Label alignment="CENTER" text="Name">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="nameField" promptText="Name" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="242.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Location">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="locationField" promptText="Location" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
                </children>
-                </VBox>
-                <Line endX="99" endY="16" startX="99" startY="49" />
-                <VBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="149.0">
-                    <opaqueInsets>
-                        <Insets left="5.0" />
-                    </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="115.0" prefWidth="484.0">
                <children>
-                  <TextField fx:id="locationField" prefHeight="26.0" prefWidth="150.0" promptText="Location" />
+                  <VBox alignment="CENTER_LEFT" prefHeight="115.0" prefWidth="224.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Description">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextArea fx:id="descriptionTextArea" prefHeight="82.0" prefWidth="171.0" promptText="Description" wrapText="true" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="115.0" prefWidth="247.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="TOP" text="Date/Time">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <DateTimePicker fx:id="dateTimePicker" format="HH:mm dd-MM-yyyy" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
                </children>
-                </VBox>
-                <Line endX="99" endY="16" startX="99" startY="49" />
-            </children>
-        </HBox>
-          <VBox alignment="CENTER" layoutX="-3.0" layoutY="41.0" prefHeight="50.0" prefWidth="247.0" />
-      <Button fx:id="confirmnBtn" onAction="#saveChanges" layoutX="314.0" layoutY="97.0" mnemonicParsing="false" text="Confirmn" />
-      <Button fx:id="goBackBtn" onAction="#goBack" layoutX="399.0" layoutY="97.0" mnemonicParsing="false" text="Go back" />
-      <TextArea fx:id="descriptionTextArea" layoutX="602.0" layoutY="52.0" prefHeight="71.0" prefWidth="166.0" promptText="Description" />
-      <Label layoutX="78.0" layoutY="17.0" text="Name">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="279.0" layoutY="18.0" text="Date">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="455.0" layoutY="18.0" text="Location">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="641.0" layoutY="18.0" text="Description">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="27.0" prefWidth="484.0">
+               <children>
+                  <Button fx:id="goBackBtn" onAction="#goBack" alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Go Back">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <HBox prefHeight="8.0" prefWidth="335.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="submitBtn" onAction="#saveChanges" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Submit" />
+               </children>
+               <VBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
     </children>
 </AnchorPane>

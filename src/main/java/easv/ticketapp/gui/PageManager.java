@@ -88,6 +88,11 @@ public class PageManager {
         return switchView("/easv/ticketapp/edit-event.fxml", event, "Edit event");
     }
 
+    public static FXMLLoader addEventView(ActionEvent event) {
+        return switchView("/easv/ticketapp/add-event.fxml", event, "Add event");
+    }
+
+
     public static FXMLLoader addCoordinatorView(ActionEvent event) {
         return switchView("/easv/ticketapp/add-coordinator-scene.fxml", event, "Add coordinator");
     }

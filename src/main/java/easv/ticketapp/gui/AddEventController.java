@@ -5,13 +5,14 @@ import easv.ticketapp.dal.db.EventRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import tornadofx.control.DateTimePicker;
 
 import java.time.LocalDateTime;
 
-public class EditEventController {
+public class AddEventController {
 
     EventRepository eventRepository = new EventRepository();
 
@@ -23,30 +24,26 @@ public class EditEventController {
     private TextArea descriptionTextArea;
     @FXML
     private DateTimePicker dateTimePicker;
-    private Event event;
-
-    public void setEditEvent(Event event) {
-        if (event == null) {
-            System.out.println("Error: Event is null!");
-            return;
-        }
-
-        this.event = event;
-
-        nameField.setText(event.getName());
-        locationField.setText(event.getLocation());
-        descriptionTextArea.setText(event.getDescription());
-
-        if (event.getDate() != null) {
-            dateTimePicker.setDateTimeValue(event.getDate());
-        }
-    }
 
     @FXML
-    public void saveChanges(ActionEvent actionEvent) {
-        String updatedName = nameField.getText();
-        String updatedLocation = locationField.getText();
-        String updatedDescription = descriptionTextArea.getText();
+    private Button createEvent;
+
+    private Event event;
+
+    @FXML
+    private void goBack(ActionEvent actionEvent) {
+        PageManager.coordinatorsView(actionEvent);
+    }
+
+
+    @FXML
+    public void createEvent(ActionEvent actionEvent) {
+
+        event = new Event();
+
+        String Name = nameField.getText();
+        String Location = locationField.getText();
+        String Description = descriptionTextArea.getText();
 
         LocalDateTime selectedDateTime = dateTimePicker.getDateTimeValue();
         if (selectedDateTime == null) {
@@ -54,10 +51,10 @@ public class EditEventController {
             return;
         }
 
-        event.setName(updatedName);
+        event.setName(Name);
         event.setDate(selectedDateTime);
-        event.setLocation(updatedLocation);
-        event.setDescription(updatedDescription);
+        event.setLocation(Location);
+        event.setDescription(Description);
 
         boolean isUpdated = updateEventInDatabase(event);
 
@@ -68,6 +65,7 @@ public class EditEventController {
         }
     }
 
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -76,14 +74,9 @@ public class EditEventController {
         alert.showAndWait();
     }
 
-    @FXML
-    private void goBack(ActionEvent actionEvent) {
-        PageManager.coordinatorsView(actionEvent);
-    }
-
     private boolean updateEventInDatabase(Event event) {
         try {
-            eventRepository.updateEvent(event);
+            eventRepository.createEvent(event);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
