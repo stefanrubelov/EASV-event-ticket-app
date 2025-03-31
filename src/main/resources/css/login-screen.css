@@ -21,28 +21,6 @@
     -fx-font-size: 20px;
 }
 
-.main-btn {
-    -fx-background-color: #f0f0f0;
-    -fx-background-radius: 10px;
-    -fx-text-fill: #333333;
-    -fx-font-size: 12px;
-    -fx-padding: 5 10 5 10;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 0, 2);
-}
-
-.main-btn:hover {
-    -fx-background-color: #e0e0e0;
-    -fx-border-color: #b0b0b0;
-}
-
-.main-btn:pressed {
-    -fx-background-color: #d0d0d0;
-    -fx-border-color: #a0a0a0;
-}
-
 .main-input {
     -fx-pref-width: 250px !important;
     -fx-min-width: 250px !important;

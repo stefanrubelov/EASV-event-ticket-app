@@ -120,7 +120,7 @@ public class LoginController {
         }
 
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        if (!email.matches(emailRegex)) {
+        if (email != null && !email.matches(emailRegex)) {
             errorLbl.setText("Please enter a valid email address");
             emailField.setStyle("-fx-border-color: red;");
             isValid = false;

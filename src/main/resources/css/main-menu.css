@@ -1,5 +1,9 @@
 .menu-item {
     -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-end-margin: 10px;
+    -fx-start-margin: 10px;
 }
 
 .menu-item, .menu-item-label {

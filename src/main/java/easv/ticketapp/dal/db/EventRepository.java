@@ -45,7 +45,7 @@ public class EventRepository {
 
     private Event mapModel(ResultSet resultSet, int id) throws SQLException {
         String name = resultSet.getString("name");
-        LocalDateTime date = resultSet.getTimestamp("date").toLocalDateTime();
+        LocalDateTime date = resultSet.getTimestamp("start_date").toLocalDateTime();
         String location = resultSet.getString("location");
         String description = resultSet.getString("description");
 
@@ -59,7 +59,7 @@ public class EventRepository {
         queryBuilder
                 .table("events")  // Table to update
                 .set("name", event.getName())  // Set the name column
-                .set("date", event.getDate())  // Set the date column
+                .set("start_date", event.getDate())  // Set the date column
                 .set("location", event.getLocation())  // Set the location column
                 .set("description", event.getDescription())  // Set the description column
                 .where("id", "=", event.getId());  // Only update where the event ID matches
@@ -79,7 +79,7 @@ public class EventRepository {
         queryBuilder
                 .table("events")  // Table to update
                 .insert("name", event.getName())  // Set the name column
-                .insert("date", event.getDate())  // Set the date column
+                .insert("start_date", event.getDate())  // Set the date column
                 .insert("location", event.getLocation())  // Set the location column
                 .insert("description", event.getDescription());  // Set the description column
         // Execute the update
