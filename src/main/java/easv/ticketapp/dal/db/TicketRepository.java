@@ -21,12 +21,10 @@ public class TicketRepository {
         ResultSet resultSet = queryBuilder.table("tickets")
                 .insert("eventName", ticket.getEventName())
                 .insert("price", ticket.getPrice())
-                .insert("seat_number", ticket.getSeatNumber())
                 .insert("perks", ticket.getPerks())
                 .insert("description", ticket.getDescription())
                 .insert("location", ticket.getLocation())
                 .insert("date", ticket.getDate())
-                .insert("imgPath",ticket.getTicketImage())
                 .insert("ticketType", ticket.getTicketType())
                 .saveAndReturn();
 

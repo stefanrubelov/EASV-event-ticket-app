@@ -1,7 +1,6 @@
 package easv.ticketapp.gui;
 
 import easv.ticketapp.be.ticket.Ticket;
-import easv.ticketapp.gui.Controllers.TicketPreviewController;
 import easv.ticketapp.be.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -86,7 +85,7 @@ public class PageManager {
         return switchView("/easv/ticketapp/ticket-scene.fxml", event, "Tickets");
     }
 
-    public static void ticketPreview(ActionEvent event, Ticket ticket, String imagePath) {
+    public static void ticketPreview(ActionEvent event, Ticket ticket) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/ticket-preview.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
@@ -100,14 +99,9 @@ public class PageManager {
                     ticket.getDate().toString(),
                     ticket.getLocation(),
                     ticket.getPrice(),
-                    ticket.getSeatNumber(),
                     ticket.getDescription(),
                     ticket.getPerks())
             ;
-
-            if (imagePath != null) {
-                controller.setBackgroundImage(imagePath);
-            }
 
             // Show the new scene
             Stage stage = primaryStage != null ? primaryStage : (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();

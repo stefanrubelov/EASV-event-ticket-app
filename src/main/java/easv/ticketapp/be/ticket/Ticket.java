@@ -8,27 +8,25 @@ public class Ticket {
     private Integer id;
     private String eventName;
     private double price;
-    private String seatNumber;
     private String perks;
     private String barcode;
     private String description;
     private String location;
     private LocalDateTime date;
     private TicketType ticketType;
-    private String ticketImage;
+    private Integer availableTickets;
 
-    public Ticket(Integer id, String eventName, double price, String seatNumber, String perks, String description, String location, LocalDateTime date, TicketType ticketType, String ticketImage) {
+    public Ticket(Integer id, String eventName, double price, String perks, String description, String location, LocalDateTime date, TicketType ticketType, Integer availableTickets) {
         this.id = id;
         this.eventName = eventName;
         this.price = price;
-        this.seatNumber = seatNumber;
         this.perks = perks;
         this.barcode = generateBarCode();
         this.description = description;
         this.location = location;
         this.date = date;
         this.ticketType = ticketType;
-        this.ticketImage = ticketImage;
+        this.availableTickets = availableTickets;
     }
     public Ticket(Integer id) {
         this.id = id;
@@ -50,9 +48,6 @@ public class Ticket {
     public Double getPrice() {
         return price;
     }
-    public String getSeatNumber() {
-        return seatNumber;
-    }
     public String getPerks() {
         return perks;
     }
@@ -68,7 +63,7 @@ public class Ticket {
     public TicketType getTicketType() {
         return ticketType;
     }
-    public String getTicketImage() {
-        return ticketImage;
+    public Integer getAvailableTickets() {
+        return availableTickets;
     }
 }

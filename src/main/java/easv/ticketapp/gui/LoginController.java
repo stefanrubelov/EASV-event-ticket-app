@@ -1,8 +1,7 @@
-package easv.ticketapp.gui.Controllers;
+package easv.ticketapp.gui;
 
 import easv.ticketapp.be.User;
 import easv.ticketapp.bll.UserService;
-import easv.ticketapp.gui.PageManager;
 import easv.ticketapp.security.Auth;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

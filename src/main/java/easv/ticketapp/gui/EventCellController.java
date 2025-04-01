@@ -1,4 +1,4 @@
-package easv.ticketapp.gui.Controllers;
+package easv.ticketapp.gui;
 
 import easv.ticketapp.be.Event;
 import javafx.event.ActionEvent;

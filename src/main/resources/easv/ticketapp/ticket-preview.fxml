@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 
 
-<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="600.0" styleClass="background" stylesheets="@../../css/ticket.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.Controllers.TicketPreviewController">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="600.0" styleClass="background" stylesheets="@../../css/ticket.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.TicketPreviewController">
    <children>
       <VBox layoutX="469.0" prefHeight="290.0" prefWidth="132.0" spacing="3.0">
          <children>
