@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="600.0" styleClass="background" stylesheets="@../../css/ticket.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.TicketPreviewController">
+   <children>
+      <VBox layoutX="469.0" prefHeight="290.0" prefWidth="132.0" spacing="3.0">
+         <children>
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <ImageView fitHeight="73.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+            <Line endX="-100.0" endY="-19.0" startX="-100.0" startY="-39.0" />
+         </children>
+         <padding>
+            <Insets top="4.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Label fx:id="eventNameLabel" layoutX="49.0" layoutY="73.0" prefHeight="17.0" prefWidth="121.0" text="Label" />
+      <Label fx:id="dateLabel" layoutX="35.0" layoutY="258.0" text="Label" />
+      <Label fx:id="locationLabel" layoutX="142.0" layoutY="258.0" text="Label" />
+      <Label fx:id="descriptionLabel" layoutX="286.0" layoutY="258.0" text="Label" />
+      <Label fx:id="priceLabel" layoutX="386.0" layoutY="90.0" text="Label" />
+      <Label fx:id="seatNumberLabel" layoutX="386.0" layoutY="143.0" text="Label" />
+      <Label fx:id="perksLabel" layoutX="197.0" layoutY="178.0" text="Label" />
+   </children>
+</Pane>

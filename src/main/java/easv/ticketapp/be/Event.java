@@ -18,7 +18,7 @@ public class Event {
     }
 
     // Constructor without ID (for new events, letting the DB auto-generate it)
-    public Event() {
+    public Event(String name, String location, LocalDateTime date, String description) {
         this.id = null; // Default to null since it's auto-generated
         this.name = name;
         this.date = date;
@@ -64,5 +64,10 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

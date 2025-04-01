@@ -1,5 +1,6 @@
 package easv.ticketapp.gui;
 
+import easv.ticketapp.be.ticket.Ticket;
 import easv.ticketapp.be.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -82,6 +83,33 @@ public class PageManager {
 
     public static FXMLLoader ticketView(ActionEvent event) {
         return switchView("/easv/ticketapp/ticket-scene.fxml", event, "Tickets");
+    }
+
+    public static void ticketPreview(ActionEvent event, Ticket ticket) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/ticket-preview.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+
+            // Get the controller
+            TicketPreviewController controller = fxmlLoader.getController();
+
+            // Pass data to the preview
+            controller.updatePreview(
+                    ticket.getEventName(),
+                    ticket.getDate().toString(),
+                    ticket.getLocation(),
+                    ticket.getPrice(),
+                    ticket.getDescription(),
+                    ticket.getPerks())
+            ;
+
+            // Show the new scene
+            Stage stage = primaryStage != null ? primaryStage : (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load ticket preview", e);
+        }
     }
 
     public static FXMLLoader editEventView(ActionEvent event) {

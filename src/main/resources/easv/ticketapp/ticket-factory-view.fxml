@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -73,18 +72,10 @@
                      </font>
                   </Label>
                   <TextField fx:id="price" prefHeight="25.0" prefWidth="101.0" />
-                  <Button mnemonicParsing="false" onAction="#selectImage" text="Select image" />
-                  <Label fx:id="lblPath" prefHeight="17.0" prefWidth="0.0" />
                </children>
             </HBox>
             <HBox prefHeight="39.0" prefWidth="465.0" spacing="20.0">
                <children>
-                  <Label text="Seats?">
-                     <font>
-                        <Font name="Segoe UI Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <CheckBox mnemonicParsing="false" onAction="#onYesSeats" text="yes" />
                   <Label text="Available tickets:">
                      <font>
                         <Font name="Segoe UI Bold" size="14.0" />
@@ -95,7 +86,8 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="previewBtn" layoutX="496.0" layoutY="41.0" mnemonicParsing="false" text="Preview" />
-      <Button fx:id="submitBtn" layoutX="499.0" layoutY="87.0" mnemonicParsing="false" text="Submit" />
+      <Button layoutX="496.0" layoutY="41.0" mnemonicParsing="false" onAction="#onPreview" text="Preview" />
+      <Button layoutX="499.0" layoutY="87.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
+      <Button layoutX="505.0" layoutY="317.0" mnemonicParsing="false" onAction="#onPrint" text="Print" />
    </children>
 </Pane>
