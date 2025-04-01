@@ -1,84 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Pagination?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
-   <children>
-      <Rectangle height="86.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1000.0" />
-      <Label layoutX="455.0" layoutY="27.0" text="Event List" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="306.0" layoutX="-3.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="89.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="306.0" layoutX="913.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="87.0" />
-      <ImageView fitHeight="82.0" fitWidth="79.0" layoutX="8.0">
-         <image>
-            <Image url="@../../images/events gif.gif" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="14.0" layoutY="120.0" rotate="30.0">
-         <image>
-            <Image url="@../../images/Beer_Mug_PNG_Vector_Clipart_Imag.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="48.0" layoutY="164.0" rotate="-20.0">
-         <image>
-            <Image url="@../../images/burger png.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="31.0" layoutX="7.0" layoutY="207.0">
-         <image>
-            <Image url="@../../images/music png.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="34.0" layoutY="251.0">
-         <image>
-            <Image url="@../../images/cloudpng.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="9.0" layoutY="314.0">
-         <image>
-            <Image url="@../../images/book png.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="957.0" layoutY="117.0" rotate="-20.0">
-         <image>
-            <Image url="@../../images/controllerpng.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="37.0" layoutX="920.0" layoutY="154.0" rotate="20.0">
-         <image>
-            <Image url="@../../images/ticketpng.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="47.0" layoutX="952.0" layoutY="191.0" rotate="40.0">
-         <image>
-            <Image url="@../../images/carpng.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="913.0" layoutY="254.0">
-         <image>
-            <Image url="@../../images/cocktailpng.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="51.0" layoutX="938.0" layoutY="308.0" rotate="20.0">
-         <image>
-            <Image url="@../../images/events gif.gif" />
-         </image>
-      </ImageView>
-      <VBox fx:id="eventContainer" layoutX="85.0" layoutY="84.0" prefHeight="234.0" prefWidth="828.0">
-         <fx:include source="event-cell.fxml" />
-      </VBox>
-      <Pagination fx:id="pagination" layoutX="411.0" layoutY="325.0" maxPageIndicatorCount="5" prefHeight="60.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-      <Button layoutX="774.0" layoutY="344.0" mnemonicParsing="false" onAction="#createEvent" text="Create event" />
-   </children>
+<Pane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
+    <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+        <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </opaqueInsets>
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
+        <HBox alignment="CENTER" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <padding>
+                <Insets left="10.0" right="10.0" />
+            </padding>
+            <!-- Coordinators title text -->
+            <Text fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Events">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Text>
+
+            <Region minWidth="-Infinity" HBox.hgrow="ALWAYS" />
+
+            <!--      <Button mnemonicParsing="false" onAction="#handleCreateCoordinatorBtn" styleClass="main-btn"-->
+            <!--              text="Create Coordinator"/>-->
+        </HBox>
+
+        <HBox prefHeight="324.0" prefWidth="593.0">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="700.0">
+                <VBox fx:id="eventContainer" minHeight="-Infinity" minWidth="-Infinity" prefWidth="560.0" spacing="6.0">
+                </VBox>
+            </ScrollPane>
+        </HBox>
+        <Region minHeight="-Infinity" VBox.vgrow="ALWAYS" />
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Pagination fx:id="pagination" maxPageIndicatorCount="5" prefHeight="60.0" prefWidth="200.0" />
+            <Region minWidth="-Infinity" />
+        </HBox>
+    </VBox>
 </Pane>

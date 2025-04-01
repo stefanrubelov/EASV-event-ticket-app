@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -38,6 +39,10 @@ public class PasswordEmailController {
 
     @FXML
     private AnchorPane rootAnchorPane;
+
+    @FXML
+    private Button submitBtn;
+
     @FXML
     public void initialize() {
         Platform.runLater(() -> {
@@ -49,7 +54,7 @@ public class PasswordEmailController {
     }
 
     @FXML
-    public void submitBtn(ActionEvent event) {
+    public void handleSubmitAction(ActionEvent event) {
         messageLbl.setText("");
         resetFieldStyles();
 
@@ -57,6 +62,7 @@ public class PasswordEmailController {
             if (!validateEmailField()) {
                 return;
             }
+            tokenField.setVisible(true);
 
             User user = userService.findByEmail(emailField.getText());
             if (user == null) {
@@ -88,7 +94,6 @@ public class PasswordEmailController {
                     super.succeeded();
                     if (getValue()) {
                         emailSent = true;
-                        tokenField.setVisible(true);
                         messageLbl.setText("Email sent");
                         emailField.setDisable(true);
                     } else {

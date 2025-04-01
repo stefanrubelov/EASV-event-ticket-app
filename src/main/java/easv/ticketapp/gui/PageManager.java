@@ -28,7 +28,7 @@ public class PageManager {
                 Parent root = baseLoader.load();
                 baseLayoutController = baseLoader.getController();
                 primaryStage.setScene(new Scene(root));
-                primaryStage.setTitle(title);
+                primaryStage.setTitle("EASV");
             }
 
             FXMLLoader sceneLoader = new FXMLLoader(PageManager.class.getResource(fxmlPath));

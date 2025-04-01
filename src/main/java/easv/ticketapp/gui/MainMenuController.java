@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 
 public class MainMenuController {
     @FXML
@@ -18,7 +16,7 @@ public class MainMenuController {
     @FXML
     private Label userEmailLbl;
 
-    private Button activeButton; // Stores the currently active button
+    private Button activeButton;
 
     public void initialize() {
         fillUserMenu();
@@ -37,7 +35,6 @@ public class MainMenuController {
             coordinatorsButton = addMenuItem("Coordinators", this::coordinatorsBtnClick);
         }
 
-        // Set the default active menu item based on the current view
         String currentView = PageManager.getCurrentView();
         if ("coordinators".equals(currentView) && coordinatorsButton != null) {
             setActiveButton(coordinatorsButton);
@@ -58,8 +55,6 @@ public class MainMenuController {
         });
 
         Label label = new Label(text);
-        label.setFont(new Font("System Bold", 14));
-        label.setTextFill(Paint.valueOf("#000000"));
         label.getStyleClass().add("menu-item-label");
 
         HBox hbox = new HBox(10, label);

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.awt.*;
@@ -51,8 +52,8 @@ public class EventController {
         for (int i = start; i < end; i++) {
             Event event = allEvents.get(i);
             try {
-                FXMLLoader childLoader = new FXMLLoader(getClass().getResource("/easv/ticketapp/event-cell.fxml"));
-                AnchorPane eventCell = childLoader.load();
+                FXMLLoader childLoader = new FXMLLoader(getClass().getResource("/easv/ticketapp/event-card.fxml"));
+                HBox eventCell = childLoader.load();
 
                 EventCellController eventCellController = childLoader.getController();
                 eventCellController.setEvent(event);
@@ -61,7 +62,7 @@ public class EventController {
                 eventContainer.getChildren().add(eventCell);
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println("Error loading event-cell.fxml");
+                System.out.println("Error loading event-card.fxml");
             }
         }
     }
