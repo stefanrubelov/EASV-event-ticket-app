@@ -28,7 +28,7 @@ public class PageManager {
                 Parent root = baseLoader.load();
                 baseLayoutController = baseLoader.getController();
                 primaryStage.setScene(new Scene(root));
-                primaryStage.setTitle(title);
+                primaryStage.setTitle("EASV");
             }
 
             FXMLLoader sceneLoader = new FXMLLoader(PageManager.class.getResource(fxmlPath));
@@ -87,6 +87,11 @@ public class PageManager {
     public static FXMLLoader editEventView(ActionEvent event) {
         return switchView("/easv/ticketapp/edit-event.fxml", event, "Edit event");
     }
+
+    public static FXMLLoader addEventView(ActionEvent event) {
+        return switchView("/easv/ticketapp/add-event.fxml", event, "Add event");
+    }
+
 
     public static FXMLLoader addCoordinatorView(ActionEvent event) {
         return switchView("/easv/ticketapp/add-coordinator-scene.fxml", event, "Add coordinator");

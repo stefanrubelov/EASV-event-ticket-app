@@ -2,84 +2,74 @@ package easv.ticketapp.gui;
 
 import easv.ticketapp.be.User;
 import easv.ticketapp.bll.UserService;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Pagination;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CoordinatorsController {
     private final UserService userService = new UserService();
+    private static final int ITEMS_PER_PAGE = 10;
 
     @FXML
-    private TableView<User> coordinatorsTable;
+    private VBox usersContainer;
+    @FXML
+    private Pagination pagination;
 
-    @FXML
-    private TableColumn<User, String> emailColumn;
-
-    @FXML
-    private TableColumn<User, String> nameColumn;
-    @FXML
-    private ContextMenu contextMenuCoordinators;
-    @FXML
-    private MenuItem delete;
-    @FXML
-    private MenuItem edit;
-    @FXML
-    private MenuItem save;
-
-    private final ObservableList<User> userList = FXCollections.observableArrayList();
+    private List<User> users;
 
     @FXML
     public void initialize() {
-        fetchUsers();
-        setupTableColumns();
-        setUpContextMenu();
+        users = userService.getCoordinators();
+        setupPagination();
     }
 
-    private void setupTableColumns() {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-
-        coordinatorsTable.setItems(userList);
+    private void setupPagination() {
+        int pageCount = (int) Math.ceil((double) users.size() / ITEMS_PER_PAGE);
+        pagination.setPageCount(Math.max(pageCount, 1));
+        pagination.setCurrentPageIndex(0);
+        pagination.currentPageIndexProperty().addListener((obs, oldIndex, newIndex) -> loadPage(newIndex.intValue()));
+        loadPage(0);
     }
 
-    private void fetchUsers() {
-        List<User> users = userService.getCoordinators();
+    private void loadPage(int pageIndex) {
+        usersContainer.getChildren().clear();
 
-        userList.clear();
-        userList.setAll(users);
-        coordinatorsTable.setItems(userList);
+        int start = pageIndex * ITEMS_PER_PAGE;
+        int end = Math.min(start + ITEMS_PER_PAGE, users.size());
 
-        System.out.println("Fetched users: " + users.size());
+        for (int i = start; i < end; i++) {
+            User user = users.get(i);
+            try {
+                FXMLLoader childLoader = new FXMLLoader(getClass().getResource("/easv/ticketapp/user-card.fxml"));
+                Pane userCard = childLoader.load();
 
-        if (users.isEmpty()) {
-            System.out.println("No users found in the database!");
+                UserCardController userCardController = childLoader.getController();
+                userCardController.setUser(user);
+                userCardController.setController(this);
+
+                usersContainer.getChildren().add(userCard);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error loading user-card.fxml");
+            }
         }
     }
 
-    private void setUpContextMenu() {
-
-        delete.setOnAction(_ -> {
-            User selectedUser = coordinatorsTable.getSelectionModel().getSelectedItem();
-            if (selectedUser != null) {
-                userService.deleteUser(selectedUser);
-                ObservableList<User> currentItems = coordinatorsTable.getItems();
-                currentItems.remove(selectedUser);
-            }
-        });
-
-        coordinatorsTable.setRowFactory(_ -> {
-            TableRow<User> row = new TableRow<>();
-            row.setContextMenu(contextMenuCoordinators);
-            return row;
-        });
+    public void deleteUser(User user) {
+        users.remove(user);
+        userService.deleteUser(user);
+        setupPagination();
+        loadPage(pagination.getCurrentPageIndex());
     }
 
-    public void onCreateCoordinator(ActionEvent event) {
-        PageManager.addCoordinatorView(event);
+    public void handleCreateCoordinatorBtn(ActionEvent actionEvent) {
+
     }
 }

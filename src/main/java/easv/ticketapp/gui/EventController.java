@@ -6,8 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,6 +24,10 @@ public class EventController {
     private Pagination pagination;
 
     private List<Event> allEvents;
+
+    @FXML
+    private Button createBtn;
+
 
     @FXML
     public void initialize() {
@@ -45,8 +52,8 @@ public class EventController {
         for (int i = start; i < end; i++) {
             Event event = allEvents.get(i);
             try {
-                FXMLLoader childLoader = new FXMLLoader(getClass().getResource("/easv/ticketapp/event-cell.fxml"));
-                AnchorPane eventCell = childLoader.load();
+                FXMLLoader childLoader = new FXMLLoader(getClass().getResource("/easv/ticketapp/event-card.fxml"));
+                HBox eventCell = childLoader.load();
 
                 EventCellController eventCellController = childLoader.getController();
                 eventCellController.setEvent(event);
@@ -55,7 +62,7 @@ public class EventController {
                 eventContainer.getChildren().add(eventCell);
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println("Error loading event-cell.fxml");
+                System.out.println("Error loading event-card.fxml");
             }
         }
     }
@@ -65,5 +72,11 @@ public class EventController {
         eventManager.deleteEvent(event);
         setupPagination();
         loadPage(pagination.getCurrentPageIndex());
+    }
+
+    @FXML
+    public void createEvent(javafx.event.ActionEvent actionEvent) {
+
+        PageManager.addEventView(actionEvent);
     }
 }

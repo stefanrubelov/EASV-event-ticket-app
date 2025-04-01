@@ -30,7 +30,7 @@ public class EventCellController {
     public void setEvent(Event event) {
         this.event = event;
         nameLabel.setText(event.getName());
-        dateLabel.setText(event.getStart_date().toString());
+        dateLabel.setText(event.getDate().toString());
         locationLabel.setText(event.getLocation());
         descriptionLabel.setText(event.getDescription());
     }
@@ -61,13 +61,22 @@ public class EventCellController {
 
     @FXML
     private void handleEditEvent(ActionEvent event) {
-        FXMLLoader loader = PageManager.editEventView(event); // Now returns FXMLLoader
+        try {
+            // Load the FXML file for the edit event view
+            FXMLLoader loader = PageManager.editEventView(event); // Returns FXMLLoader with the FXML file
 
-        // Retrieve the controller of the edit event view
-        EditEventController editEventController = loader.getController();
+            // Retrieve the controller of the edit event view
+            EditEventController editEventController = loader.getController();
 
-        // Set the event on the controller
-        editEventController.setEditEvent(this.event);
+            // Ensure the controller is properly initialized and pass the event data
+            if (editEventController != null) {
+                editEventController.setEditEvent(this.event);
+            } else {
+                System.out.println("Error: EditEventController is null");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error: Could not load the edit event view.");
+        }
     }
-
 }
