@@ -37,15 +37,9 @@ public class TicketController implements Initializable {
     @FXML
     private TextField availableTicketsField;
     @FXML
-    private DatePicker datePicker;
-    @FXML
     private TextField descriptionTxtfield;
     @FXML
     private ComboBox<Event> eventBox;
-    @FXML
-    private Label lblPath;
-    @FXML
-    private TextField locationTxtfield;
     @FXML
     private TextField price;
     @FXML
@@ -64,12 +58,29 @@ public class TicketController implements Initializable {
 
     @FXML
     void onPreview(ActionEvent event) {
-        if (eventBox.getValue() == null || ticketBox.getValue() == null || datePicker.getValue() == null ||
-                locationTxtfield.getText().isEmpty() || price.getText().isEmpty() || availableTicketsField.getText().isEmpty()) {
+        if (eventBox.getValue() == null || ticketBox.getValue() == null ||
+               price.getText().isEmpty() || availableTicketsField.getText().isEmpty()) {
             System.out.println("Please fill in all fields before previewing.");
             return;
         }
-        Ticket ticket = new Ticket(1, "name name ", 39.0, "test", "description", "locaiton", LocalDateTime.now(), new TicketType("vip"), 200);
+        Event selectedEvent = eventBox.getValue();
+        TicketType selectedTicketType = ticketBox.getValue();
+        String description = descriptionTxtfield.getText();
+        String location = selectedEvent.getLocation();
+        LocalDateTime eventDate = selectedEvent.getDate();
+        double ticketPrice = Double.parseDouble(price.getText());
+        Integer availableTickets = Integer.valueOf(availableTicketsField.getText());
+
+        Ticket ticket = new Ticket(
+                0, // Generates automatically
+                selectedEvent.getName(),
+                ticketPrice,
+                "General", // TODO
+                description,
+                location,
+                eventDate,
+                selectedTicketType,
+                availableTickets);
         PageManager.ticketPreview(event,ticket);
     }
 
@@ -77,8 +88,7 @@ public class TicketController implements Initializable {
     void onSubmit(ActionEvent event) {
         try {
             // Validation of the input fields
-            if (eventBox.getValue() == null || ticketBox.getValue() == null || datePicker.getValue() == null ||
-                    locationTxtfield.getText().isEmpty() || price.getText().isEmpty() || descriptionTxtfield.getText().isEmpty() || availableTicketsField.getText().isEmpty()){
+            if (eventBox.getValue() == null || ticketBox.getValue() == null || price.getText().isEmpty() || descriptionTxtfield.getText().isEmpty() || availableTicketsField.getText().isEmpty()){
                 System.out.println("Please fill in all fields before previewing.");
                 return;
             }
@@ -86,9 +96,9 @@ public class TicketController implements Initializable {
             // Get the input values
             Event selectedEvent = eventBox.getValue();
             TicketType selectedTicketType = ticketBox.getValue();
-            String location = locationTxtfield.getText();
             String description = descriptionTxtfield.getText();
-            LocalDateTime eventDate = datePicker.getValue().atStartOfDay();
+            String location = selectedEvent.getLocation();
+            LocalDateTime eventDate = selectedEvent.getDate();
             double ticketPrice = Double.parseDouble(price.getText());
             Integer availableTickets = Integer.valueOf(availableTicketsField.getText());
 

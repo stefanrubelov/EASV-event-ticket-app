@@ -14,6 +14,7 @@ public class TicketPreviewController {
     @FXML
     private Pane rootPane;
 
+
     public void setBackgroundImage(String imagePath) {
         rootPane.setStyle("-fx-background-image: url(");
     }

@@ -89,7 +89,6 @@ public class PageManager {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/ticket-preview.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-
             // Get the controller
             TicketPreviewController controller = fxmlLoader.getController();
 
@@ -105,6 +104,7 @@ public class PageManager {
 
             // Show the new scene
             Stage stage = primaryStage != null ? primaryStage : (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

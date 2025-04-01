@@ -9,9 +9,7 @@ public class Event {
     private String location;
     private String description;
 
-    public Event(){
-
-    }
+    public Event(){}
 
     public Event(Integer id, String name, LocalDateTime date, String location, String description) {
         this.id = id;
