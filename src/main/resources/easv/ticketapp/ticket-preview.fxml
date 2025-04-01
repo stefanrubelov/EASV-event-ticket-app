@@ -1,15 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="845.0" styleClass="background" stylesheets="@../../css/ticket.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.TicketPreviewController">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="845.0" styleClass="background" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.TicketPreviewController">
    <children>
-      <Label fx:id="eventNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="330.0" layoutY="81.0" prefHeight="17.0" prefWidth="213.0" text="Event" textAlignment="CENTER" />
-      <Label fx:id="dateLabel" layoutX="351.0" layoutY="204.0" text="Date " />
-      <Label fx:id="locationLabel" layoutX="451.0" layoutY="204.0" prefHeight="17.0" prefWidth="190.0" text="Location" />
-      <Label fx:id="descriptionLabel" layoutX="403.0" layoutY="238.0" prefHeight="36.0" prefWidth="190.0" text="Description" />
-      <Label fx:id="priceLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="195.0" text="Price" textAlignment="CENTER" textFill="WHITE" />
-      <Label fx:id="perksLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="311.0" layoutY="107.0" prefHeight="17.0" prefWidth="253.0" text="Perk" textAlignment="CENTER" />
+      <Label fx:id="eventNameLbl1" alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="65.0" prefHeight="42.0" prefWidth="367.0" text="Event title 1 2 3" textAlignment="CENTER">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <Label fx:id="eventDateLbl1" layoutX="327.0" layoutY="193.0" prefHeight="20.0" prefWidth="300.0" text="2020-02-02" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="eventLocationLbl1" contentDisplay="RIGHT" layoutX="327.0" layoutY="174.0" prefHeight="17.0" prefWidth="300.0" text="EASV, Esbjerg" textAlignment="RIGHT" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label fx:id="ticketDescriptionLbl" alignment="TOP_RIGHT" layoutX="346.0" layoutY="232.0" prefHeight="42.0" prefWidth="300.0" text="Ticket description, lorem ipsum dolor sit amet " textAlignment="RIGHT" wrapText="true" />
+      <Label fx:id="ticketPriceLbl" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="230.0" layoutY="184.0" prefHeight="37.0" prefWidth="100.0" text="100" textFill="WHITE" textOverrun="CLIP">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font></Label>
+      <Label fx:id="eventDescriptionLbl" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="330.0" layoutY="107.0" prefHeight="42.0" prefWidth="253.0" text="Event description, lorem ipsum dolor sit amet" textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="271.0" layoutY="213.0" text="dkk" textFill="WHITE" />
+      <ImageView fitHeight="50.0" fitWidth="200.0" layoutX="690.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/easvlogo.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="57.0" layoutX="35.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
+      <ImageView cache="true" fitHeight="109.0" fitWidth="167.0" layoutX="54.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/barcode_example.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </ImageView>
+      <ImageView cache="true" fitHeight="109.0" fitWidth="167.0" layoutX="667.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/barcode_example.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </ImageView>
+      <Label fx:id="eventNameLbl2" alignment="CENTER" contentDisplay="CENTER" layoutX="658.0" layoutY="74.0" prefHeight="37.0" prefWidth="180.0" text="Event title" textAlignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="eventDateLbl2" alignment="TOP_CENTER" layoutX="658.0" layoutY="106.0" prefHeight="20.0" prefWidth="180.0" text="2020-02-02" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="eventLocationLbl2" alignment="CENTER" layoutX="658.0" layoutY="148.0" prefHeight="20.0" prefWidth="180.0" text="EASV, Esbjerg" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="450.0" layoutY="273.0" text="www.easv.dk/">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
+   <stylesheets>
+      <URL value="@../../css/ticket.css" />
+      <URL value="@../../css/main.css" />
+   </stylesheets>
 </Pane>

@@ -35,11 +35,19 @@ public class MainMenuController {
             coordinatorsButton = addMenuItem("Coordinators", this::coordinatorsBtnClick);
         }
 
+        Button createTicketButton = addMenuItem("Add ticket", this::addTicketBtnClick);
+
         String currentView = PageManager.getCurrentView();
-        if ("coordinators".equals(currentView) && coordinatorsButton != null) {
-            setActiveButton(coordinatorsButton);
-        } else {
-            setActiveButton(eventsButton);
+        switch (currentView) {
+            case "coordinators":
+                setActiveButton(coordinatorsButton);
+                break;
+            case "events":
+                setActiveButton(eventsButton);
+                break;
+            case "add_ticket":
+                setActiveButton(createTicketButton);
+                break;
         }
     }
 
@@ -90,5 +98,10 @@ public class MainMenuController {
     private void logoutBtnClick(ActionEvent event) {
         Auth.logout();
         PageManager.loginView(event);
+    }
+
+    @FXML
+    private void addTicketBtnClick(ActionEvent event) {
+        PageManager.addTicketView(event);
     }
 }

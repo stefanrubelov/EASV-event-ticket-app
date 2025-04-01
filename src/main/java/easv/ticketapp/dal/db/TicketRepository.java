@@ -1,14 +1,9 @@
 package easv.ticketapp.dal.db;
 
-import easv.ticketapp.be.Event;
 import easv.ticketapp.be.ticket.Ticket;
-import easv.ticketapp.be.ticket.TicketType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,16 +11,13 @@ public class TicketRepository {
     final private QueryBuilder queryBuilder = new QueryBuilder();
     final private Logger logger = Logger.getAnonymousLogger();
 
-    public Ticket createTicket(Ticket ticket) {
+    public Ticket create(Ticket ticket) {
         Ticket newTicket = null;
         ResultSet resultSet = queryBuilder.table("tickets")
-                .insert("eventName", ticket.getEventName())
+                .insert("event_id", ticket.getEvent().getId())
                 .insert("price", ticket.getPrice())
-                .insert("perks", ticket.getPerks())
                 .insert("description", ticket.getDescription())
-                .insert("location", ticket.getLocation())
-                .insert("date", ticket.getDate())
-                .insert("ticketType", ticket.getTicketType())
+                .insert("ticket_type_id", ticket.getTicketType().getId())
                 .saveAndReturn();
 
         try {
@@ -50,6 +42,6 @@ public class TicketRepository {
         String perks = rs.getString("perks");
 
         return new Ticket(id, title, path, createdAt, updatedAt);
-
+}
      */
 }

@@ -5,29 +5,24 @@ import easv.ticketapp.bll.EventManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.List;
 
 public class EventController {
     private final EventManager eventManager = new EventManager();
-    private static final int ITEMS_PER_PAGE = 5;
+    private static final int ITEMS_PER_PAGE = 15;
+    private List<Event> allEvents;
 
     @FXML
     private VBox eventContainer;
     @FXML
     private Pagination pagination;
-
-    private List<Event> allEvents;
-
     @FXML
     private Button createBtn;
-
 
     @FXML
     public void initialize() {
@@ -76,7 +71,6 @@ public class EventController {
 
     @FXML
     public void createEvent(javafx.event.ActionEvent actionEvent) {
-
         PageManager.addEventView(actionEvent);
     }
 }

@@ -1,33 +1,48 @@
 package easv.ticketapp.be.ticket;
 
-import java.awt.*;
-import java.time.LocalDateTime;
+import easv.ticketapp.be.Event;
+
 import java.util.UUID;
 
 public class Ticket {
     private Integer id;
-    private String eventName;
+    private Integer eventId;
     private double price;
-    private String perks;
-    private String barcode;
     private String description;
-    private String location;
-    private LocalDateTime date;
+    private Integer ticketTypeId;
     private TicketType ticketType;
-    private Integer availableTickets;
+    private Event event;
 
-    public Ticket(Integer id, String eventName, double price, String perks, String description, String location, LocalDateTime date, TicketType ticketType, Integer availableTickets) {
-        this.id = id;
-        this.eventName = eventName;
+    /**
+     * Constructor to create a Ticket object with the specified details.
+     *
+     * @param eventId     The unique identifier for the event associated with the ticket.
+     * @param price       The price of the ticket.
+     * @param description A brief description of the ticket or event.
+     * @param ticketType  The type of the ticket (e.g., VIP, General Admission, etc.).
+     */
+    public Ticket(Integer eventId, double price, String description, TicketType ticketType) {
+        this.eventId = eventId;
         this.price = price;
-        this.perks = perks;
-        this.barcode = generateBarCode();
         this.description = description;
-        this.location = location;
-        this.date = date;
         this.ticketType = ticketType;
-        this.availableTickets = availableTickets;
     }
+
+    public Ticket(Integer eventId, double price, String description, Integer ticketTypeId) {
+        this.eventId = eventId;
+        this.price = price;
+        this.description = description;
+        this.ticketTypeId = ticketTypeId;
+    }
+
+    public Ticket(Integer eventId, double price, String description, TicketType ticketType, Event event) {
+        this.eventId = eventId;
+        this.price = price;
+        this.description = description;
+        this.ticketType = ticketType;
+        this.event = event;
+    }
+
     public Ticket(Integer id) {
         this.id = id;
     }
@@ -39,31 +54,24 @@ public class Ticket {
     public Integer getId() {
         return id;
     }
-    public String getEventName() {
-        return eventName;
-    }
+
     public String getDescription() {
         return description;
     }
+
     public Double getPrice() {
         return price;
     }
-    public String getPerks() {
-        return perks;
-    }
-    public String getLocation() {
-        return location;
-    }
-    public LocalDateTime getDate() {
-        return date;
-    }
-    public String getBarCode() {
-        return barcode;
-    }
+
     public TicketType getTicketType() {
         return ticketType;
     }
-    public Integer getAvailableTickets() {
-        return availableTickets;
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public Integer getTicketTypeId() {
+        return ticketTypeId;
     }
 }

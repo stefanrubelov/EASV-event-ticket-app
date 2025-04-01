@@ -8,44 +8,26 @@ import easv.ticketapp.bll.TicketManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class TicketController implements Initializable {
-    private String filePath;
-    private Ticket ticket;
-
     private final EventManager eventManager = new EventManager();
     private final TicketManager ticketManager = new TicketManager();
+
     @FXML
-    private VBox vBoxInputContainer;
-    @FXML
-    private TextField availableTicketsField;
-    @FXML
-    private TextField descriptionTxtfield;
+    private TextArea descriptionTextArea;
     @FXML
     private ComboBox<Event> eventBox;
     @FXML
     private TextField price;
     @FXML
-    private ComboBox<TicketType> ticketBox;
-
-    private final static String IMAGES_DIRECTORY_PATH = "src/EmailClient/resources/images";
+    private ComboBox<TicketType> ticketTypeBox;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,68 +35,42 @@ public class TicketController implements Initializable {
         System.out.println(events.size());
         List<TicketType> ticketTypes = ticketManager.getAllTicketTypes();
         eventBox.getItems().addAll(events);
-        ticketBox.getItems().addAll(ticketTypes);
+        ticketTypeBox.getItems().addAll(ticketTypes);
     }
 
     @FXML
-    void onPreview(ActionEvent event) {
-        if (eventBox.getValue() == null || ticketBox.getValue() == null ||
-               price.getText().isEmpty() || availableTicketsField.getText().isEmpty()) {
+    void onPreview(ActionEvent actionEvent) {
+        if (eventBox.getValue() == null || ticketTypeBox.getValue() == null || price.getText().isEmpty()) {
             System.out.println("Please fill in all fields before previewing.");
             return;
         }
         Event selectedEvent = eventBox.getValue();
-        TicketType selectedTicketType = ticketBox.getValue();
-        String description = descriptionTxtfield.getText();
-        String location = selectedEvent.getLocation();
-        LocalDateTime eventDate = selectedEvent.getDate();
+        TicketType selectedTicketType = ticketTypeBox.getValue();
+        String description = descriptionTextArea.getText();
         double ticketPrice = Double.parseDouble(price.getText());
-        Integer availableTickets = Integer.valueOf(availableTicketsField.getText());
 
-        Ticket ticket = new Ticket(
-                0, // Generates automatically
-                selectedEvent.getName(),
-                ticketPrice,
-                "General", // TODO
-                description,
-                location,
-                eventDate,
-                selectedTicketType,
-                availableTickets);
-        PageManager.ticketPreview(event,ticket);
+        Ticket ticket = new Ticket(selectedEvent.getId(), ticketPrice, description, selectedTicketType, selectedEvent);
+
+        PageManager.ticketPreview(actionEvent, ticket);
     }
 
     @FXML
     void onSubmit(ActionEvent event) {
         try {
             // Validation of the input fields
-            if (eventBox.getValue() == null || ticketBox.getValue() == null || price.getText().isEmpty() || descriptionTxtfield.getText().isEmpty() || availableTicketsField.getText().isEmpty()){
+            if (eventBox.getValue() == null || ticketTypeBox.getValue() == null || price.getText().isEmpty() || descriptionTextArea.getText().isEmpty()) {
                 System.out.println("Please fill in all fields before previewing.");
                 return;
             }
 
             // Get the input values
             Event selectedEvent = eventBox.getValue();
-            TicketType selectedTicketType = ticketBox.getValue();
-            String description = descriptionTxtfield.getText();
-            String location = selectedEvent.getLocation();
-            LocalDateTime eventDate = selectedEvent.getDate();
+            TicketType selectedTicketType = ticketTypeBox.getValue();
+            String description = descriptionTextArea.getText();
             double ticketPrice = Double.parseDouble(price.getText());
-            Integer availableTickets = Integer.valueOf(availableTicketsField.getText());
 
             // Creates new ticket
-            Ticket newTicket = new Ticket(
-                    0, // Generates automatically
-                    selectedEvent.getName(),
-                    ticketPrice,
-                    "General", // TODO
-                    description,
-                    location,
-                    eventDate,
-                    selectedTicketType,
-                    availableTickets
-            );
-
+            Ticket newTicket = new Ticket(selectedEvent.getId(), ticketPrice, description, selectedTicketType, selectedEvent);
             ticketManager.addTicket(newTicket);
 
             // Testing
@@ -126,10 +82,5 @@ public class TicketController implements Initializable {
         } catch (Exception e) {
             System.out.println("Error adding the ticket: " + e.getMessage());
         }
-    }
-
-    @FXML
-    void onPrint(ActionEvent event) {
-
     }
 }

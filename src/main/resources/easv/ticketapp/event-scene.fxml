@@ -4,47 +4,43 @@
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
-    <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-        <opaqueInsets>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-        </opaqueInsets>
-        <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-        </padding>
-        <HBox alignment="CENTER" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+<?import javafx.scene.control.Button?>
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
+    <opaqueInsets>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </opaqueInsets>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+        <HBox alignment="CENTER" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="NEVER">
             <padding>
                 <Insets left="10.0" right="10.0" />
             </padding>
-            <!-- Coordinators title text -->
-            <Text fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Events">
-                <font>
-                    <Font name="System Bold" size="24.0" />
-                </font>
-            </Text>
-
-            <Region minWidth="-Infinity" HBox.hgrow="ALWAYS" />
-
-            <!--      <Button mnemonicParsing="false" onAction="#handleCreateCoordinatorBtn" styleClass="main-btn"-->
-            <!--              text="Create Coordinator"/>-->
+            <children>
+                <Text fill="#464646" strokeType="OUTSIDE" strokeWidth="0.0" text="Events">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Text>
+                <Region minWidth="-Infinity" HBox.hgrow="ALWAYS" />
+            </children>
+            <Button mnemonicParsing="false" styleClass="main-btn" text="Add event" onAction="#createEvent" />
         </HBox>
-
-        <HBox prefHeight="324.0" prefWidth="593.0">
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="700.0">
-                <VBox fx:id="eventContainer" minHeight="-Infinity" minWidth="-Infinity" prefWidth="560.0" spacing="6.0">
-                </VBox>
-            </ScrollPane>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefWidth="700.0" VBox.vgrow="ALWAYS">
+            <content>
+                <VBox fx:id="eventContainer" minHeight="-Infinity" minWidth="-Infinity" spacing="6.0" />
+            </content>
+        </ScrollPane>
+        <HBox alignment="CENTER" VBox.vgrow="SOMETIMES">
+            <children>
+                <Pagination fx:id="pagination" maxPageIndicatorCount="5" />
+            </children>
         </HBox>
-        <Region minHeight="-Infinity" VBox.vgrow="ALWAYS" />
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <Pagination fx:id="pagination" maxPageIndicatorCount="5" prefHeight="60.0" prefWidth="200.0" />
-            <Region minWidth="-Infinity" />
-        </HBox>
-    </VBox>
-</Pane>
+    </children>
+</VBox>
