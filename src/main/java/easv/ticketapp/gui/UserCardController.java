@@ -47,7 +47,7 @@ public class UserCardController {
     }
 
     @FXML
-    public void handleDeleteAction(ActionEvent event) {
+        public void handleDeleteAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete user");
         alert.setHeaderText("Are you sure you want to delete this user?");

@@ -18,6 +18,6 @@ public class TicketManager {
     }
 
     public void addTicket(Ticket newTicket) {
-        ticketRepository.createTicket(newTicket);
+        ticketRepository.create(newTicket);
     }
 }

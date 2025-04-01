@@ -1,12 +1,13 @@
 package easv.ticketapp.gui;
 
-import easv.ticketapp.be.ticket.Ticket;
 import easv.ticketapp.be.User;
+import easv.ticketapp.be.ticket.Ticket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -89,28 +90,21 @@ public class PageManager {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/ticket-preview.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            // Get the controller
             TicketPreviewController controller = fxmlLoader.getController();
 
-            // Pass data to the preview
-            controller.updatePreview(
-                    ticket.getEventName(),
-                    ticket.getDate().toString(),
-                    ticket.getLocation(),
-                    ticket.getPrice(),
-                    ticket.getDescription(),
-                    ticket.getPerks())
-            ;
+            controller.updatePreview(ticket);
 
-            // Show the new scene
-            Stage stage = primaryStage != null ? primaryStage : (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setResizable(false);
+            Stage stage = new Stage();
+            stage.setTitle("Ticket Preview");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException("Failed to load ticket preview", e);
         }
     }
+
 
     public static FXMLLoader editEventView(ActionEvent event) {
         return switchView("/easv/ticketapp/edit-event.fxml", event, "Edit event");
@@ -152,6 +146,11 @@ public class PageManager {
         } catch (IOException e) {
             throw new RuntimeException("Failed to load view: /easv/ticketapp/password-reset.fxml", e);
         }
+    }
+
+    public static FXMLLoader addTicketView(ActionEvent event) {
+        currentView = "add_ticket";
+        return switchView("/easv/ticketapp/ticket-factory-view.fxml", event, "Add ticket");
     }
 
     public static String getCurrentView() {
