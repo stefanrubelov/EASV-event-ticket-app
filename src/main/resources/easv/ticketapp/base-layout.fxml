@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="baseLayout" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.BaseLayoutController">
+<BorderPane styleClass="layout-background-gradient" fx:id="baseLayout" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.BaseLayoutController">
     <left>
-        <!-- Use absolute path instead of relative -->
+        <!-- Left menu (not changed) -->
         <fx:include source="main-menu.fxml" />
     </left>
-    <center>
 
+    <center>
+        <!-- This will hold the content and resize based on the window size -->
+        <VBox fx:id="contentContainer" VBox.vgrow="ALWAYS">
+            <!-- Dynamic content will go here -->
+        </VBox>
     </center>
+    <stylesheets>
+        <URL value="@../../css/main.css" />
+    </stylesheets>
 </BorderPane>
