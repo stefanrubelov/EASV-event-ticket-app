@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,6 +24,10 @@ public class EventController {
     private Pagination pagination;
 
     private List<Event> allEvents;
+
+    @FXML
+    private Button createBtn;
+
 
     @FXML
     public void initialize() {
@@ -66,5 +72,11 @@ public class EventController {
         eventManager.deleteEvent(event);
         setupPagination();
         loadPage(pagination.getCurrentPageIndex());
+    }
+
+    @FXML
+    public void createEvent(javafx.event.ActionEvent actionEvent) {
+
+        PageManager.addEventView(actionEvent);
     }
 }

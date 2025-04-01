@@ -12,6 +12,7 @@ module easv.ticketapp {
     requires jakarta.mail;
     requires jdk.jdi;
     requires net.synedra.validatorfx;
+    requires tornadofx.controls;
 
     opens easv.ticketapp to javafx.fxml;
     opens easv.ticketapp.be to javafx.base;
