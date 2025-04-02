@@ -1,6 +1,7 @@
 package easv.ticketapp.be;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event {
     private Integer id; // Remove 'final' to allow setting later
@@ -9,9 +10,10 @@ public class Event {
     private String location;
     private String description;
 
-    public Event(){}
+    public Event() {
+    }
 
-    public Event(Integer id){
+    public Event(Integer id) {
         this.id = id;
     }
 
@@ -30,6 +32,10 @@ public class Event {
         this.date = date;
         this.location = location;
         this.description = description;
+    }
+
+    public Event(String name) {
+        this.name = name;
     }
 
     public Event(int eventId) {
@@ -79,5 +85,12 @@ public class Event {
     @Override
     public String toString() {
         return name;
+    }
+
+    public String getDateFormatted() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm, d'th' 'of' MMMM, yyyy");
+
+        String formattedDateTime = date.format(formatter);
+        return formattedDateTime;
     }
 }

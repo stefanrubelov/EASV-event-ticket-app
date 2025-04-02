@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-
-<HBox alignment="CENTER" minWidth="-Infinity" prefHeight="40.0" style="-fx-background-color: #ffffff;" stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:id="eventCardContainer" fx:controller="easv.ticketapp.gui.EventCardController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<HBox alignment="CENTER" minWidth="-Infinity" prefHeight="40.0" style="-fx-background-color: #ffffff;"
+      stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+      fx:id="eventCardContainer" fx:controller="easv.ticketapp.gui.EventCardController">
     <children>
         <!-- Name HBox -->
         <HBox alignment="CENTER" minWidth="150.0" prefWidth="1.0" styleClass="card-cell" HBox.hgrow="ALWAYS">
             <children>
-                <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="150.0" text="Silent Disco" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="150.0" text="Silent Disco"
+                       wrapText="true" HBox.hgrow="ALWAYS"/>
             </children>
         </HBox>
         <!-- Date HBox -->
         <HBox alignment="CENTER" minWidth="100.0" prefWidth="1.0" styleClass="card-cell" HBox.hgrow="ALWAYS">
             <children>
-                <Label fx:id="dateLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" text="05-02-2025" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label fx:id="dateLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" text="05-02-2025"
+                       textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS"/>
             </children>
         </HBox>
         <!-- Location HBox -->
         <HBox alignment="CENTER" minWidth="100.0" prefWidth="1.0" styleClass="card-cell" HBox.hgrow="ALWAYS">
             <children>
-                <Label fx:id="locationLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" text="EASV Bar" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label fx:id="locationLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" text="EASV Bar"
+                       wrapText="true" HBox.hgrow="ALWAYS"/>
             </children>
         </HBox>
         <!-- Description HBox -->
         <HBox alignment="CENTER" minWidth="200.0" prefWidth="1.0" styleClass="card-cell" HBox.hgrow="ALWAYS">
             <children>
-                <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="200.0" text="Annual technology conference." textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS" />
+                <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="200.0"
+                       text="Annual technology conference." textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS"/>
             </children>
         </HBox>
         <!-- Edit and Delete buttons HBox -->
         <HBox fx:id="actionsContainer" alignment="CENTER" minWidth="120.0" spacing="10.0" HBox.hgrow="ALWAYS">
             <children>
-                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleEditEvent" styleClass="main-btn" text="Edit" />
-                <Button fx:id="deleteBtn" mnemonicParsing="false" styleClass="main-btn" text="Delete" />
-            <Button mnemonicParsing="false" onAction="#onTickets" text="Tickets" />
+                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleEditEvent" styleClass="main-btn"
+                        text="Edit"/>
+                <Button fx:id="deleteBtn" mnemonicParsing="false" styleClass="main-btn" text="Delete"/>
+                <Button mnemonicParsing="false" onAction="#onTickets" styleClass="main-btn" text="Tickets"/>
             </children>
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
         </HBox>
     </children>

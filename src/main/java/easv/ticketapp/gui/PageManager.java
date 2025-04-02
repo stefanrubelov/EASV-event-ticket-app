@@ -160,4 +160,8 @@ public class PageManager {
     public static FXMLLoader eventTicketsiew(ActionEvent event) {
         return switchView("/easv/ticketapp/event-tickets-view.fxml", event, "Event tickets");
     }
+    public static FXMLLoader purchaseTicketView(ActionEvent event) {
+        currentView = "purchase_ticket";
+        return switchView("/easv/ticketapp/purchase-ticket.fxml", event, "Purchase ticket");
+    }
 }

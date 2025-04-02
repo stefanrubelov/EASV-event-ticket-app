@@ -42,6 +42,7 @@ public class Ticket {
         this.ticketType = ticketType;
         this.event = event;
     }
+
     public Ticket(Integer id, Event event, double price, String description, TicketType ticketType) {
         this.id = id;
         this.event = event;
@@ -80,5 +81,13 @@ public class Ticket {
 
     public Integer getTicketTypeId() {
         return ticketTypeId;
+    }
+
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

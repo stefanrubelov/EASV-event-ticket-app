@@ -13,7 +13,6 @@ public class TicketManager {
     private final TicketRepository ticketRepository = new TicketRepository();
 
     public List<TicketType> getAllTicketTypes() {
-
         return ticketTypeRepository.getTicketTypes();
     }
 
