@@ -28,8 +28,8 @@
         </HBox>
         <HBox alignment="CENTER" minWidth="120.0" spacing="10.0" HBox.hgrow="ALWAYS">
             <children>
-                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleEditAction" styleClass="main-btn"
-                        text="Edit"/>
+<!--                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleEditAction" styleClass="main-btn"-->
+<!--                        text="Edit"/>-->
                 <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#handleDeleteAction" styleClass="main-btn"
                         text="Delete"/>
             </children>
