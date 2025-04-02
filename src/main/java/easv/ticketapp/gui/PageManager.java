@@ -156,4 +156,8 @@ public class PageManager {
     public static String getCurrentView() {
         return currentView;
     }
+
+    public static FXMLLoader eventTicketsiew(ActionEvent event) {
+        return switchView("/easv/ticketapp/event-tickets-view.fxml", event, "Event tickets");
+    }
 }

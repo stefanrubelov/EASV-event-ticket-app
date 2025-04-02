@@ -1,9 +1,13 @@
 package easv.ticketapp.dal.db;
 
+import easv.ticketapp.be.Event;
 import easv.ticketapp.be.ticket.Ticket;
+import easv.ticketapp.be.ticket.TicketType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,15 +37,43 @@ public class TicketRepository {
         return newTicket;
     }
 
+    public List<Ticket> getEventTickets(int eventId) {
+        List<Ticket> tickets = new ArrayList<>();
+        ResultSet resultSet = queryBuilder
+                .table("tickets")
+                .select("id", "event_id", "price", "description", "ticket_type_id")
+                //.where("event_id", eventId)
+                .get();
 
+        try {
+            while (resultSet.next()) {
+                tickets.add(mapModel(resultSet));
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
 
-    /*private Ticket mapModel(ResultSet rs, int id) {
-        String eventName = rs.getString("eventName");
-        LocalDateTime price = rs.getTimestamp("price").toLocalDateTime();
-        LocalDateTime seat_number = rs.getTimestamp("seat_number").toLocalDateTime();
-        String perks = rs.getString("perks");
+        return tickets;
+    }
 
-        return new Ticket(id, title, path, createdAt, updatedAt);
-}
-     */
+    private Ticket mapModel(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        int eventId = rs.getInt("event_id");
+        double price = rs.getDouble("price");
+        String description = rs.getString("description");
+        int ticketTypeId = rs.getInt("ticket_type_id");
+
+        Event event = fetchEvent(eventId);  // Implementa este método para obter o evento da BD
+        TicketType ticketType = fetchTicketType(ticketTypeId); // Implementa este método
+
+        return new Ticket(id, event, price, description, ticketType);
+    }
+
+    private TicketType fetchTicketType(int ticketTypeId) {
+        return new TicketType(ticketTypeId);
+    }
+
+    private Event fetchEvent(int eventId) {
+        return new Event(eventId);
+    }
 }

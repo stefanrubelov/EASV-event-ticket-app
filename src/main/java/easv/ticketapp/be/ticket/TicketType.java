@@ -11,6 +11,11 @@ public class TicketType {
     public TicketType(String type) {
         this.type = type;
     }
+
+    public TicketType(int ticketTypeId) {
+        this.id = ticketTypeId;
+    }
+
     public int getId() {
         return id;
     }

@@ -20,4 +20,8 @@ public class TicketManager {
     public void addTicket(Ticket newTicket) {
         ticketRepository.create(newTicket);
     }
+
+    public List<Ticket> getTicketsByEvent(Integer eventId) {
+        return ticketRepository.getEventTickets(eventId);
+    }
 }

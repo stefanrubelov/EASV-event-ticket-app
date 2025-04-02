@@ -32,6 +32,10 @@ public class Event {
         this.description = description;
     }
 
+    public Event(int eventId) {
+        this.id = eventId;
+    }
+
     public Integer getId() {
         return id;
     }
