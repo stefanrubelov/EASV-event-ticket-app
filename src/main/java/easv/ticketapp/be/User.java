@@ -31,14 +31,21 @@ public class User {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-    public User (int id){
+
+    public User(int id) {
         this.id = id;
     }
 
-    public User(String name, String email, String password,Integer userType) {
+    public User(String name, String email, String password, Integer userType) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.userType = userType;
+    }
+
+    public User(String name, String email, Integer userType) {
+        this.name = name;
+        this.email = email;
         this.userType = userType;
     }
 

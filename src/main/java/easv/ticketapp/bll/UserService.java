@@ -3,6 +3,7 @@ package easv.ticketapp.bll;
 import easv.ticketapp.be.User;
 import easv.ticketapp.dal.db.UserRepository;
 import easv.ticketapp.security.Auth;
+import easv.ticketapp.utils.UuidGenerator;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -29,21 +30,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    private String hashPassword(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-512");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            return Base64.getEncoder().encodeToString(hash);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public boolean updatePassword(User user, String password) {
-        System.out.println(user.getEmail());
-        System.out.println(hashPassword(password));
-
         return userRepository.updatePassword(user, hashPassword(password));
     }
 
@@ -56,6 +43,19 @@ public class UserService {
     }
 
     public void addUser(User user) {
-        User newCoordinator = userRepository.create(user);
+        String password = UuidGenerator.generate();
+        user.setPassword(hashPassword(password));
+        userRepository.create(user);
+    }
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -2,13 +2,14 @@ package easv.ticketapp.gui;
 
 import easv.ticketapp.be.Event;
 import easv.ticketapp.bll.EventManager;
+import easv.ticketapp.security.Auth;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,11 +23,20 @@ public class EventController {
     @FXML
     private Pagination pagination;
     @FXML
-    private Button createBtn;
+    private Button createEventBtn;
 
     @FXML
     public void initialize() {
-        allEvents = eventManager.getAllEvents();
+        if (Auth.check() && Auth.getUser().isAdmin()) {
+            createEventBtn.setVisible(false);
+        }
+
+        if (Auth.getUser().isAdmin()) {
+            allEvents = eventManager.getAllEvents();
+        } else {
+            allEvents = eventManager.getAllEventsByUser(Auth.getUser());
+        }
+
         setupPagination();
     }
 
@@ -50,9 +60,9 @@ public class EventController {
                 FXMLLoader childLoader = new FXMLLoader(getClass().getResource("/easv/ticketapp/event-card.fxml"));
                 HBox eventCell = childLoader.load();
 
-                EventCellController eventCellController = childLoader.getController();
-                eventCellController.setEvent(event);
-                eventCellController.setEventController(this);
+                EventCardController eventCardController = childLoader.getController();
+                eventCardController.setEvent(event);
+                eventCardController.setEventController(this);
 
                 eventContainer.getChildren().add(eventCell);
             } catch (IOException e) {

@@ -1,6 +1,7 @@
 package easv.ticketapp.gui;
 
 import easv.ticketapp.be.Event;
+import easv.ticketapp.security.Auth;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,9 +9,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+
 import java.util.Optional;
 
-public class EventCellController {
+public class EventCardController {
     @FXML
     public Button editBtn;
     @FXML
@@ -24,8 +27,18 @@ public class EventCellController {
     @FXML
     private Label descriptionLabel;
 
+    @FXML
+    private HBox actionsContainer;
+
     private Event event;
     private EventController eventController;
+
+    @FXML
+    public void initialize() {
+        if (Auth.check() && Auth.getUser().isAdmin()) {
+            editBtn.setVisible(false);
+        }
+    }
 
     public void setEvent(Event event) {
         this.event = event;
@@ -62,13 +75,10 @@ public class EventCellController {
     @FXML
     private void handleEditEvent(ActionEvent event) {
         try {
-            // Load the FXML file for the edit event view
-            FXMLLoader loader = PageManager.editEventView(event); // Returns FXMLLoader with the FXML file
+            FXMLLoader loader = PageManager.editEventView(event);
 
-            // Retrieve the controller of the edit event view
             EditEventController editEventController = loader.getController();
 
-            // Ensure the controller is properly initialized and pass the event data
             if (editEventController != null) {
                 editEventController.setEditEvent(this.event);
             } else {
