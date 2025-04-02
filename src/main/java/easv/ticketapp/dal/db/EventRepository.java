@@ -1,11 +1,10 @@
 package easv.ticketapp.dal.db;
 
 import easv.ticketapp.be.Event;
+import easv.ticketapp.be.User;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +15,33 @@ public class EventRepository {
     final private QueryBuilder queryBuilder = new QueryBuilder();
     final private Logger logger = Logger.getAnonymousLogger();
 
-
     public List<Event> getAll() {
         List<Event> events = new ArrayList<>();
 
         try (ResultSet rs = queryBuilder
                 .select("*")
                 .from("events")
+                .get()) {
+
+            while (rs != null && rs.next()) {
+                Event event = mapModel(rs, rs.getInt("id"));
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return events;
+    }
+
+    public List<Event> getAllByUserId(int userId) {
+        List<Event> events = new ArrayList<>();
+
+        try (ResultSet rs = queryBuilder
+                .select("events.id as id, events.name as name, events.location as location, events.description as description, events.start_date as start_date, event_user.id as u_e_id")
+                .from("events")
+                .join("event_user", "events.id = event_user.event_id", "INNER")
+                .where("event_user.user_id", "=", userId)
                 .get()) {
 
             while (rs != null && rs.next()) {
@@ -50,7 +69,6 @@ public class EventRepository {
         String description = resultSet.getString("description");
 
 
-
         return new Event(id, name, date, location, description);
     }
 
@@ -74,23 +92,30 @@ public class EventRepository {
         }
     }
 
-    public void createEvent(Event event) {
-        // Use QueryBuilder to construct the update query
-        queryBuilder
-                .table("events")  // Table to update
-                .insert("name", event.getName())  // Set the name column
-                .insert("start_date", event.getDate())  // Set the date column
-                .insert("location", event.getLocation())  // Set the location column
-                .insert("description", event.getDescription());  // Set the description column
-        // Execute the update
-        boolean success = queryBuilder.save();
+    public Event createEvent(Event event) {
+        ResultSet resultSet = queryBuilder
+                .table("events")
+                .insert("name", event.getName())
+                .insert("start_date", event.getDate())
+                .insert("location", event.getLocation())
+                .insert("description", event.getDescription())
+                .saveAndReturn();
+        try {
+            while (resultSet.next()) {
+                return new Event(resultSet.getInt("id"));
+            }
 
-        if (success) {
-            logger.log(Level.INFO, "Event with ID " + event.getId() + " updated successfully.");
-        } else {
-            logger.log(Level.WARNING, "Failed to update event with ID " + event.getId());
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
+        return null;
     }
 
-
+    public boolean addCoordinator(Event event, User user) {
+        return queryBuilder
+                .table("event_user")
+                .insert("event_id", event.getId())
+                .insert("user_id", user.getId())
+                .save();
+    }
 }

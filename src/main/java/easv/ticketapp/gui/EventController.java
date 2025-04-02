@@ -30,7 +30,13 @@ public class EventController {
         if (Auth.check() && Auth.getUser().isAdmin()) {
             createEventBtn.setVisible(false);
         }
-        allEvents = eventManager.getAllEvents();
+
+        if (Auth.getUser().isAdmin()) {
+            allEvents = eventManager.getAllEvents();
+        } else {
+            allEvents = eventManager.getAllEventsByUser(Auth.getUser());
+        }
+
         setupPagination();
     }
 

@@ -31,9 +31,6 @@ public class UserService {
     }
 
     public boolean updatePassword(User user, String password) {
-        System.out.println(user.getEmail());
-        System.out.println(hashPassword(password));
-
         return userRepository.updatePassword(user, hashPassword(password));
     }
 

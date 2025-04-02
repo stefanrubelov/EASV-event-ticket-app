@@ -1,20 +1,18 @@
 package easv.ticketapp.gui;
 
 import easv.ticketapp.be.Event;
-import easv.ticketapp.dal.db.EventRepository;
+import easv.ticketapp.be.User;
+import easv.ticketapp.bll.EventManager;
+import easv.ticketapp.security.Auth;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import tornadofx.control.DateTimePicker;
 
 import java.time.LocalDateTime;
 
 public class AddEventController {
-    private EventRepository eventRepository = new EventRepository();
+    private final EventManager eventManager = new EventManager();
     private Event event;
 
     @FXML
@@ -47,9 +45,10 @@ public class AddEventController {
             event.setLocation(location);
             event.setDescription(description);
 
-            boolean isUpdated = updateEventInDatabase(event);
+            User user = Auth.getUser();
+            boolean saved = eventManager.saveEvent(event, user);
 
-            if (isUpdated) {
+            if (saved) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Event created successfully!");
                 PageManager.coordinatorsView(actionEvent);
             } else {
@@ -146,15 +145,6 @@ public class AddEventController {
         alert.showAndWait();
     }
 
-    private boolean updateEventInDatabase(Event event) {
-        try {
-            eventRepository.createEvent(event);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     @FXML
     private void onGoBackAction(ActionEvent actionEvent) {

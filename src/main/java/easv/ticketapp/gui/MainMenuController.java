@@ -28,12 +28,12 @@ public class MainMenuController {
     }
 
     private void fillUserMenu() {
-        Button eventsButton = addMenuItem("Events", this::eventsBtnClick);
-
         Button coordinatorsButton = null;
         if (Auth.getUser().isAdmin()) {
             coordinatorsButton = addMenuItem("Coordinators", this::coordinatorsBtnClick);
         }
+
+        Button eventsButton = addMenuItem("Events", this::eventsBtnClick);
 
         Button createTicketButton = addMenuItem("Add ticket", this::addTicketBtnClick);
 
