@@ -24,6 +24,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TicketController implements Initializable {
@@ -32,8 +33,6 @@ public class TicketController implements Initializable {
 
     private final EventManager eventManager = new EventManager();
     private final TicketManager ticketManager = new TicketManager();
-    @FXML
-    private VBox vBoxInputContainer;
     @FXML
     private TextField availableTicketsField;
     @FXML
@@ -50,10 +49,43 @@ public class TicketController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Event> events = eventManager.getAllEvents();
-        System.out.println(events.size());
         List<TicketType> ticketTypes = ticketManager.getAllTicketTypes();
         eventBox.getItems().addAll(events);
         ticketBox.getItems().addAll(ticketTypes);
+
+        // Add a special placeholder for "+ Add new type..."
+        ticketBox.getItems().add(new TicketType("+ Add new type..."));
+
+        // Handle selection event
+        ticketBox.setOnAction(event -> handleTicketTypeSelection());
+
+    }
+
+    private void handleTicketTypeSelection() {
+        TicketType selectedType = ticketBox.getValue();
+
+        if (selectedType != null && "+ Add new type...".equals(selectedType.getType())) {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("New Ticket Type");
+            dialog.setHeaderText("Enter the new ticket type:");
+            dialog.setContentText("Ticket Type:");
+
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(newType -> {
+                if (!newType.trim().isEmpty()) {
+                    // Create a new TicketType object
+                    TicketType newTicketType = new TicketType(newType);
+
+                    // Save it to the database (if needed)
+                    ticketManager.addTicketType(newTicketType);
+
+                    // Update the ComboBox (add before "+ Add new type...")
+                    int lastIndex = ticketBox.getItems().size() - 1;
+                    ticketBox.getItems().add(lastIndex, newTicketType);
+                    ticketBox.setValue(newTicketType); // Set the new selection
+                }
+            });
+        }
     }
 
     @FXML
@@ -131,5 +163,21 @@ public class TicketController implements Initializable {
     @FXML
     void onPrint(ActionEvent event) {
 
+    }
+
+    public void addTicketType(ActionEvent event) {
+/*
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("New Ticket Type");
+        dialog.setHeaderText("Enter a new ticket type:");
+        Optional<TicketType> result = dialog.showAndWait();
+
+        result.ifPresent(newType -> {
+            if (!newType.trim().isEmpty() && !ticketBox.getItems().contains(newType)) {
+                ticketBox.getItems().add(newType);
+                ticketBox.setValue(newType);
+            }
+        });
+    });*/
     }
 }

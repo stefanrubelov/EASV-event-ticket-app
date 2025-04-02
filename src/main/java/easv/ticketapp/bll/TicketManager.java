@@ -20,4 +20,8 @@ public class TicketManager {
     public void addTicket(Ticket newTicket) {
         ticketRepository.createTicket(newTicket);
     }
+
+    public void addTicketType(TicketType newTicketType) {
+        ticketTypeRepository.addTicketType(newTicketType);
+    }
 }

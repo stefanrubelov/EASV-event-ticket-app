@@ -4,62 +4,44 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.TicketController">
    <children>
-      <VBox fx:id="vBoxInputContainer" fillWidth="false" layoutX="14.0" layoutY="151.0" prefHeight="232.0" prefWidth="471.0" spacing="20.0">
-         <children>
-            <HBox prefHeight="25.0" prefWidth="274.0" spacing="20.0" />
-            <HBox prefHeight="30.0" prefWidth="260.0" spacing="20.0" />
-            <TextField fx:id="descriptionTxtfield" prefHeight="58.0" prefWidth="232.0" />
-            <HBox prefHeight="25.0" prefWidth="232.0" spacing="20.0" />
-            <HBox prefHeight="9.0" prefWidth="388.0" spacing="20.0" />
-            <HBox prefHeight="64.0" prefWidth="755.0" spacing="20.0" />
-            <HBox prefHeight="25.0" prefWidth="472.0" spacing="20.0">
-               <children>
-                  <Label text="Price:">
-                     <font>
-                        <Font name="Segoe UI Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="price" prefHeight="25.0" prefWidth="101.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="39.0" prefWidth="465.0" spacing="20.0">
-               <children>
-                  <Label text="Available tickets:">
-                     <font>
-                        <Font name="Segoe UI Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="availableTicketsField" prefHeight="17.0" prefWidth="37.0" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
       <Button layoutX="448.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPreview" text="Preview" />
       <Button layoutX="525.0" layoutY="14.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
-      <Button layoutX="531.0" layoutY="351.0" mnemonicParsing="false" onAction="#onPrint" text="Print" />
-      <Label layoutX="18.0" layoutY="48.0" text="Event name:">
+      <Button layoutX="531.0" layoutY="324.0" mnemonicParsing="false" onAction="#onPrint" text="Print" />
+      <Label layoutX="18.0" layoutY="48.0" text="Event name">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="eventBox" layoutX="14.0" layoutY="73.0" prefWidth="150.0" />
-      <Label layoutX="258.0" layoutY="49.0" text="Ticket type:">
+      <ComboBox fx:id="eventBox" layoutX="14.0" layoutY="85.0" prefWidth="150.0" />
+      <Label layoutX="258.0" layoutY="49.0" text="Ticket type">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="ticketBox" layoutX="255.0" layoutY="72.0" prefWidth="150.0" />
-      <Label layoutX="18.0" layoutY="142.0" text="Description:">
+      <ComboBox fx:id="ticketBox" layoutX="256.0" layoutY="85.0" prefWidth="150.0" />
+      <Label layoutX="19.0" layoutY="217.0" text="Description">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
+      <Label layoutX="258.0" layoutY="143.0" text="Price">
+         <font>
+            <Font name="Segoe UI Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="price" layoutX="258.0" layoutY="174.0" prefHeight="25.0" prefWidth="101.0" />
+      <Label layoutX="20.0" layoutY="143.0" text="Available tickets">
+         <font>
+            <Font name="Segoe UI Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="availableTicketsField" layoutX="20.0" layoutY="174.0" prefHeight="17.0" prefWidth="37.0" />
+      <TextField fx:id="descriptionTxtfield" layoutX="16.0" layoutY="244.0" prefHeight="105.0" prefWidth="407.0" />
+      <Button layoutX="342.0" layoutY="46.0" mnemonicParsing="false" onAction="#addTicketType" text="+" />
    </children>
 </Pane>

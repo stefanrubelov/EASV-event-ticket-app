@@ -38,4 +38,18 @@ public class TicketTypeRepository {
 
         return new TicketType(id, type);
     }
+
+    public void addTicketType(TicketType ticket) {
+        queryBuilder
+                .table("ticket_types")  // Table to update
+                .insert("type", ticket.getType());  // Set the name column
+        // Execute the update
+        boolean success = queryBuilder.save();
+
+        if (success) {
+            logger.log(Level.INFO, "Ticket with ID " + ticket.getId() + " updated successfully.");
+        } else {
+            logger.log(Level.WARNING, "Failed to update ticket with ID " + ticket.getId());
+        }
+    }
 }
