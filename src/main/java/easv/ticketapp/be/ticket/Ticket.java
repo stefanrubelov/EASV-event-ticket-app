@@ -42,6 +42,13 @@ public class Ticket {
         this.ticketType = ticketType;
         this.event = event;
     }
+    public Ticket(Integer id, Event event, double price, String description, TicketType ticketType) {
+        this.id = id;
+        this.event = event;
+        this.price = price;
+        this.description = description;
+        this.ticketType = ticketType;
+    }
 
     public Ticket(Integer id) {
         this.id = id;

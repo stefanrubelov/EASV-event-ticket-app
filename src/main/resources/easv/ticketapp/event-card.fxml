@@ -36,6 +36,7 @@
             <children>
                 <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleEditEvent" styleClass="main-btn" text="Edit" />
                 <Button fx:id="deleteBtn" mnemonicParsing="false" styleClass="main-btn" text="Delete" />
+            <Button mnemonicParsing="false" onAction="#onTickets" text="Tickets" />
             </children>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

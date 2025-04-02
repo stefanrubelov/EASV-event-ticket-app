@@ -79,4 +79,20 @@ public class EventCellController {
             System.out.println("Error: Could not load the edit event view.");
         }
     }
+
+    public void onTickets(ActionEvent event) {
+        try {
+            FXMLLoader loader = PageManager.eventTicketsiew(event);
+
+            EventTicketsController eventTicketsController = loader.getController();
+            if (eventTicketsController != null) {
+                eventTicketsController.setEvent(this.event); // Passes the actual event
+            } else {
+                System.out.println("Error: EventTicketsController is null");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error: Could not load the event tickets view.");
+        }
+    }
 }
