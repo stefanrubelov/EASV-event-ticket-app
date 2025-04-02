@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import tornadofx.control.DateTimePicker?>
+
+<VBox fx:id="vBoxInputContainer" fillWidth="true" minWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.AddEventController">
+    <children>
+        <HBox alignment="CENTER" prefHeight="100.0" spacing="40.0">
+            <children>
+                <VBox fillWidth="true" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Name:">
+                            <font>
+                                <Font name="Segoe UI Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="nameField" maxWidth="Infinity" promptText="Name" styleClass="main-input" />
+                    </children>
+                </VBox>
+                <VBox fillWidth="true" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Location:">
+                            <font>
+                                <Font name="Segoe UI Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="locationField" maxWidth="Infinity" promptText="Location" styleClass="main-input" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" spacing="40.0">
+            <children>
+                <VBox fillWidth="true" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Date/Time:">
+                            <font>
+                                <Font name="Segoe UI Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <DateTimePicker fx:id="dateTimePicker" format="HH:mm dd-MM-yyyy" maxWidth="Infinity" styleClass="main-input" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <VBox prefHeight="100.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Label text="Description:">
+                    <font>
+                        <Font name="Segoe UI Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="descriptionTextArea" prefHeight="82.0" promptText="Description" styleClass="main-input" wrapText="true" VBox.vgrow="ALWAYS" />
+            </children>
+        </VBox>
+        <Label fx:id="errorLbl" layoutX="75.0" layoutY="260.0" prefHeight="17.0" prefWidth="250.0" textFill="RED" />
+        <HBox alignment="CENTER_RIGHT" prefHeight="26.0" spacing="20.0" VBox.vgrow="NEVER">
+            <children>
+                <Button fx:id="goBackBtn" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onGoBackAction" styleClass="main-btn" text="Go back" />
+                <Region minWidth="-Infinity" HBox.hgrow="ALWAYS" />
+                <Button fx:id="createEventBtn" mnemonicParsing="false" onAction="#onCreateEventAction" styleClass="main-btn" text="Submit" />
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+</VBox>

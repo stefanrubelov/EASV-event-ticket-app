@@ -41,10 +41,10 @@ public class UserCardController {
         this.coordinatorsController = controller;
     }
 
-    @FXML
-    public void handleEditAction(ActionEvent event) {
-
-    }
+//    @FXML
+//    public void handleEditAction(ActionEvent event) {
+//
+//    }
 
     @FXML
         public void handleDeleteAction(ActionEvent event) {

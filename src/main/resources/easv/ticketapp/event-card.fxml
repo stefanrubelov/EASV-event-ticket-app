@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="CENTER" minWidth="-Infinity" prefHeight="40.0" style="-fx-background-color: #ffffff;" stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventCellController">
+<HBox alignment="CENTER" minWidth="-Infinity" prefHeight="40.0" style="-fx-background-color: #ffffff;" stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:id="eventCardContainer" fx:controller="easv.ticketapp.gui.EventCardController">
     <children>
         <!-- Name HBox -->
         <HBox alignment="CENTER" minWidth="150.0" prefWidth="1.0" styleClass="card-cell" HBox.hgrow="ALWAYS">
@@ -32,7 +32,7 @@
             </children>
         </HBox>
         <!-- Edit and Delete buttons HBox -->
-        <HBox alignment="CENTER" minWidth="120.0" spacing="10.0" HBox.hgrow="ALWAYS">
+        <HBox fx:id="actionsContainer" alignment="CENTER" minWidth="120.0" spacing="10.0" HBox.hgrow="ALWAYS">
             <children>
                 <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleEditEvent" styleClass="main-btn" text="Edit" />
                 <Button fx:id="deleteBtn" mnemonicParsing="false" styleClass="main-btn" text="Delete" />

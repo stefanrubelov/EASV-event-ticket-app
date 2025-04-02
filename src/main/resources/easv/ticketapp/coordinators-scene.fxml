@@ -27,7 +27,7 @@
             </font>
         </Text>
         <Region minWidth="-Infinity" HBox.hgrow="ALWAYS" />
-        <Button mnemonicParsing="false" onAction="#handleCreateCoordinatorBtn" styleClass="main-btn" text="Add event" />
+        <Button mnemonicParsing="false" onAction="#handleCreateCoordinatorBtn" styleClass="main-btn" text="Add coordinator" />
     </HBox>
     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefWidth="700.0" VBox.vgrow="ALWAYS">
         <VBox fx:id="usersContainer" minHeight="-Infinity" minWidth="-Infinity" spacing="6.0" />
