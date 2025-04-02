@@ -41,13 +41,18 @@ public class TicketRepository {
         List<Ticket> tickets = new ArrayList<>();
         ResultSet resultSet = queryBuilder
                 .table("tickets")
-                .select("id", "event_id", "price", "description", "ticket_type_id")
-                //.where("event_id", eventId)
+                .select("tickets.id", "tickets.event_id", "tickets.price", "tickets.description", "tickets.ticket_type_id, ticket_types.type as ticket_type, events.name as event_name")
+                .join("ticket_types", "ticket_types.id = tickets.ticket_type_id", "INNER")
+                .join("events", "events.id = tickets.event_id", "INNER")
+                .where("event_id", "=", eventId)
                 .get();
 
         try {
             while (resultSet.next()) {
-                tickets.add(mapModel(resultSet));
+                Ticket newTicket = mapModel(resultSet);
+                newTicket.setTicketType(new TicketType(resultSet.getString("ticket_type")));
+                newTicket.setEvent(new Event(resultSet.getString("event_name")));
+                tickets.add(newTicket);
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
@@ -62,9 +67,8 @@ public class TicketRepository {
         double price = rs.getDouble("price");
         String description = rs.getString("description");
         int ticketTypeId = rs.getInt("ticket_type_id");
-
-        Event event = fetchEvent(eventId);  // Implementa este método para obter o evento da BD
-        TicketType ticketType = fetchTicketType(ticketTypeId); // Implementa este método
+        Event event = fetchEvent(eventId);
+        TicketType ticketType = fetchTicketType(ticketTypeId);
 
         return new Ticket(id, event, price, description, ticketType);
     }

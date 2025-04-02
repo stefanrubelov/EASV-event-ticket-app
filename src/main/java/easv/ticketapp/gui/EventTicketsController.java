@@ -3,28 +3,76 @@ package easv.ticketapp.gui;
 import easv.ticketapp.be.Event;
 import easv.ticketapp.be.ticket.Ticket;
 import easv.ticketapp.bll.TicketManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.List;
 
 public class EventTicketsController {
-    @FXML
-    private ListView<Ticket> ticketListView;
-    private TicketManager ticketManager;
+    private final TicketManager ticketManager = new TicketManager();
+    private static final int ITEMS_PER_PAGE = 10;
 
-    public EventTicketsController() {
-        this.ticketManager = new TicketManager();
-    }
+    public VBox ticketsContainer;
+    private List<Ticket> tickets;
+
+    @FXML
+    private Label eventNameLbl;
+    @FXML
+    private Label eventDescriptionLbl;
+    @FXML
+    private Label eventLocationLbl;
+    @FXML
+    private Label eventDateLbl;
+    @FXML
+    private Pagination pagination;
 
     public void setEvent(Event event) {
-        if (event != null) {
-            loadTicketsForEvent(event);
+        eventNameLbl.setText(event.getName());
+        eventDescriptionLbl.setText(event.getDescription());
+        eventLocationLbl.setText(event.getLocation());
+        eventDateLbl.setText(event.getDateFormatted());
+        tickets = ticketManager.getTicketsByEvent(event.getId());
+        setupPagination();
+    }
+
+    private void setupPagination() {
+        int pageCount = (int) Math.ceil((double) tickets.size() / ITEMS_PER_PAGE);
+        pagination.setPageCount(Math.max(pageCount, 1));
+        pagination.setCurrentPageIndex(0);
+        pagination.currentPageIndexProperty().addListener((obs, oldIndex, newIndex) -> loadPage(newIndex.intValue()));
+        loadPage(0);
+    }
+
+    private void loadPage(int pageIndex) {
+        ticketsContainer.getChildren().clear();
+
+        int start = pageIndex * ITEMS_PER_PAGE;
+        int end = Math.min(start + ITEMS_PER_PAGE, tickets.size());
+
+        for (int i = start; i < end; i++) {
+            Ticket ticket = tickets.get(i);
+            try {
+                FXMLLoader childLoader = new FXMLLoader(getClass().getResource("/easv/ticketapp/ticket-card.fxml"));
+                Pane userCard = childLoader.load();
+
+                TicketCardController ticketCardController = childLoader.getController();
+                ticketCardController.setTicket(ticket);
+                ticketCardController.setController(this);
+
+                ticketsContainer.getChildren().add(userCard);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error loading ticket-card.fxml");
+            }
         }
     }
 
-    private void loadTicketsForEvent(Event event) {
-        List<Ticket> tickets = ticketManager.getTicketsByEvent(event.getId()); // Buscar os bilhetes do evento
-        ticketListView.getItems().setAll(tickets);
+    public void handleCreateTicketBtn(ActionEvent actionEvent) {
     }
 }
