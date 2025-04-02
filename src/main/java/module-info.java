@@ -13,6 +13,7 @@ module easv.ticketapp {
     requires jdk.jdi;
     requires net.synedra.validatorfx;
     requires tornadofx.controls;
+    requires itextpdf;
 
     opens easv.ticketapp to javafx.fxml;
     opens easv.ticketapp.be to javafx.base;

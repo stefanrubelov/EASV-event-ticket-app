@@ -5,13 +5,27 @@ import easv.ticketapp.be.ticket.Ticket;
 import easv.ticketapp.be.ticket.TicketType;
 import easv.ticketapp.bll.EventManager;
 import easv.ticketapp.bll.TicketManager;
+import easv.ticketapp.utils.PdfExporter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -19,6 +33,7 @@ import java.util.ResourceBundle;
 public class TicketController implements Initializable {
     private final EventManager eventManager = new EventManager();
     private final TicketManager ticketManager = new TicketManager();
+    private final TicketPreviewController ticketPreviewController = new TicketPreviewController();
 
     @FXML
     private TextArea descriptionTextArea;
@@ -28,6 +43,12 @@ public class TicketController implements Initializable {
     private TextField price;
     @FXML
     private ComboBox<TicketType> ticketTypeBox;
+    @FXML
+    private Button savePdfBtn;
+
+    private Scene scene;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,6 +73,7 @@ public class TicketController implements Initializable {
         Ticket ticket = new Ticket(selectedEvent.getId(), ticketPrice, description, selectedTicketType, selectedEvent);
 
         PageManager.ticketPreview(actionEvent, ticket);
+
     }
 
     @FXML
@@ -83,4 +105,36 @@ public class TicketController implements Initializable {
             System.out.println("Error adding the ticket: " + e.getMessage());
         }
     }
+
+    @FXML
+    void saveTicketToPdf(ActionEvent actionEvent) {
+        if (eventBox.getValue() == null || ticketTypeBox.getValue() == null || price.getText().isEmpty()) {
+            System.out.println("Please fill in all fields before saving to PDF.");
+            return;
+        }
+
+        Event selectedEvent = eventBox.getValue();
+        TicketType selectedTicketType = ticketTypeBox.getValue();
+        String description = descriptionTextArea.getText();
+        double ticketPrice = Double.parseDouble(price.getText());
+
+        Ticket ticket = new Ticket(selectedEvent.getId(), ticketPrice, description, selectedTicketType, selectedEvent);
+        ticketManager.addTicket(ticket);
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/easv/ticketapp/ticket-preview.fxml"));
+            Parent root = loader.load();
+            TicketPreviewController ticketPreviewController = loader.getController();
+
+            ticketPreviewController.updatePreview(ticket);
+            Scene previewScene = new Scene(root);
+
+            Stage stage = (Stage) savePdfBtn.getScene().getWindow();
+            PdfExporter.exportSceneToPDF(previewScene, stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading ticket preview scene.");
+        }
+    }
+
 }

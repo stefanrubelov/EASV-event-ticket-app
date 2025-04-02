@@ -3,6 +3,7 @@ package easv.ticketapp.gui;
 import easv.ticketapp.be.Event;
 import easv.ticketapp.be.ticket.Ticket;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -49,4 +50,10 @@ public class TicketPreviewController {
     public void setBackgroundImage(String imagePath) {
         rootPane.setStyle("-fx-background-image: url(");
     }
+
+    public Pane getRootPane() {
+        return rootPane;
+    }
+
+
 }
