@@ -32,7 +32,6 @@ public class TicketController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Event> events = eventManager.getAllEvents();
-        System.out.println(events.size());
         List<TicketType> ticketTypes = ticketManager.getAllTicketTypes();
         eventBox.getItems().addAll(events);
         ticketTypeBox.getItems().addAll(ticketTypes);

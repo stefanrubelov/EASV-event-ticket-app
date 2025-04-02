@@ -11,6 +11,10 @@ public class Event {
 
     public Event(){}
 
+    public Event(Integer id){
+        this.id = id;
+    }
+
     public Event(Integer id, String name, LocalDateTime date, String location, String description) {
         this.id = id;
         this.name = name;
