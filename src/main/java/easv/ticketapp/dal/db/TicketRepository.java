@@ -41,7 +41,7 @@ public class TicketRepository {
         List<Ticket> tickets = new ArrayList<>();
         ResultSet resultSet = queryBuilder
                 .table("tickets")
-                .select("tickets.id", "tickets.event_id", "tickets.price", "tickets.description", "tickets.ticket_type_id, ticket_types.type as ticket_type, events.name as event_name")
+                .select("tickets.id", "tickets.event_id", "tickets.price", "tickets.description", "tickets.ticket_type_id, ticket_types.type as ticket_type, events.name as event_name, events.start_date as start_date, events.description as event_description, events.location as event_location")
                 .join("ticket_types", "ticket_types.id = tickets.ticket_type_id", "INNER")
                 .join("events", "events.id = tickets.event_id", "INNER")
                 .where("event_id", "=", eventId)
@@ -51,7 +51,8 @@ public class TicketRepository {
             while (resultSet.next()) {
                 Ticket newTicket = mapModel(resultSet);
                 newTicket.setTicketType(new TicketType(resultSet.getString("ticket_type")));
-                newTicket.setEvent(new Event(resultSet.getString("event_name")));
+                Event event = new Event(resultSet.getInt("event_id"), resultSet.getString("event_name"), resultSet.getTimestamp("start_date").toLocalDateTime(), resultSet.getString("event_location"), resultSet.getString("event_description"));
+                newTicket.setEvent(event);
                 tickets.add(newTicket);
             }
         } catch (SQLException e) {
