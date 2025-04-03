@@ -5,7 +5,6 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -17,7 +16,7 @@ import java.io.FileOutputStream;
 
 public class PdfExporter {
 
-    public static void exportSceneToPDF(Scene scene, Stage stage) {
+    public static void exportSceneToPDF(Scene scene, Stage stage, String ticketName) {
         if (scene == null || scene.getRoot() == null) {
             System.out.println("Invalid scene or root node!");
             return;
@@ -33,6 +32,7 @@ public class PdfExporter {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        fileChooser.setInitialFileName(ticketName + ".pdf");
         File file = fileChooser.showSaveDialog(stage);
 
         if (file == null) {

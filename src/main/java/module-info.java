@@ -14,6 +14,8 @@ module easv.ticketapp {
     requires net.synedra.validatorfx;
     requires tornadofx.controls;
     requires itextpdf;
+    requires com.mailjet.api;
+    requires org.json;
 
     opens easv.ticketapp to javafx.fxml;
     opens easv.ticketapp.be to javafx.base;

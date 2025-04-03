@@ -104,36 +104,4 @@ public class TicketController implements Initializable {
             System.out.println("Error adding the ticket: " + e.getMessage());
         }
     }
-
-    @FXML
-    void saveTicketToPdf(ActionEvent actionEvent) {
-        if (eventBox.getValue() == null || ticketTypeBox.getValue() == null || price.getText().isEmpty()) {
-            System.out.println("Please fill in all fields before saving to PDF.");
-            return;
-        }
-
-        Event selectedEvent = eventBox.getValue();
-        TicketType selectedTicketType = ticketTypeBox.getValue();
-        String description = descriptionTextArea.getText();
-        double ticketPrice = Double.parseDouble(price.getText());
-
-        Ticket ticket = new Ticket(selectedEvent.getId(), ticketPrice, description, selectedTicketType, selectedEvent);
-        ticketManager.addTicket(ticket);
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/easv/ticketapp/ticket-preview.fxml"));
-            Parent root = loader.load();
-            TicketPreviewController ticketPreviewController = loader.getController();
-
-            ticketPreviewController.updatePreview(ticket);
-            Scene previewScene = new Scene(root);
-
-            Stage stage = (Stage) savePdfBtn.getScene().getWindow();
-            PdfExporter.exportSceneToPDF(previewScene, stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading ticket preview scene.");
-        }
-    }
-
 }

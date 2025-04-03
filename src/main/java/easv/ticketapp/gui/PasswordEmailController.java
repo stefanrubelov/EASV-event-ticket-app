@@ -1,7 +1,8 @@
 package easv.ticketapp.gui;
 
+import com.mailjet.client.MailjetResponse;
 import easv.ticketapp.be.User;
-import easv.ticketapp.bll.Email.EmailService;
+import easv.ticketapp.bll.Email.EmailClient;
 import easv.ticketapp.bll.PasswordResetService;
 import easv.ticketapp.bll.UserService;
 import javafx.application.Platform;
@@ -78,15 +79,21 @@ public class PasswordEmailController {
                 @Override
                 protected Boolean call() throws Exception {
                     String token = passwordResetService.createToken(userId);
+                    EmailClient emailClient = new EmailClient();
 
-                    EmailService email = new EmailService()
-                            .to(user.getEmail())
-                            .subject("Your password reset token")
-                            .html(true)
-                            .body("Token:  <b>: " + token + "</b>" +
-                                    "<br> <span>This token expires in 10 minutes</span>");
+                    MailjetResponse response = emailClient.sendSimpleEmail(
+                            user.getEmail(), user.getName(),
+                            "Password reset",
+                            "Code for password reset",
+                            "You have requested a password change, here is the code to reset your password: <b><h3>"
+                                    + token + "</h3></b></br> "
+                                    +"If you didn't request the password change, please report it to the support team."
+                                    +"<br><br> EASV </br> https://easv.dk/"
+                    );
 
-                    return email.send();
+                    System.out.println(EmailClient.processResponse(response));
+
+                    return true;
                 }
 
                 @Override

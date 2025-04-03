@@ -1,7 +1,8 @@
 package easv.ticketapp.gui;
 
+import com.mailjet.client.MailjetResponse;
 import easv.ticketapp.be.User;
-import easv.ticketapp.bll.Email.EmailService;
+import easv.ticketapp.bll.Email.EmailClient;
 import easv.ticketapp.bll.UserService;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ public class AddCoordinatorController {
     @FXML
     private Label errorLbl;
 
+
     public void onReturnAction(ActionEvent event) {
         PageManager.adminView(event);
     }
@@ -31,7 +33,7 @@ public class AddCoordinatorController {
             Integer user_type = 2;
             User user = new User(name, email, user_type);
             userService.addUser(user);
-            sendEmailToUser(email);
+            sendEmailToUser(email, name);
             PageManager.adminView(event);
         }
     }
@@ -86,19 +88,21 @@ public class AddCoordinatorController {
         errorLbl.setText("");
     }
 
-    private void sendEmailToUser(String emailAddress) {
+    private void sendEmailToUser(String userEmail, String userName) {
         Task<Boolean> sendEmailTask = new Task<>() {
             @Override
             protected Boolean call() throws Exception {
+                EmailClient emailClient = new EmailClient();
 
-                EmailService email = new EmailService()
-                        .to(emailAddress)
-                        .subject("Registered as coordinator")
-                        .html(true)
-                        .body("Welcome to EASV" +
-                                "<br/> <span>You have been registered as a coordinator. </span> <br/> <span> When logging in for the first time in the system click 'forgot password' to set up your new password.</span>");
+                MailjetResponse response = emailClient.sendSimpleEmail(
+                        userEmail, userName,
+                        "Welcome to the EASV System",
+                        "Welcome to the EASV system",
+                        "You have been registered to the EASV Ticket App, when logging in for the first time, click on 'forgot password' to enter a new password"
+                );
 
-                return email.send();
+                System.out.println(EmailClient.processResponse(response));
+                return true;
             }
         };
 
