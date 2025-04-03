@@ -81,4 +81,11 @@ public class TicketRepository {
     private Event fetchEvent(int eventId) {
         return new Event(eventId);
     }
+
+    public void delete(int id) {
+        queryBuilder
+                .table("tickets")
+                .where("id", "=", id)
+                .delete();
+    }
 }

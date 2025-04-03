@@ -49,7 +49,6 @@ public class TicketController implements Initializable {
     private Scene scene;
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Event> events = eventManager.getAllEvents();

@@ -32,7 +32,9 @@ public class EventTicketsController {
     @FXML
     private Pagination pagination;
 
+    private Event event;
     public void setEvent(Event event) {
+        this.event = event;
         eventNameLbl.setText(event.getName());
         eventDescriptionLbl.setText(event.getDescription());
         eventLocationLbl.setText(event.getLocation());
@@ -74,5 +76,23 @@ public class EventTicketsController {
     }
 
     public void handleCreateTicketBtn(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = PageManager.addTicketView(actionEvent);
+
+            TicketController ticketController = loader.getController();
+            if (ticketController != null) {
+                ticketController.setEvent(this.event);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error: Could not load the purchase ticket view.");
+        }
+    }
+
+    public void deleteTicket(Ticket ticket) {
+        tickets.remove(ticket);
+        ticketManager.deleteTicket(ticket);
+        setupPagination();
+        loadPage(pagination.getCurrentPageIndex());
     }
 }
