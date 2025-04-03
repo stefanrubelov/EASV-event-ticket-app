@@ -5,27 +5,15 @@ import easv.ticketapp.be.ticket.Ticket;
 import easv.ticketapp.be.ticket.TicketType;
 import easv.ticketapp.bll.EventManager;
 import easv.ticketapp.bll.TicketManager;
-import easv.ticketapp.utils.PdfExporter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -102,5 +90,9 @@ public class TicketController implements Initializable {
         } catch (Exception e) {
             System.out.println("Error adding the ticket: " + e.getMessage());
         }
+    }
+
+    public void setEvent(Event event) {
+        eventBox.setValue(event);
     }
 }
