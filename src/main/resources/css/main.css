@@ -2,40 +2,85 @@
     -fx-font-family: "Arial" !important;
 }
 
-.layout-background-gradient {
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #00aeef, #fdb93b);
+.layout-background {
+    -fx-background-color: #fdb93b;
+}
+
+.cordinator-box{
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.menu-layout{
+    -fx-background-color: #00aeef;
+    -fx-border-color: transparent white transparent transparent; /* Top Right Bottom Left */
+    -fx-border-width: 0 4px 0 0; /* Top Right Bottom Left */
+}
+
+.item-list{
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.item-pane{
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-width: 0;
 }
 
 .main-input {
     -fx-pref-width: 250px !important;
     -fx-min-width: 250px !important;
-    -fx-background-color: #f0f0f0;
-    -fx-background-radius: 10px;
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f5f5f5);
+    -fx-background-radius: 5px;
     -fx-text-fill: #333333;
     -fx-font-size: 14px;
-    -fx-padding: 7px;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 0, 2);
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-transition: all 0.3s ease-in-out;
 }
 
 .main-btn {
-    -fx-background-color: #f0f0f0;
-    -fx-background-radius: 10px;
     -fx-text-fill: #333333;
-    -fx-font-size: 12px;
-    -fx-padding: 5 10 5 10;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 0, 2);
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 14px;
+    -fx-border-color: #bbbbbb;
+    -fx-border-width: 0,5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
+}
+.main-btn-login{
+    -fx-background-color: #00aeef ;
+    -fx-text-fill: white;
 }
 
-.main-btn:hover {
+.main-btn-preview {
     -fx-background-color: #e0e0e0;
-    -fx-border-color: #b0b0b0;
+    -fx-text-fill: white;
 }
+
+.main-btn-goback{
+    -fx-background-color: #949899;
+    -fx-text-fill: white;
+}
+
+.main-btn-login:hover {
+    -fx-background-color: #17b7e3;
+}
+
+    /* Hover effect */
+.main-btn:hover {
+
+}
+
+/* Pressed effect */
+.main-btn:pressed {
+    -fx-background-color: #cccccc;
+    -fx-effect: none;
+}
+
 
 .main-btn:pressed {
     -fx-background-color: #d0d0d0;
@@ -45,16 +90,17 @@
 /* Main pagination container */
 .pagination {
     -fx-background-color: transparent;
+    -fx-padding: 5px;
 }
 
 /* Pagination control buttons container */
 .pagination > .pagination-control {
-    -fx-spacing: 0;
+    -fx-spacing: 3px;
 }
 
 /* Number and arrow buttons */
 .pagination > .pagination-control > .control-box {
-    -fx-spacing: 0;
+    -fx-spacing: 3px;
 }
 
 /* Individual buttons (numbers and arrows) */
@@ -62,41 +108,43 @@
 .pagination > .pagination-control > .control-box > .left-arrow-button,
 .pagination > .pagination-control > .control-box > .right-arrow-button {
     -fx-background-color: white;
-    -fx-background-radius: 0;
+    -fx-background-radius: 5px;
     -fx-background-insets: 0;
-    -fx-border-color: #e0e0e0;
+    -fx-border-color: #d0d0d0;
     -fx-border-width: 1;
-    -fx-padding: 8 16;
+    -fx-padding: 10px 18px;
     -fx-font-size: 14px;
-    -fx-min-width: 40px;
-    -fx-min-height: 40px;
+    -fx-min-width: 42px;
+    -fx-min-height: 42px;
     -fx-content-display: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 1);
+    -fx-transition: all 0.2s ease-in-out;
 }
 
-/* Style for left arrow button */
+/* Left arrow button styling */
 .pagination > .pagination-control > .control-box > .left-arrow-button {
-    -fx-border-radius: 4 0 0 4;
-    -fx-background-radius: 4 0 0 4;
+    -fx-background-radius: 5px 0 0 5px;
 }
 
-/* Style for right arrow button */
+/* Right arrow button styling */
 .pagination > .pagination-control > .control-box > .right-arrow-button {
-    -fx-border-radius: 0 4 4 0;
-    -fx-background-radius: 0 4 4 0;
+    -fx-background-radius: 0 5px 5px 0;
 }
 
 /* Selected/current page button */
 .pagination > .pagination-control > .control-box > .number-button:selected {
-    -fx-background-color: #f3f3f3;
-    -fx-text-fill: #000000;
+    -fx-background-color: #00aeef;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 120, 215, 0.3), 6, 0, 0, 2);
 }
 
 /* Button hover effect */
 .pagination > .pagination-control > .control-box > .number-button:hover,
 .pagination > .pagination-control > .control-box > .left-arrow-button:hover,
 .pagination > .pagination-control > .control-box > .right-arrow-button:hover {
-    -fx-background-color: #f8f8f8;
+    -fx-border-color: #bbbbbb;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 0, 1);
 }
 
 /* Arrow icons */
@@ -104,35 +152,36 @@
 .pagination > .pagination-control > .control-box > .right-arrow-button > .right-arrow {
     -fx-background-color: #555555;
     -fx-padding: 4;
-    -fx-scale-x: 0.8;
-    -fx-scale-y: 0.8;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
 }
 
-/* Make pagination control more responsive */
+/* Responsive Pagination */
 .pagination {
     -fx-max-width: 100%;
     -fx-pref-width: 100%;
-    -fx-min-width: 200px;
+    -fx-min-width: 220px;
 }
+
 
 .combo-box-main {
     -fx-pref-width: 250px !important;
     -fx-min-width: 250px !important;
-    -fx-background-color: #f0f0f0;
-    -fx-background-radius: 10px;
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f5f5f5);
+    -fx-background-radius: 5px;
+    -fx-border-width: 0,5px;
+    -fx-border-radius: 5px;
     -fx-text-fill: #333333;
     -fx-font-size: 14px;
-    -fx-padding: 3px;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 0, 2);
+    -fx-padding: 10px;
+    -fx-font-weight: bold;
+    -fx-transition: all 0.3s ease-in-out;
 }
 
 .combo-box-main .arrow-button {
-    -fx-background-color: #f0f0f0;
-    -fx-background-radius: 10px;
-    -fx-border-color: #cccccc;
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-border-color: lightgrey;
     -fx-border-width: 1px;
     -fx-border-radius: 10px;
 }
@@ -148,7 +197,7 @@
 }
 
 .combo-box-main .list-cell {
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: white;
     -fx-text-fill: #333333;
 }
 
@@ -157,6 +206,6 @@
 }
 
 .combo-box-main .list-cell:selected {
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: white;
     -fx-text-fill: #000000;
 }

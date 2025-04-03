@@ -33,6 +33,7 @@ public class EventTicketsController {
     private Pagination pagination;
 
     private Event event;
+
     public void setEvent(Event event) {
         this.event = event;
         eventNameLbl.setText(event.getName());

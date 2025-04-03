@@ -4,10 +4,12 @@
     -fx-font-size: 14px;
     -fx-end-margin: 10px;
     -fx-start-margin: 10px;
+    -fx-text-alignment: center;
+
 }
 
 .menu-item, .menu-item-label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: white;
 }
 
 .menu-item-label:hover {
@@ -15,9 +17,8 @@
 }
 
 .menu-item.active {
-    -fx-background-color: #cccccc;
-    -fx-border-color: #9c9c9c;
+    -fx-border-color: white;
     -fx-border-width: 1px;
-    -fx-border-radius: 10px;
-    -fx-text-fill: #000000;
+    -fx-border-radius: 5px;
+    -fx-text-fill: white;
 }

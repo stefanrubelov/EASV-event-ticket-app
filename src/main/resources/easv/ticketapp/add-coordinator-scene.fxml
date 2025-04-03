@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,44 +12,55 @@
 
 <VBox fx:id="vBoxInputContainer" fillWidth="true" minWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.AddCoordinatorController">
    <children>
-      <Label alignment="CENTER" maxWidth="Infinity" text="Add New Coordinator">
+      <Label alignment="TOP_LEFT" maxWidth="Infinity" text="Add New Coordinator" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
 
-      <VBox fillWidth="true" spacing="10.0">
+      <VBox fillWidth="true" spacing="5.0">
          <children>
-            <Label text="Name:">
+            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Name">
                <font>
-                  <Font name="Segoe UI Bold" size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </Label>
             <TextField fx:id="coordinatorName" maxWidth="Infinity" promptText="Enter the name" styleClass="main-input" />
          </children>
       </VBox>
 
-      <VBox fillWidth="true" spacing="10.0">
+      <VBox fillWidth="true" spacing="5.0">
          <children>
-            <Label text="Email:">
+            <Label text="Email">
                <font>
-                  <Font name="Segoe UI Bold" size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <TextField fx:id="coordinatorEmail" maxWidth="Infinity" promptText="Enter the email" styleClass="main-input" />
          </children>
       </VBox>
-      <Label fx:id="errorLbl" layoutX="75.0" layoutY="260.0" prefHeight="17.0" prefWidth="250.0" textFill="RED" />
-
-      <Region VBox.vgrow="ALWAYS" />
 
       <HBox alignment="CENTER_RIGHT" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onReturnAction" styleClass="main-btn" text="Go back" />
+            <Button mnemonicParsing="false" onAction="#onReturnAction" text="Go back">
+               <styleClass>
+                  <String fx:value="main-btn" />
+                  <String fx:value="main-btn-goback" />
+               </styleClass></Button>
             <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#onSaveAction" styleClass="main-btn" text="Save" />
+            <Button mnemonicParsing="false" onAction="#onSaveAction" text="Save">
+               <styleClass>
+                  <String fx:value="main-btn" />
+                  <String fx:value="main-btn-login" />
+               </styleClass></Button>
          </children>
       </HBox>
+      <Label fx:id="errorLbl" layoutX="75.0" layoutY="260.0" prefHeight="17.0" prefWidth="418.0" textFill="RED" />
+
+      <Region VBox.vgrow="ALWAYS" />
    </children>
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
