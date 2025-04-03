@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.PurchaseTicketController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.PurchaseTicketController" fx:id="root">
     <VBox prefHeight="81.0" prefWidth="600.0" VBox.vgrow="NEVER">
         <Label fx:id="eventNameLbl" text="Event name" VBox.vgrow="ALWAYS">
             <font>
@@ -37,7 +37,7 @@
                 </VBox.margin>
             </Label>
             <TextField styleClass="main-input" />
-         <Button mnemonicParsing="false" onAction="#onBackButtonAction" text="Go back">
+         <Button mnemonicParsing="false" onAction="#onBackButtonAction" styleClass="main-btn" text="Go back">
             <VBox.margin>
                <Insets top="30.0" />
             </VBox.margin>
