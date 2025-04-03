@@ -23,4 +23,8 @@ public class TicketManager {
     public List<Ticket> getTicketsByEvent(Integer eventId) {
         return ticketRepository.getEventTickets(eventId);
     }
+
+    public void deleteTicket(Ticket ticket) {
+        ticketRepository.delete(ticket.getId());
+    }
 }
