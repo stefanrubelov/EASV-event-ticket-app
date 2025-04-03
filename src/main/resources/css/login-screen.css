@@ -1,14 +1,14 @@
 .forgot-password {
     -fx-background-color: transparent;
     -fx-border: none;
-    -fx-text-fill: #0000FFFF;
+    -fx-text-fill: #66aaff;
     -fx-cursor: hand;
-    -fx-font-size: 12px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
     -fx-padding: 0;
 }
 
 .forgot-password:hover {
-    -fx-text-fill: #00008BFF;
     -fx-underline: true;
 }
 
@@ -23,8 +23,6 @@
 
 
 .main-input:focused {
-    -fx-border-color: #66aaff;
-    -fx-background-color: #ffffff;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 0, 2);
 }
 
@@ -36,6 +34,7 @@
 }
 
 .input-label {
-    -fx-text-fill: #484848;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
     -fx-font-size: 12px;
 }

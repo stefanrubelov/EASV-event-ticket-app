@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
-<BorderPane fx:id="baseLayout" prefHeight="400.0" prefWidth="800.0" styleClass="layout-background-gradient"
+<BorderPane fx:id="baseLayout" prefHeight="400.0" prefWidth="800.0" styleClass="layout-background"
             xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="easv.ticketapp.gui.BaseLayoutController">
     <left>
