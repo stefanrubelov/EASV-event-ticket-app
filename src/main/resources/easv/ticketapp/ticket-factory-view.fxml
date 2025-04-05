@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -63,16 +65,30 @@
         </VBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="534.0" spacing="20.0" VBox.vgrow="NEVER">
             <children>
-            <Button alignment="TOP_LEFT" layoutX="414.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPreview" text="Preview">
+            <Button alignment="TOP_LEFT" layoutX="414.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPreview">
                <styleClass>
                   <String fx:value="main-btn" />
-                  <String fx:value="main-btn-goback" />
-               </styleClass></Button>
-                <Button mnemonicParsing="false" onAction="#onSubmit" text="Submit">
+                  <String fx:value="main-btn-preview" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/preview_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button mnemonicParsing="false" onAction="#onSubmit">
                <styleClass>
                   <String fx:value="main-btn" />
                   <String fx:value="main-btn-login" />
-               </styleClass></Button>
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/save_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             </children>
         </HBox>
     </children>

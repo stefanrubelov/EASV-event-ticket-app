@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -41,7 +43,7 @@
                 </VBox.margin>
             </Label>
          <Spinner fx:id="amountOfTicketsSpinner" styleClass="main-spinner" />
-         <Button mnemonicParsing="false" onAction="#onBackButtonAction" text="Go back">
+         <Button mnemonicParsing="false" onAction="#onBackButtonAction" prefHeight="40.0" prefWidth="49.0">
             <VBox.margin>
                <Insets top="30.0" />
             </VBox.margin>
@@ -49,24 +51,52 @@
                <String fx:value="main-btn" />
                <String fx:value="main-btn-goback" />
             </styleClass>
+            <graphic>
+               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../images/arrow_go_back_fill_icon.png" />
+                  </image>
+               </ImageView>
+            </graphic>
          </Button>
         </VBox>
         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePrintTicketAction" prefWidth="120.0" text="Print (PDF)">
+            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePrintTicketAction" prefHeight="50.0" prefWidth="50.0">
             <styleClass>
                <String fx:value="main-btn" />
                <String fx:value="main-btn-login" />
-            </styleClass></Button>
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEmailTicketAction" prefWidth="120.0" text="Send to email">
+            </styleClass>
+            <graphic>
+               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../images/pdf_icon.png" />
+                  </image>
+               </ImageView>
+            </graphic></Button>
+            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEmailTicketAction" prefHeight="50.0" prefWidth="50.0">
             <styleClass>
                <String fx:value="main-btn" />
                <String fx:value="main-btn-login" />
-            </styleClass></Button>
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePreviewTicketAction" prefWidth="120.0" text="Preview">
+            </styleClass>
+            <graphic>
+               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../images/send_email_icon.png" />
+                  </image>
+               </ImageView>
+            </graphic></Button>
+            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePreviewTicketAction" prefHeight="50.0" prefWidth="50.0">
             <styleClass>
                <String fx:value="main-btn" />
-               <String fx:value="main-btn-goback" />
-            </styleClass></Button>
+               <String fx:value="main-btn-preview" />
+            </styleClass>
+            <graphic>
+               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../images/preview_icon.png" />
+                  </image>
+               </ImageView>
+            </graphic></Button>
         </VBox>
     </HBox>
    <padding>
