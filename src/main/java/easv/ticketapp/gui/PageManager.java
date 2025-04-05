@@ -67,9 +67,22 @@ public class PageManager {
             throw new RuntimeException("Failed to load view: " + fxmlPath, e);
         }
     }
+    public static void loginView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/auth/login-view.fxml"));
+            Parent root = loader.load();
 
-    public static FXMLLoader loginView(ActionEvent event) {
-        return switchViewNewScene("/easv/ticketapp/auth/login-view.fxml", event, "Login");
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            newStage.setTitle("Login");
+            newStage.centerOnScreen();
+            newStage.show();
+
+            Stage oldStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            oldStage.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load login view", e);
+        }
     }
 
     public static FXMLLoader adminView(ActionEvent event) {

@@ -1,5 +1,5 @@
 .background {
-    -fx-background-image: url("../images/regular_ticket.jpg");
+    -fx-background-image: url("../images/ticket-templates/regular.jpg");
     -fx-background-size: cover;
     -fx-background-position: center;
 }

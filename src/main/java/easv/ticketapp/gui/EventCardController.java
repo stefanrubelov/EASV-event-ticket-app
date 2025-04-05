@@ -26,7 +26,8 @@ public class EventCardController {
     private Label locationLabel;
     @FXML
     private Label descriptionLabel;
-
+    @FXML
+    private Button ticketsBtn;
     @FXML
     private HBox actionsContainer;
 
@@ -36,14 +37,15 @@ public class EventCardController {
     @FXML
     public void initialize() {
         if (Auth.check() && Auth.getUser().isAdmin()) {
-            editBtn.setVisible(false);
+            actionsContainer.getChildren().remove(editBtn);
+            actionsContainer.getChildren().remove(ticketsBtn);
         }
     }
 
     public void setEvent(Event event) {
         this.event = event;
         nameLabel.setText(event.getName());
-        dateLabel.setText(event.getDate().toString());
+        dateLabel.setText(event.getDateFormatted());
         locationLabel.setText(event.getLocation());
         descriptionLabel.setText(event.getDescription());
     }

@@ -34,8 +34,10 @@ public class MainMenuController {
         }
 
         Button eventsButton = addMenuItem("Events", this::eventsBtnClick);
-
-        Button createTicketButton = addMenuItem("Add ticket", this::addTicketBtnClick);
+        Button createTicketButton = null;
+        if (!Auth.getUser().isAdmin()) {
+            createTicketButton = addMenuItem("Add ticket", this::addTicketBtnClick);
+        }
 
         String currentView = PageManager.getCurrentView();
         switch (currentView) {

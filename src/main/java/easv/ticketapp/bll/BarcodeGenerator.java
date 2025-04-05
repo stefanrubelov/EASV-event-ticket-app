@@ -24,8 +24,6 @@ public class BarcodeGenerator {
     }
 
     private void qrImageCreate(int width, int height, int imageType) {
-
-        // Convert BitMatrix to BufferedImage
         this.qrImage = new BufferedImage(width, height, imageType);
 
         for (int x = 0; x < width; x++) {
@@ -35,9 +33,7 @@ public class BarcodeGenerator {
                 qrImage.setRGB(x, y, this.bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
 
             }
-
         }
-
     }
 
     public BufferedImage qrImage() {
