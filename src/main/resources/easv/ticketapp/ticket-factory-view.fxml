@@ -23,6 +23,7 @@
                             </font>
                         </Label>
                         <ComboBox fx:id="eventBox" maxWidth="Infinity" styleClass="combo-box-main" />
+                  <Label fx:id="errorEventLbl" textFill="RED" />
                     </children>
                 </VBox>
                 <VBox fillWidth="true" HBox.hgrow="ALWAYS">
@@ -33,6 +34,7 @@
                             </font>
                         </Label>
                         <ComboBox fx:id="ticketTypeBox" maxWidth="Infinity" styleClass="combo-box-main" />
+                  <Label fx:id="errorTicketTypeLbl" textFill="RED" />
                     </children>
                 </VBox>
             </children>
@@ -45,6 +47,7 @@
                     </font>
                 </Label>
                 <TextField fx:id="price" prefHeight="25.0" prefWidth="150.0" styleClass="main-input" />
+            <Label fx:id="errorPriceLbl" textFill="RED" />
             </children>
         </VBox>
         <VBox prefHeight="100.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
@@ -55,6 +58,7 @@
                     </font>
                 </Label>
                 <TextArea fx:id="descriptionTextArea" styleClass="main-input" VBox.vgrow="ALWAYS" />
+            <Label fx:id="errorDescriptionLbl" textFill="RED" />
             </children>
         </VBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="534.0" spacing="20.0" VBox.vgrow="NEVER">
@@ -62,7 +66,7 @@
             <Button alignment="TOP_LEFT" layoutX="414.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPreview" text="Preview">
                <styleClass>
                   <String fx:value="main-btn" />
-                  <String fx:value="main-btn-preview" />
+                  <String fx:value="main-btn-goback" />
                </styleClass></Button>
                 <Button mnemonicParsing="false" onAction="#onSubmit" text="Submit">
                <styleClass>

@@ -9,9 +9,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="845.0" styleClass="background" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.TicketPreviewController">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="845.0" styleClass="arrow-button" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.TicketPreviewController">
    <children>
-      <Label fx:id="eventNameLbl1" alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="65.0" prefHeight="42.0" prefWidth="367.0" text="Event title 1 2 3" textAlignment="CENTER">
+      <ImageView fx:id="ticketTemplate" fitHeight="295.0" fitWidth="845.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/ticket-templates/regular.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="eventNameLbl1" alignment="CENTER" contentDisplay="CENTER" layoutX="271.0" layoutY="53.0" prefHeight="42.0" prefWidth="379.0" text="Event title 1 2 3" textAlignment="CENTER">
          <font>
             <Font size="36.0" />
          </font></Label>
@@ -30,13 +35,13 @@
          </font></Label>
       <Label fx:id="eventDescriptionLbl" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="330.0" layoutY="107.0" prefHeight="42.0" prefWidth="253.0" text="Event description, lorem ipsum dolor sit amet" textAlignment="CENTER" wrapText="true" />
       <Label layoutX="271.0" layoutY="213.0" text="dkk" textFill="WHITE" />
-      <ImageView fitHeight="50.0" fitWidth="200.0" layoutX="690.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="57.0" fitWidth="117.0" layoutX="678.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/easvlogo.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="57.0" layoutX="35.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
-      <ImageView cache="true" fitHeight="109.0" fitWidth="167.0" layoutX="54.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="barcodeContainer1" cache="true" fitHeight="110.0" fitWidth="200.0" layoutX="35.0" layoutY="198.0" pickOnBounds="true">
          <image>
             <Image url="@../../images/barcode_example.png" />
          </image>
@@ -44,7 +49,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </ImageView>
-      <ImageView cache="true" fitHeight="109.0" fitWidth="167.0" layoutX="667.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="barcodeContainer2" cache="true" fitHeight="110.0" fitWidth="200.0" layoutX="660.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/barcode_example.png" />
          </image>
@@ -70,6 +75,12 @@
       <Label layoutX="450.0" layoutY="273.0" text="www.easv.dk/">
          <font>
             <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="customerNameLbl" alignment="CENTER" layoutX="312.0" layoutY="150.0" prefHeight="15.0" prefWidth="335.0" text="Customer name" textAlignment="CENTER" />
+      <Label fx:id="ticketCodeLbl" alignment="BOTTOM_LEFT" layoutX="691.0" layoutY="135.0" prefHeight="27.0" prefWidth="280.0" rotate="270.0" text="code_code_code" textAlignment="CENTER">
+         <font>
+            <Font size="10.0" />
          </font>
       </Label>
    </children>

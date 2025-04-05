@@ -34,7 +34,6 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        System.out.println("Auth? " + Auth.check());
         Platform.runLater(() -> {
             Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
             if (stage != null) {
@@ -119,12 +118,12 @@ public class LoginController {
             isValid = false;
         }
 
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        if (email != null && !email.matches(emailRegex)) {
-            errorLbl.setText("Please enter a valid email address");
-            emailField.setStyle("-fx-border-color: red;");
-            isValid = false;
-        }
+//        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+//        if (email != null && !email.matches(emailRegex)) {
+//            errorLbl.setText("Please enter a valid email address");
+//            emailField.setStyle("-fx-border-color: red;");
+//            isValid = false;
+//        }
 
         if (password == null || password.trim().isEmpty()) {
             if (!isValid) {

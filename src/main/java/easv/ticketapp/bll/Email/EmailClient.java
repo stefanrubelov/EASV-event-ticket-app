@@ -10,17 +10,15 @@ import easv.ticketapp.utils.Env;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-/**
- * A client for sending emails via the Mailjet API v3.1.
- */
+import java.io.File;
+import java.nio.file.Files;
+import java.util.List;
+
 public class EmailClient {
     private final MailjetClient client;
     private static final String FROM_EMAIL = Env.get("ADMIN_EMAIL");
     private static final String FROM_NAME = "EASV Admin";
 
-    /**
-     * Creates a new EmailClient with the provided API key and secret.
-     */
     public EmailClient() {
         String apiKey = Env.get("MJ_APIKEY_PUBLIC");
         String apiSecretKey = Env.get("MJ_APIKEY_PRIVATE");
@@ -73,37 +71,48 @@ public class EmailClient {
         return client.post(request);
     }
 
-    /**
-     * Sends an advanced email with additional parameters like CC, BCC, template ID, etc.
-     *
-     * @param emailData A JSONObject containing all the email data as per Mailjet API specs
-     * @return MailjetResponse from the API
-     * @throws MailjetException if the request fails
-     */
-    public MailjetResponse sendAdvancedEmail(JSONObject emailData)
-            throws MailjetException {
+    // New method for sending an email with attachments
+    public MailjetResponse sendSimpleEmailWithAttachments(
+            String toEmail, String toName,
+            String subject, String textContent,
+            String htmlContent, List<File> attachments) throws MailjetException {
+
+        JSONObject message = new JSONObject();
+        message.put(Emailv31.Message.FROM, new JSONObject()
+                .put("Email", FROM_EMAIL)
+                .put("Name", FROM_NAME));
+
+        message.put(Emailv31.Message.TO, new JSONArray()
+                .put(new JSONObject()
+                        .put("Email", toEmail)
+                        .put("Name", toName)));
+
+        message.put(Emailv31.Message.SUBJECT, subject);
+        message.put(Emailv31.Message.TEXTPART, textContent);
+
+        if (htmlContent != null && !htmlContent.isEmpty()) {
+            message.put(Emailv31.Message.HTMLPART, htmlContent);
+        }
+
+        if (attachments != null && !attachments.isEmpty()) {
+            try {
+                JSONArray attachmentArray = prepareAttachments(attachments);
+                message.put(Emailv31.Message.ATTACHMENTS, attachmentArray);
+            } catch (Exception e) {
+                throw new MailjetException("Failed to encode attachments", e);
+            }
+        }
 
         MailjetRequest request = new MailjetRequest(Emailv31.resource)
-                .property(Emailv31.MESSAGES, new JSONArray().put(emailData));
+                .property(Emailv31.MESSAGES, new JSONArray().put(message));
 
         return client.post(request);
     }
 
-    /**
-     * Sends a template-based email using Mailjet templates.
-     *
-     * @param toEmail    Recipient email address
-     * @param toName     Recipient name
-     * @param subject    Email subject
-     * @param templateId Mailjet template ID to use
-     * @param variables  JSONObject containing variables to inject into the template
-     * @return MailjetResponse from the API
-     * @throws MailjetException if the request fails
-     */
-    public MailjetResponse sendTemplateEmail(String toEmail, String toName,
-                                             String subject, int templateId,
-                                             JSONObject variables)
-            throws MailjetException {
+    // New method for sending a template-based email with attachments
+    public MailjetResponse sendTemplateEmailWithAttachments(String toEmail, String toName,
+                                                            String subject, int templateId,
+                                                            JSONObject variables, List<File> attachments) throws MailjetException {
 
         JSONObject message = new JSONObject();
         message.put(Emailv31.Message.FROM, new JSONObject()
@@ -123,18 +132,67 @@ public class EmailClient {
             message.put(Emailv31.Message.VARIABLES, variables);
         }
 
+        if (attachments != null && !attachments.isEmpty()) {
+            try {
+                JSONArray attachmentArray = prepareAttachments(attachments);
+                message.put(Emailv31.Message.ATTACHMENTS, attachmentArray);
+            } catch (Exception e) {
+                throw new MailjetException("Failed to encode attachments", e);
+            }
+        }
+
         MailjetRequest request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray().put(message));
 
         return client.post(request);
     }
 
-    /**
-     * Processes the API response and returns a human-readable status message.
-     *
-     * @param response The MailjetResponse from an API call
-     * @return A string describing the result of the API call
-     */
+    private JSONArray prepareAttachments(List<File> attachments) throws Exception {
+        JSONArray attachmentsArray = new JSONArray();
+        for (File file : attachments) {
+            if (!file.exists()) {
+                System.out.println("File does not exist: " + file.getAbsolutePath());
+                continue;
+            }
+            if (!file.canRead()) {
+                System.out.println("Cannot read file: " + file.getAbsolutePath());
+                continue;
+            }
+
+            byte[] fileData = Files.readAllBytes(file.toPath());
+            System.out.println("File size: " + fileData.length + " bytes for " + file.getName());
+
+            String fileBase64 = java.util.Base64.getEncoder().encodeToString(fileData);
+            System.out.println("Base64 length: " + fileBase64.length() + " for " + file.getName());
+
+            JSONObject attachment = new JSONObject();
+            attachment.put("ContentType", determineMimeType(file.getName())); // See method below
+            attachment.put("Filename", file.getName());
+            attachment.put("Base64Content", fileBase64);
+
+            attachmentsArray.put(attachment);
+        }
+        System.out.println("Total attachments prepared: " + attachmentsArray.length());
+        return attachmentsArray;
+    }
+
+    // Helper method to determine MIME type based on file extension
+    private String determineMimeType(String fileName) {
+        String extension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+        switch (extension) {
+            case "pdf":
+                return "application/pdf";
+            case "jpg":
+            case "jpeg":
+                return "image/jpeg";
+            case "png":
+                return "image/png";
+            // Add more types as needed
+            default:
+                return "application/octet-stream";
+        }
+    }
+
     public static String processResponse(MailjetResponse response) {
         int statusCode = response.getStatus();
 
