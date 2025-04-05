@@ -2,29 +2,29 @@ package easv.ticketapp.bll;
 
 import easv.ticketapp.be.Event;
 import easv.ticketapp.be.User;
-import easv.ticketapp.dal.db.EventRepository;
+import easv.ticketapp.dal.db.EventRepositoryImp;
 
 import java.util.List;
 import java.util.logging.Logger;
 
 public class EventManager {
-    final private EventRepository eventRepository = new EventRepository();
+    final private EventRepositoryImp eventRepositoryImp = new EventRepositoryImp();
     final private Logger logger = Logger.getAnonymousLogger();
 
     public List<Event> getAllEvents() {
-        return eventRepository.getAll();
+        return eventRepositoryImp.getAll();
     }
 
  public List<Event> getAllEventsByUser(User user) {
-        return eventRepository.getAllByUserId(user.getId());
+        return eventRepositoryImp.getAllByUserId(user.getId());
     }
 
     public boolean saveEvent(Event event, User user) {
-        Event newEvent = eventRepository.createEvent(event);
+        Event newEvent = eventRepositoryImp.create(event);
         boolean newEventCoordinator = false;
         if (newEvent != null) {
 
-            newEventCoordinator = eventRepository.addCoordinator(newEvent, user);
+            newEventCoordinator = eventRepositoryImp.addCoordinator(newEvent, user);
         }
 
         if (newEventCoordinator) {
@@ -34,6 +34,6 @@ public class EventManager {
     }
 
     public void deleteEvent(Event event) {
-        eventRepository.delete(event.getId());
+        eventRepositoryImp.delete(event.getId());
     }
 }
