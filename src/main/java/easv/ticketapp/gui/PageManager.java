@@ -67,6 +67,7 @@ public class PageManager {
             throw new RuntimeException("Failed to load view: " + fxmlPath, e);
         }
     }
+
     public static void loginView(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/auth/login-view.fxml"));
@@ -166,15 +167,21 @@ public class PageManager {
         return switchView("/easv/ticketapp/ticket-factory-view.fxml", event, "Add ticket");
     }
 
-    public static String getCurrentView() {
-        return currentView;
-    }
-
     public static FXMLLoader eventTicketsiew(ActionEvent event) {
         return switchView("/easv/ticketapp/event-tickets-view.fxml", event, "Event tickets");
     }
+
     public static FXMLLoader purchaseTicketView(ActionEvent event) {
         currentView = "purchase_ticket";
         return switchView("/easv/ticketapp/purchase-ticket.fxml", event, "Purchase ticket");
+    }
+
+    public static FXMLLoader myProfile(ActionEvent event) {
+        currentView = "my_profile";
+        return switchView("/easv/ticketapp/my-profile.fxml", event, "My profile");
+    }
+
+    public static String getCurrentView() {
+        return currentView;
     }
 }
