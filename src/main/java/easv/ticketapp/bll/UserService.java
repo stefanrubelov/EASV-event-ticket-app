@@ -48,6 +48,10 @@ public class UserService {
         userRepository.create(user);
     }
 
+    public boolean updateUser(User user) {
+        return userRepository.update(user);
+    }
+
     private String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-512");

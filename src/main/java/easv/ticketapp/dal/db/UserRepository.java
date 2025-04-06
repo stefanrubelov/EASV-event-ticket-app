@@ -107,4 +107,12 @@ public class UserRepository {
                 .where("email", "=", user.getEmail())
                 .update();
     }
+
+    public boolean update(User user) {
+        return queryBuilder
+                .table("users")
+                .set("name", user.getName())
+                .set("email", user.getEmail())
+                .update();
+    }
 }
