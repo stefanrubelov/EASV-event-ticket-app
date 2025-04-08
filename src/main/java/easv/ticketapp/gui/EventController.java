@@ -6,7 +6,9 @@ import easv.ticketapp.security.Auth;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -24,6 +26,11 @@ public class EventController {
     private Pagination pagination;
     @FXML
     private Button createEventBtn;
+    @FXML
+    private TextField search;
+    private List<Event> filteredEvents;
+    @FXML
+    private ComboBox<String> sortBox;
 
     @FXML
     public void initialize() {
@@ -37,11 +44,53 @@ public class EventController {
             allEvents = eventManager.getAllEventsByUser(Auth.getUser());
         }
 
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+           filterEvents(newValue);
+        });
+
+        sortBox.getItems().addAll("Date" ,"A-Z", "Z-A");
+
+        sortBox.setOnAction(e -> {
+            applySorting(sortBox.getValue());
+        });
+
+        setupPagination();
+    }
+
+    private void filterEvents(String keyword) {
+        if (keyword == null || keyword.isBlank()) {
+            filteredEvents = allEvents;
+        } else {
+            String lowerKeyword = keyword.toLowerCase();
+            filteredEvents = allEvents.stream()
+                    .filter(event ->
+                            event.getName().toLowerCase().contains(lowerKeyword) ||
+                                    (event.getDescription() != null && event.getDescription().toLowerCase().contains(lowerKeyword))
+                    )
+                    .toList();
+        }
+
+        setupPagination();
+    }
+
+    private void applySorting(String sortType) {
+        if (filteredEvents == null) return;
+
+        switch (sortType) {
+            case "Date" -> filteredEvents.sort((e1, e2) -> e1.getDate().compareTo(e2.getDate()));
+            case "A-Z" -> filteredEvents.sort((e1, e2) -> e1.getName().compareToIgnoreCase(e2.getName()));
+            case "Z-A" -> filteredEvents.sort((e1, e2) -> e2.getName().compareToIgnoreCase(e1.getName()));
+        }
+
         setupPagination();
     }
 
     private void setupPagination() {
-        int pageCount = (int) Math.ceil((double) allEvents.size() / ITEMS_PER_PAGE);
+        if (filteredEvents == null) {
+            filteredEvents = allEvents;
+        }
+
+        int pageCount = (int) Math.ceil((double) filteredEvents.size() / ITEMS_PER_PAGE);
         pagination.setPageCount(Math.max(pageCount, 1));
         pagination.setCurrentPageIndex(0);
         pagination.currentPageIndexProperty().addListener((obs, oldIndex, newIndex) -> loadPage(newIndex.intValue()));
@@ -51,11 +100,13 @@ public class EventController {
     private void loadPage(int pageIndex) {
         eventContainer.getChildren().clear();
 
+        if (filteredEvents == null) return;
+
         int start = pageIndex * ITEMS_PER_PAGE;
-        int end = Math.min(start + ITEMS_PER_PAGE, allEvents.size());
+        int end = Math.min(start + ITEMS_PER_PAGE, filteredEvents.size());
 
         for (int i = start; i < end; i++) {
-            Event event = allEvents.get(i);
+            Event event = filteredEvents.get(i);
             try {
                 FXMLLoader childLoader = new FXMLLoader(getClass().getResource("/easv/ticketapp/event-card.fxml"));
                 HBox eventCell = childLoader.load();
@@ -71,6 +122,7 @@ public class EventController {
             }
         }
     }
+
 
     public void deleteEvent(Event event) {
         allEvents.remove(event);

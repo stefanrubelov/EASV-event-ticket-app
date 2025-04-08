@@ -3,13 +3,15 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
     <opaqueInsets>
@@ -31,12 +33,22 @@
                 </Text>
                 <Region minWidth="-Infinity" HBox.hgrow="ALWAYS" />
             </children>
-            <Button fx:id="createEventBtn" mnemonicParsing="false" styleClass="main-btn-login" onAction="#createEvent" text="Add event">
+            <Button fx:id="createEventBtn" mnemonicParsing="false" onAction="#createEvent" styleClass="main-btn-login" text="Add event">
             <styleClass>
                <String fx:value="main-btn" />
                <String fx:value="main-btn-login" />
             </styleClass></Button>
         </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="700.0">
+         <children>
+            <TextField fx:id="search" prefHeight="26.0" prefWidth="231.0" promptText="search..." styleClass="search" stylesheets="@../../css/main.css" />
+            <ComboBox fx:id="sortBox" prefHeight="26.0" prefWidth="89.0" promptText="sort">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </ComboBox>
+         </children>
+      </HBox>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefWidth="700.0" styleClass="item-list" VBox.vgrow="ALWAYS">
             <content>
                 <VBox fx:id="eventContainer" minHeight="-Infinity" minWidth="-Infinity" spacing="6.0" styleClass="item-pane" />
