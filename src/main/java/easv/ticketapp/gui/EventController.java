@@ -27,6 +27,8 @@ public class EventController {
     @FXML
     private Button createEventBtn;
     @FXML
+    private Button assignCoordinatorBtn;
+    @FXML
     private TextField search;
     private List<Event> filteredEvents;
     @FXML
@@ -134,5 +136,10 @@ public class EventController {
     @FXML
     public void createEvent(javafx.event.ActionEvent actionEvent) {
         PageManager.addEventView(actionEvent);
+    }
+
+    @FXML
+    public void assignCoordinator(javafx.event.ActionEvent actionEvent) {
+        PageManager.assignCoordinatorView(actionEvent);
     }
 }

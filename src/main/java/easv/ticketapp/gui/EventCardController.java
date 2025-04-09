@@ -68,6 +68,9 @@ public class EventCardController {
         alert.setHeaderText("Are you sure you want to delete this event?");
         alert.setContentText(event.getName());
 
+        alert.getDialogPane().setMaxWidth(400);  
+        alert.getDialogPane().setMaxHeight(200);
+
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             eventController.deleteEvent(event);

@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Text?>
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventController">
     <opaqueInsets>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -33,11 +33,20 @@
                 </Text>
                 <Region minWidth="-Infinity" HBox.hgrow="ALWAYS" />
             </children>
-            <Button fx:id="createEventBtn" mnemonicParsing="false" onAction="#createEvent" styleClass="main-btn-login" text="Add event">
+         <Button fx:id="createEventBtn" mnemonicParsing="false" onAction="#createEvent" text="Add event">
             <styleClass>
                <String fx:value="main-btn" />
                <String fx:value="main-btn-login" />
-            </styleClass></Button>
+            </styleClass>
+         </Button>
+            <Button fx:id="assignCoordinatorBtn" mnemonicParsing="false" onAction="#assignCoordinator" styleClass="main-btn-login" text="Assign Coordinator">
+            <styleClass>
+               <String fx:value="main-btn" />
+               <String fx:value="main-btn-login" />
+            </styleClass>
+            <HBox.margin>
+               <Insets left="5.0" />
+            </HBox.margin></Button>
         </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="700.0">
          <children>
