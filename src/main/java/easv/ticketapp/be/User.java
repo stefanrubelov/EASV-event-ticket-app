@@ -112,4 +112,9 @@ public class User {
     public boolean isCoordinator() {
         return userType == COORDINATOR_TYPE;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

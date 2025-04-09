@@ -100,6 +100,10 @@ public class PageManager {
         return switchView("/easv/ticketapp/ticket-scene.fxml", event, "Tickets");
     }
 
+    public static FXMLLoader assignCoordinatorView(ActionEvent event) {
+        return switchView("/easv/ticketapp/assign-coordinator.fxml", event, "Tickets");
+    }
+
     public static void ticketPreview(ActionEvent event, Ticket ticket) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(PageManager.class.getResource("/easv/ticketapp/ticket-preview.fxml"));

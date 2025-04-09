@@ -118,4 +118,23 @@ public class EventRepository {
                 .insert("user_id", user.getId())
                 .save();
     }
+
+    public List<Event> getAllEventNames() {
+        List<Event> events = new ArrayList<>();
+
+        try (ResultSet rs = queryBuilder
+                .select("id", "name", "start_date")
+                .from("events")
+                .get()) {
+
+            while (rs != null && rs.next()) {
+                Event event = mapModel(rs, rs.getInt("id"));
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return events;
+    }
 }
