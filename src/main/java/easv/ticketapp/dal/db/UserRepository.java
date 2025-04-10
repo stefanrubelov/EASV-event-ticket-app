@@ -32,7 +32,8 @@ public class UserRepository implements easv.ticketapp.dal.db.interaces.UserRepos
                         result.getString("password"),
                         result.getInt("user_type"),
                         result.getTimestamp("created_at").toLocalDateTime(),
-                        result.getTimestamp("updated_at").toLocalDateTime()
+                        result.getTimestamp("updated_at").toLocalDateTime(),
+                        result.getString("picture")
                 );
             }
 
@@ -172,6 +173,18 @@ public class UserRepository implements easv.ticketapp.dal.db.interaces.UserRepos
         }
     }
 
+    @Override
+    public boolean updatePicture(int userId, String picture) {
+        try {
+            return queryBuilder.table("users")
+                    .set("picture", picture)
+                    .where("id", "=", userId)
+                    .update();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private User mapModel(ResultSet rs) throws SQLException {
         String name = rs.getString("name");
         String email = rs.getString("email");
@@ -179,8 +192,9 @@ public class UserRepository implements easv.ticketapp.dal.db.interaces.UserRepos
         int userType = rs.getInt("user_type");
         Timestamp createdAt = rs.getTimestamp("created_at");
         Timestamp updatedAt = rs.getTimestamp("updated_at");
+        String picture = rs.getString("picture");
 
-        return new User(name, email, password, userType, createdAt.toLocalDateTime(), updatedAt.toLocalDateTime());
+        return new User(name, email, password, userType, createdAt.toLocalDateTime(), updatedAt.toLocalDateTime(), picture);
     }
 
 }

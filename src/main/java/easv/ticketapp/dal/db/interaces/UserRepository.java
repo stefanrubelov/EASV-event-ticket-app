@@ -10,4 +10,5 @@ public interface UserRepository extends BaseRepository<User> {
         List<User> getAllCoordinators();
         boolean updatePassword(User user, String password);
         boolean addCoordinator(Event event, User user);
+        boolean updatePicture(int userId, String picture);
 }
