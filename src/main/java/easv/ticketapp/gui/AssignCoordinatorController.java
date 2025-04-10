@@ -12,9 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AssignCoordinatorController {
@@ -29,12 +26,11 @@ public class AssignCoordinatorController {
 
     private User user;
     private final EventRepository eventRepository = new EventRepository();
-    private final UserRepository userRepository= new UserRepository();
-
+    private final UserRepository userRepository = new UserRepository();
 
     public void initialize() {
-       loadEvents();
-       loadUsers();
+        loadEvents();
+        loadUsers();
     }
 
     public void loadEvents() {
@@ -76,11 +72,8 @@ public class AssignCoordinatorController {
         alert.showAndWait();
     }
 
-
     @FXML
     private void goBack(ActionEvent actionEvent) {
         PageManager.coordinatorsView(actionEvent);
-
     }
-
 }

@@ -102,9 +102,9 @@ public class MyProfileController {
             update = userService.updatePassword(this.currentUser, password);
         }
 
-        boolean profileUpdate = userService.updateUser(this.currentUser);
+        userService.updateUser(this.currentUser);
 
-        if (update && profileUpdate) {
+        if (update) {
             messageLbl.setText("Profile updated successfully");
         } else {
             messageLbl.setText("Something went wrong, please try again.");
