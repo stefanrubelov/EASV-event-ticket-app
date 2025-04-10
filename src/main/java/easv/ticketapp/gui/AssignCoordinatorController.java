@@ -59,6 +59,11 @@ public class AssignCoordinatorController {
             return;
         }
 
+        if (eventRepository.isUserAssignedToEvent(selectedEvent, selectedCoordinator)) {
+            showAlert(Alert.AlertType.WARNING, "Already Assigned", "This user is already assigned to the selected event.");
+            return;
+        }
+
         eventRepository.addCoordinator(selectedEvent, selectedCoordinator);
         showAlert(Alert.AlertType.INFORMATION, "Success", "Coordinator assigned successfully!");
     }

@@ -1,6 +1,7 @@
 package easv.ticketapp.be;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class User {
     public static final int ADMIN_TYPE = 1;
@@ -117,4 +118,5 @@ public class User {
     public String toString() {
         return name;
     }
+
 }
