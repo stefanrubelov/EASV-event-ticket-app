@@ -2,7 +2,10 @@ package easv.ticketapp.dal.db;
 
 import easv.ticketapp.be.Event;
 import easv.ticketapp.be.User;
+import easv.ticketapp.dal.db.connection.DatabaseConnection;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -119,22 +122,31 @@ public class EventRepository {
                 .save();
     }
 
-    public List<Event> getAllEventNames() {
-        List<Event> events = new ArrayList<>();
+    public boolean isUserAssignedToEvent(Event event, User user) {
+        String sql = "SELECT COUNT(*) AS count FROM event_user WHERE event_id = ? AND user_id = ?";
 
-        try (ResultSet rs = queryBuilder
-                .select("id", "name", "start_date")
-                .from("events")
-                .get()) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
 
-            while (rs != null && rs.next()) {
-                Event event = mapModel(rs, rs.getInt("id"));
-                events.add(event);
+        try (Connection conn = databaseConnection.getConnection();  // however you get connection
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, event.getId());
+            stmt.setInt(2, user.getId());
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                System.out.println("Assignment count: " + count);
+                return count > 0;
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
 
-        return events;
+        return false;
     }
+
+
+
 }
