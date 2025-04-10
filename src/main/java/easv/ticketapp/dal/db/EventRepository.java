@@ -165,8 +165,13 @@ public class EventRepository implements easv.ticketapp.dal.db.interaces.EventRep
         return false;
     }
 
-
-
+    public boolean addCoordinator(Event event, User user) {
+        return queryBuilder
+                .table("event_user")
+                .insert("event_id", event.getId())
+                .insert("user_id", user.getId())
+                .save();
+    }
 
     private Event mapModel(ResultSet resultSet, int id) throws SQLException {
         String name = resultSet.getString("name");

@@ -86,9 +86,9 @@ public class PasswordResetController {
         String password = passwordField.isVisible() ?
                 passwordField.getText() :
                 passwordTextField.getText();
-
+        System.out.println(password);
         boolean update = userService.updatePassword(user, password);
-
+        System.out.println(update);
         if (update) {
             passwordResetService.removeToken(user.getId());
             PageManager.loginView(event);

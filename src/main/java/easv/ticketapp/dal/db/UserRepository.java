@@ -119,8 +119,6 @@ public class UserRepository implements easv.ticketapp.dal.db.interaces.UserRepos
                     .table("users")
                     .set("name", entity.getName())
                     .set("email", entity.getEmail())
-                    .set("password", entity.getPassword())
-                    .set("user_type", entity.getUserType())
                     .where("id", "=", entity.getId())
                     .update();
         } catch (Exception e) {
