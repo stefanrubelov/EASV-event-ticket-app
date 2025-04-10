@@ -2,30 +2,29 @@ package easv.ticketapp.bll;
 
 import easv.ticketapp.be.ticket.Ticket;
 import easv.ticketapp.be.ticket.TicketType;
-import easv.ticketapp.dal.db.TicketRepositoryImp;
+import easv.ticketapp.dal.db.TicketRepository;
 import easv.ticketapp.dal.db.TicketTypeRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public class TicketManager {
 
     private final TicketTypeRepository ticketTypeRepository = new TicketTypeRepository();
-    private final TicketRepositoryImp ticketRepositoryImp = new TicketRepositoryImp();
+    private final TicketRepository ticketRepository = new TicketRepository();
 
     public List<TicketType> getAllTicketTypes() {
         return ticketTypeRepository.getTicketTypes();
     }
 
     public void addTicket(Ticket newTicket) {
-        ticketRepositoryImp.create(newTicket);
+        ticketRepository.create(newTicket);
     }
 
     public List<Ticket> getTicketsByEvent(int id) {
-        return ticketRepositoryImp.getEventTickets(id);
+        return ticketRepository.getEventTickets(id);
     }
 
     public void deleteTicket(Ticket ticket) {
-        ticketRepositoryImp.delete(ticket.getId());
+        ticketRepository.delete(ticket.getId());
     }
 }

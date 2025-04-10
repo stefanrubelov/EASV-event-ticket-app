@@ -1,7 +1,7 @@
 package easv.ticketapp.bll;
 
 import easv.ticketapp.be.User;
-import easv.ticketapp.dal.db.UserRepositoryImp;
+import easv.ticketapp.dal.db.UserRepository;
 import easv.ticketapp.security.Auth;
 import easv.ticketapp.utils.UuidGenerator;
 
@@ -13,10 +13,10 @@ import java.util.List;
 
 public class UserService {
 
-    private final UserRepositoryImp userRepositoryImp = new UserRepositoryImp();
+    private final UserRepository userRepository = new UserRepository();
 
     public User authenticate(String email, String password) {
-        User user = userRepositoryImp.findByEmail(email);
+        User user = userRepository.findByEmail(email);
 
         if (user != null && user.getPassword().equals(hashPassword(password))) {
             Auth.login(user);
@@ -27,25 +27,25 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
-        return userRepositoryImp.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     public boolean updatePassword(User user, String password) {
-        return userRepositoryImp.updatePassword(user, hashPassword(password));
+        return userRepository.updatePassword(user, hashPassword(password));
     }
 
     public void deleteUser(User user) {
-        userRepositoryImp.delete(user.getId());
+        userRepository.delete(user.getId());
     }
 
     public List<User> getCoordinators() {
-        return userRepositoryImp.getAllCoordinators();
+        return userRepository.getAllCoordinators();
     }
 
     public void addUser(User user) {
         String password = UuidGenerator.generate();
         user.setPassword(hashPassword(password));
-        userRepositoryImp.create(user);
+        userRepository.create(user);
     }
 
     private String hashPassword(String password) {

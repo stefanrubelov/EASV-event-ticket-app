@@ -1,7 +1,7 @@
 package easv.ticketapp.gui;
 
 import easv.ticketapp.be.Event;
-import easv.ticketapp.dal.db.EventRepositoryImp;
+import easv.ticketapp.dal.db.EventRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 public class EditEventController {
 
-    EventRepositoryImp eventRepositoryImp = new EventRepositoryImp();
+    EventRepository eventRepository = new EventRepository();
 
     @FXML
     private TextField nameField;
@@ -23,6 +23,7 @@ public class EditEventController {
     private TextArea descriptionTextArea;
     @FXML
     private DateTimePicker dateTimePicker;
+
     private Event event;
 
     public void setEditEvent(Event event) {
@@ -83,7 +84,7 @@ public class EditEventController {
 
     private boolean updateEventInDatabase(Event event) {
         try {
-            eventRepositoryImp.update(event);
+            eventRepository.update(event);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
