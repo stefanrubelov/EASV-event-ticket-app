@@ -68,13 +68,18 @@ public class TicketRepository implements easv.ticketapp.dal.db.interaces.TicketR
         List<Ticket> tickets = new ArrayList<>();
 
         try (ResultSet rs = queryBuilder
-                .select("*")
-                .from("tickets")
+                .table("tickets")
+                .select("tickets.id", "tickets.event_id", "tickets.price", "tickets.description", "tickets.ticket_type_id, ticket_types.type as ticket_type, events.name as event_name, events.start_date as start_date, events.description as event_description, events.location as event_location")
+                .join("ticket_types", "ticket_types.id = tickets.ticket_type_id", "INNER")
+                .join("events", "events.id = tickets.event_id", "INNER")
                 .where("event_id","=",eventId)
                 .get()) {
 
             while (rs != null && rs.next()) {
                 Ticket ticket = mapModel(rs);
+                ticket.setTicketType(new TicketType(rs.getString("ticket_type")));
+                Event event = new Event(rs.getInt("event_id"), rs.getString("event_name"), rs.getTimestamp("start_date").toLocalDateTime(), rs.getString("event_location"), rs.getString("event_description"));
+                ticket.setEvent(event);
                 tickets.add(ticket);
             }
         } catch (SQLException e) {
