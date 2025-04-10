@@ -97,13 +97,19 @@ public class MainMenuController {
     }
 
     @FXML
+    private void addTicketBtnClick(ActionEvent event) {
+        PageManager.addTicketView(event);
+    }
+
+    @FXML
     private void logoutBtnClick(ActionEvent event) {
         Auth.logout();
         PageManager.loginView(event);
     }
 
     @FXML
-    private void addTicketBtnClick(ActionEvent event) {
-        PageManager.addTicketView(event);
+    private void myProfileBtn(ActionEvent event) {
+        setActiveButton((Button) event.getSource());
+        PageManager.myProfile(event);
     }
 }

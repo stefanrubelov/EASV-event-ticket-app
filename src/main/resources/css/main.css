@@ -291,3 +291,9 @@
     -fx-padding: 10px;
     -fx-font-size: 14px;
 }
+
+.search {
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right center;
+    -fx-background-padding: 5 30 5 5; /* top right bottom left */
+}
