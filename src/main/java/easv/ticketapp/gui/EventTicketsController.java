@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class EventTicketsController {
     private final TicketManager ticketManager = new TicketManager();

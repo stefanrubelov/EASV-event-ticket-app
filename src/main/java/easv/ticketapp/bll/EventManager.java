@@ -15,16 +15,16 @@ public class EventManager {
         return eventRepository.getAll();
     }
 
- public List<Event> getAllEventsByUser(User user) {
+    public List<Event> getAllEventsByUser(User user) {
         return eventRepository.getAllByUserId(user.getId());
     }
 
     public boolean saveEvent(Event event, User user) {
-        Event newEvent = eventRepository.createEvent(event);
+        Event newEvent = eventRepository.create(event);
         boolean newEventCoordinator = false;
         if (newEvent != null) {
 
-            newEventCoordinator = eventRepository.addCoordinator(newEvent, user);
+            newEventCoordinator = eventRepository.assignCoordinator(newEvent, user);
         }
 
         if (newEventCoordinator) {

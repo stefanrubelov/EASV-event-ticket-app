@@ -38,41 +38,55 @@
     -fx-font-weight: bold;
     -fx-padding: 10px;
     -fx-transition: all 0.3s ease-in-out;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, 0, 6);
+}
+.main-input:pressed{
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: rgba(40, 200, 250, 0.8);
 }
 
 .main-btn {
-    -fx-text-fill: #333333;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-padding: 8px 14px;
-    -fx-border-color: #bbbbbb;
-    -fx-border-width: 0,5px;
-    -fx-background-radius: 5px;
-    -fx-cursor: hand;
-    -fx-transition: all 0.3s ease-in-out;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-width: 1px;
+    -fx-padding: 10px 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 4);
+    -fx-transition: all 0.3s ease;
 }
 .main-btn-login{
     -fx-background-color: #00aeef ;
     -fx-text-fill: white;
 }
+.main-btn-login:hover{
+    -fx-background-color: rgba(40, 200, 250, 0.8);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, 0, 6);
+    -fx-translate-y: -2px;
+}
+
+/* Active state when button is clicked */
+.main-btn:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 2);
+    -fx-translate-y: 1px;
+}
 
 .main-btn-preview {
     -fx-background-color: #e0e0e0;
-    -fx-text-fill: white;
+}
+.main-btn-preview:hover{
+    -fx-background-color: #FFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, 0, 6);
+    -fx-translate-y: -2px;
 }
 
 .main-btn-goback{
-    -fx-background-color: #f3f3f3;
-    -fx-text-fill: black;
+    -fx-background-color: #e0e0e0;
 }
-
-.main-btn-login:hover {
-    -fx-background-color: #17b7e3;
-}
-
-    /* Hover effect */
-.main-btn:hover {
-
+.main-btn-goback:hover{
+    -fx-background-color: #FFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, 0, 6);
+    -fx-translate-y: -2px;
 }
 
 /* Pressed effect */
@@ -90,6 +104,11 @@
 .main-btn-delete {
     -fx-background-color: #ff0000;
     -fx-text-fill: #ffffff;
+}
+.main-btn-delete:hover {
+    -fx-background-color: rgba(250, 30, 40, 0.8);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, 0, 6);
+    -fx-translate-y: -2px;
 }
 
 /* Main pagination container */

@@ -14,10 +14,33 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EventRepository {
+public class EventRepository implements easv.ticketapp.dal.db.interaces.EventRepository {
     final private QueryBuilder queryBuilder = new QueryBuilder();
     final private Logger logger = Logger.getAnonymousLogger();
 
+    @Override
+    public Event getById(int id) {
+        Event event = null;
+        ResultSet resultSet = queryBuilder
+                .from("events")
+                .select("*")
+                .where("id", "=", id)
+                .get();
+
+        try {
+            while (resultSet.next()) {
+                event = mapModel(resultSet, resultSet.getInt("id"));
+            }
+
+            return event;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+
+            return event;
+        }
+    }
+
+    @Override
     public List<Event> getAll() {
         List<Event> events = new ArrayList<>();
 
@@ -37,6 +60,7 @@ public class EventRepository {
         return events;
     }
 
+    @Override
     public List<Event> getAllByUserId(int userId) {
         List<Event> events = new ArrayList<>();
 
@@ -58,6 +82,7 @@ public class EventRepository {
         return events;
     }
 
+    @Override
     public void delete(int id) {
         queryBuilder
                 .table("events")
@@ -65,25 +90,16 @@ public class EventRepository {
                 .delete();
     }
 
-    private Event mapModel(ResultSet resultSet, int id) throws SQLException {
-        String name = resultSet.getString("name");
-        LocalDateTime date = resultSet.getTimestamp("start_date").toLocalDateTime();
-        String location = resultSet.getString("location");
-        String description = resultSet.getString("description");
-
-
-        return new Event(id, name, date, location, description);
-    }
-
-    public void updateEvent(Event event) {
+    @Override
+    public void update(Event event) {
         // Use QueryBuilder to construct the update query
-        queryBuilder
-                .table("events")  // Table to update
-                .set("name", event.getName())  // Set the name column
-                .set("start_date", event.getDate())  // Set the date column
-                .set("location", event.getLocation())  // Set the location column
-                .set("description", event.getDescription())  // Set the description column
-                .where("id", "=", event.getId());  // Only update where the event ID matches
+            queryBuilder
+                .table("events")
+                .set("name", event.getName())
+                .set("start_date", event.getDate())
+                .set("location", event.getLocation())
+                .set("description", event.getDescription())
+                .where("id", "=", event.getId());
 
         // Execute the update
         boolean success = queryBuilder.update();
@@ -95,7 +111,8 @@ public class EventRepository {
         }
     }
 
-    public Event createEvent(Event event) {
+    @Override
+    public Event create(Event event) {
         ResultSet resultSet = queryBuilder
                 .table("events")
                 .insert("name", event.getName())
@@ -114,7 +131,8 @@ public class EventRepository {
         return null;
     }
 
-    public boolean addCoordinator(Event event, User user) {
+    @Override
+    public boolean assignCoordinator(Event event, User user) {
         return queryBuilder
                 .table("event_user")
                 .insert("event_id", event.getId())
@@ -149,4 +167,14 @@ public class EventRepository {
 
 
 
+
+    private Event mapModel(ResultSet resultSet, int id) throws SQLException {
+        String name = resultSet.getString("name");
+        LocalDateTime date = resultSet.getTimestamp("start_date").toLocalDateTime();
+        String location = resultSet.getString("location");
+        String description = resultSet.getString("description");
+
+
+        return new Event(id, name, date, location, description);
+    }
 }

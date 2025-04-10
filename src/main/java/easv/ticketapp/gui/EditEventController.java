@@ -23,6 +23,7 @@ public class EditEventController {
     private TextArea descriptionTextArea;
     @FXML
     private DateTimePicker dateTimePicker;
+
     private Event event;
 
     public void setEditEvent(Event event) {
@@ -83,7 +84,7 @@ public class EditEventController {
 
     private boolean updateEventInDatabase(Event event) {
         try {
-            eventRepository.updateEvent(event);
+            eventRepository.update(event);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

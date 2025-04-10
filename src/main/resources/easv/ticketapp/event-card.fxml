@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<?import java.lang.String?>
 <HBox fx:id="eventCardContainer" alignment="CENTER" minWidth="-Infinity" prefHeight="40.0" style="-fx-background-color: white;" styleClass="card-cell" stylesheets="@../../css/card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easv.ticketapp.gui.EventCardController">
     <children>
         <!-- Name HBox -->
@@ -33,25 +35,46 @@
             </children>
         </HBox>
         <!-- Edit and Delete buttons HBox -->
-        <HBox fx:id="actionsContainer" alignment="CENTER" minWidth="120.0" spacing="10.0" HBox.hgrow="ALWAYS">
+        <HBox fx:id="actionsContainer" alignment="CENTER" minWidth="120.0" spacing="10.0" stylesheets="@../../css/event-card.css" HBox.hgrow="ALWAYS">
             <children>
-                <Button fx:id="ticketsBtn" mnemonicParsing="false" onAction="#onTickets" styleClass="main-btn" text="Tickets" >
+                <Button fx:id="ticketsBtn" mnemonicParsing="false" onAction="#onTickets" prefHeight="10.0" prefWidth="15.0" styleClass="main-btn">
                     <styleClass>
-                        <String fx:value="main-btn" />
+                        <String fx:value="event-btn" />
                         <String fx:value="main-btn-login" />
                     </styleClass>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/tickets_checked_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Button>
-                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleEditEvent" styleClass="main-btn" text="Edit" >
-                    <styleClass>
-                        <String fx:value="main-btn" />
-                        <String fx:value="main-btn-login" />
-                    </styleClass>
+                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleEditEvent">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/edit_pencil_write_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="event-btn" />
+                  <String fx:value="main-btn-login" />
+               </styleClass>
                 </Button>
-                <Button fx:id="deleteBtn" mnemonicParsing="false" styleClass="main-btn" text="Delete" >
+                <Button fx:id="deleteBtn" mnemonicParsing="false" styleClass="main-btn">
                     <styleClass>
                         <String fx:value="main-btn" />
                         <String fx:value="main-btn-delete" />
                     </styleClass>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/remove_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Button>
             </children>
             <padding>

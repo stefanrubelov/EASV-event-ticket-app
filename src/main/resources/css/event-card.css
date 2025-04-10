@@ -1,0 +1,24 @@
+/* Modern styling for buttons */
+.event-btn {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-width: 1px;
+    -fx-padding: 10px 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 4);
+    -fx-transition: all 0.3s ease;
+}
+
+
+/* Hover effect for added interactivity */
+.event-btn:hover{
+    -fx-background-color: rgba(40, 200, 250, 0.8);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, 0, 6);
+    -fx-translate-y: -2px;
+}
+
+/* Active state when button is clicked */
+.event-btn:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 2);
+    -fx-translate-y: 1px;
+}

@@ -1,5 +1,6 @@
 package easv.ticketapp.dal.db;
 
+import easv.ticketapp.be.Event;
 import easv.ticketapp.be.User;
 
 import java.sql.ResultSet;
@@ -10,11 +11,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserRepository {
-
+public class UserRepository implements easv.ticketapp.dal.db.interaces.UserRepository {
     private final QueryBuilder queryBuilder = new QueryBuilder();
     final private Logger logger = Logger.getAnonymousLogger();
 
+    @Override
     public User findByEmail(String email) {
         User user = null;
         ResultSet result = queryBuilder.from("users")
@@ -41,6 +42,7 @@ public class UserRepository {
         return user;
     }
 
+    @Override
     public List<User> getAllCoordinators() {
         List<User> users = new ArrayList<>();
 
@@ -51,7 +53,7 @@ public class UserRepository {
                 .get()) {
 
             while (rs != null && rs.next()) {
-                User user = mapModel(rs, rs.getInt("id"));
+                User user = mapModel(rs);
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -61,6 +63,48 @@ public class UserRepository {
         return users;
     }
 
+    @Override
+    public User getById(int id) {
+        User user = null;
+        ResultSet resultSet = queryBuilder
+                .table("users")
+                .select("*")
+                .where("id", "=", id)
+                .get();
+
+        try {
+            while (resultSet.next()) {
+                user = mapModel(resultSet);
+                user.setUserType(resultSet.getInt("user_type"));
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return user;
+    }
+
+    @Override
+    public List<User> getAll() {
+        List<User> users = new ArrayList<>();
+
+        try (ResultSet rs = queryBuilder
+                .select("*")
+                .from("users")
+                .get()) {
+
+            while (rs != null && rs.next()) {
+                User user = mapModel(rs);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return users;
+    }
+
+    @Override
     public void delete(int id) {
         queryBuilder
                 .table("users")
@@ -68,17 +112,23 @@ public class UserRepository {
                 .delete();
     }
 
-    private User mapModel(ResultSet rs, int id) throws SQLException {
-        String name = rs.getString("name");
-        String email = rs.getString("email");
-        String password = rs.getString("password");
-        int userType = rs.getInt("user_type");
-        Timestamp createdAt = rs.getTimestamp("created_at");
-        Timestamp updatedAt = rs.getTimestamp("updated_at");
-
-        return new User(id, name, email, password, userType, createdAt.toLocalDateTime(), updatedAt.toLocalDateTime());
+    @Override
+    public void update(User entity) {
+        try {
+            queryBuilder
+                    .table("users")
+                    .set("name", entity.getName())
+                    .set("email", entity.getEmail())
+                    .set("password", entity.getPassword())
+                    .set("user_type", entity.getUserType())
+                    .where("id", "=", entity.getId())
+                    .update();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
+    @Override
     public User create(User user) {
         User newCoordinator = null;
         ResultSet resultSet = queryBuilder.table("users")
@@ -101,6 +151,7 @@ public class UserRepository {
         return newCoordinator;
     }
 
+    @Override
     public boolean updatePassword(User user, String password) {
         return queryBuilder.table("users")
                 .set("password", password)
@@ -108,11 +159,31 @@ public class UserRepository {
                 .update();
     }
 
-    public boolean update(User user) {
-        return queryBuilder
-                .table("users")
-                .set("name", user.getName())
-                .set("email", user.getEmail())
-                .update();
+    @Override
+    public boolean addCoordinator(Event event, User user) {
+        try {
+            queryBuilder.table("event_user")
+                    .insert("event_id", event.getId())
+                    .insert("user_id", user.getId())
+                    .save();
+
+            return true;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+            return false;
+        }
     }
+
+    private User mapModel(ResultSet rs) throws SQLException {
+        String name = rs.getString("name");
+        String email = rs.getString("email");
+        String password = rs.getString("password");
+        int userType = rs.getInt("user_type");
+        Timestamp createdAt = rs.getTimestamp("created_at");
+        Timestamp updatedAt = rs.getTimestamp("updated_at");
+
+        return new User(name, email, password, userType, createdAt.toLocalDateTime(), updatedAt.toLocalDateTime());
+    }
+
 }
+

@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TicketRepository {
+public class TicketRepository implements easv.ticketapp.dal.db.interaces.TicketRepository {
     final private QueryBuilder queryBuilder = new QueryBuilder();
     final private Logger logger = Logger.getAnonymousLogger();
 
+    @Override
     public Ticket create(Ticket ticket) {
         Ticket newTicket = null;
         ResultSet resultSet = queryBuilder.table("tickets")
@@ -37,29 +38,94 @@ public class TicketRepository {
         return newTicket;
     }
 
-    public List<Ticket> getEventTickets(int eventId) {
-        List<Ticket> tickets = new ArrayList<>();
+    @Override
+    public Ticket getById(int id) {
+        Ticket ticket = null;
         ResultSet resultSet = queryBuilder
                 .table("tickets")
                 .select("tickets.id", "tickets.event_id", "tickets.price", "tickets.description", "tickets.ticket_type_id, ticket_types.type as ticket_type, events.name as event_name, events.start_date as start_date, events.description as event_description, events.location as event_location")
                 .join("ticket_types", "ticket_types.id = tickets.ticket_type_id", "INNER")
                 .join("events", "events.id = tickets.event_id", "INNER")
-                .where("event_id", "=", eventId)
+                .where("tickets.id", "=", id)
                 .get();
 
         try {
             while (resultSet.next()) {
-                Ticket newTicket = mapModel(resultSet);
-                newTicket.setTicketType(new TicketType(resultSet.getString("ticket_type")));
+                ticket = mapModel(resultSet);
+                ticket.setTicketType(new TicketType(resultSet.getString("ticket_type")));
                 Event event = new Event(resultSet.getInt("event_id"), resultSet.getString("event_name"), resultSet.getTimestamp("start_date").toLocalDateTime(), resultSet.getString("event_location"), resultSet.getString("event_description"));
-                newTicket.setEvent(event);
-                tickets.add(newTicket);
+                ticket.setEvent(event);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return ticket;
+    }
+
+    @Override
+    public List<Ticket> getEventTickets(int eventId) {
+        List<Ticket> tickets = new ArrayList<>();
+
+        try (ResultSet rs = queryBuilder
+                .select("*")
+                .from("tickets")
+                .where("event_id","=",eventId)
+                .get()) {
+
+            while (rs != null && rs.next()) {
+                Ticket ticket = mapModel(rs);
+                tickets.add(ticket);
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
 
         return tickets;
+    }
+
+    @Override
+    public TicketType fetchTicketType(int ticketTypeId) {
+        return easv.ticketapp.dal.db.interaces.TicketRepository.super.fetchTicketType(ticketTypeId);
+    }
+
+    @Override
+    public Event fetchEvent(int eventId) {
+        return easv.ticketapp.dal.db.interaces.TicketRepository.super.fetchEvent(eventId);
+    }
+
+
+    @Override
+    public List<Ticket> getAll() {
+        List<Ticket> tickets = new ArrayList<>();
+
+        try (ResultSet rs = queryBuilder
+                .select("*")
+                .from("tickets")
+                .get()) {
+
+            while (rs != null && rs.next()) {
+                Ticket ticket = mapModel(rs);
+                tickets.add(ticket);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return tickets;
+    }
+
+    @Override
+    public void delete(int id) {
+        queryBuilder
+                .table("tickets")
+                .where("id", "=", id)
+                .delete();
+    }
+
+    @Override
+    public void update(Ticket entity) {
+
     }
 
     private Ticket mapModel(ResultSet rs) throws SQLException {
@@ -74,18 +140,4 @@ public class TicketRepository {
         return new Ticket(id, event, price, description, ticketType);
     }
 
-    private TicketType fetchTicketType(int ticketTypeId) {
-        return new TicketType(ticketTypeId);
-    }
-
-    private Event fetchEvent(int eventId) {
-        return new Event(eventId);
-    }
-
-    public void delete(int id) {
-        queryBuilder
-                .table("tickets")
-                .where("id", "=", id)
-                .delete();
-    }
 }

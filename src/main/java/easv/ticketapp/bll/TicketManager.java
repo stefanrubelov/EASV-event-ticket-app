@@ -20,8 +20,8 @@ public class TicketManager {
         ticketRepository.create(newTicket);
     }
 
-    public List<Ticket> getTicketsByEvent(Integer eventId) {
-        return ticketRepository.getEventTickets(eventId);
+    public List<Ticket> getTicketsByEvent(int id) {
+        return ticketRepository.getEventTickets(id);
     }
 
     public void deleteTicket(Ticket ticket) {
