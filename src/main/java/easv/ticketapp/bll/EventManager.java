@@ -24,7 +24,7 @@ public class EventManager {
         boolean newEventCoordinator = false;
         if (newEvent != null) {
 
-            newEventCoordinator = eventRepositoryImp.addCoordinator(newEvent, user);
+            newEventCoordinator = eventRepositoryImp.assignCoordinator(newEvent, user);
         }
 
         if (newEventCoordinator) {

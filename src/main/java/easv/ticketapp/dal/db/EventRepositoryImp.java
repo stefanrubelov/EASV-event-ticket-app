@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,8 +17,25 @@ public class EventRepositoryImp implements EventRepository {
     final private Logger logger = Logger.getAnonymousLogger();
 
     @Override
-    public List<Event> getById(int id) {
-        return List.of();
+    public Event getById(int id) {
+        Event event = null;
+        ResultSet resultSet = queryBuilder
+                .from("events")
+                .select("*")
+                .where("id", "=", id)
+                .get();
+
+        try {
+            while (resultSet.next()) {
+                event = mapModel(resultSet, resultSet.getInt("id"));
+            }
+
+            return event;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+
+            return event;
+        }
     }
 
     @Override
@@ -112,7 +130,7 @@ public class EventRepositoryImp implements EventRepository {
     }
 
     @Override
-    public boolean addCoordinator(Event event, User user) {
+    public boolean assignCoordinator(Event event, User user) {
         return queryBuilder
                 .table("event_user")
                 .insert("event_id", event.getId())

@@ -49,6 +49,15 @@ public class User {
         this.userType = userType;
     }
 
+    public User(String name, String email, String password, int userType, LocalDateTime localDateTime, LocalDateTime localDateTime1) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+        this.createdAt = localDateTime;
+        this.updatedAt = localDateTime1;
+    }
+
     public int getId() {
         return id;
     }

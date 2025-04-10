@@ -2,12 +2,15 @@ package easv.ticketapp.dal.db;
 
 import easv.ticketapp.be.Event;
 import easv.ticketapp.be.User;
+import easv.ticketapp.be.ticket.Ticket;
+import easv.ticketapp.be.ticket.TicketType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,7 +57,7 @@ public class UserRepositoryImp implements UserRepository {
                 .get()) {
 
             while (rs != null && rs.next()) {
-                User user = mapModel(rs, rs.getInt("id"));
+                User user = mapModel(rs);
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -65,13 +68,44 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
-    public List<User> getById(int id) {
-        return List.of();
+    public User getById(int id) {
+        User user = null;
+        ResultSet resultSet = queryBuilder
+                .table("users")
+                .select("*")
+                .where("id", "=", id)
+                .get();
+
+        try {
+            while (resultSet.next()) {
+                user = mapModel(resultSet);
+                user.setUserType(resultSet.getInt("user_type"));
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return user;
     }
 
     @Override
     public List<User> getAll() {
-        return List.of();
+        List<User> users = new ArrayList<>();
+
+        try (ResultSet rs = queryBuilder
+                .select("*")
+                .from("users")
+                .get()) {
+
+            while (rs != null && rs.next()) {
+                User user = mapModel(rs);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return users;
     }
 
     @Override
@@ -145,7 +179,7 @@ public class UserRepositoryImp implements UserRepository {
         }
     }
 
-    private User mapModel(ResultSet rs, int id) throws SQLException {
+    private User mapModel(ResultSet rs) throws SQLException {
         String name = rs.getString("name");
         String email = rs.getString("email");
         String password = rs.getString("password");
@@ -153,7 +187,7 @@ public class UserRepositoryImp implements UserRepository {
         Timestamp createdAt = rs.getTimestamp("created_at");
         Timestamp updatedAt = rs.getTimestamp("updated_at");
 
-        return new User(id, name, email, password, userType, createdAt.toLocalDateTime(), updatedAt.toLocalDateTime());
+        return new User(name, email, password, userType, createdAt.toLocalDateTime(), updatedAt.toLocalDateTime());
     }
 
 }

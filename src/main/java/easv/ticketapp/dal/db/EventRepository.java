@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EventRepository extends BaseRepository<Event> {
     List<Event> getAllByUserId(int userId);
-    boolean addCoordinator(Event event, User user);
+    boolean assignCoordinator(Event event, User user);
 }

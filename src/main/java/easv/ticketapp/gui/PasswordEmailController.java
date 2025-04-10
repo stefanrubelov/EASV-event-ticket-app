@@ -128,7 +128,7 @@ public class PasswordEmailController {
             if (exists) {
                 PageManager.passwordResetView(event, user);
             } else {
-                tokenMessageLbl.setText("Invalid or expired token");
+                tokenMessageLbl.setText("Invalid or expired recovery code");
                 tokenField.setStyle("-fx-border-color: red;");
             }
         }
@@ -168,7 +168,7 @@ public class PasswordEmailController {
         tokenMessageLbl.setText("");
 
         if (token == null || token.trim().isEmpty()) {
-            tokenMessageLbl.setText("Token is required");
+            tokenMessageLbl.setText("Recovery code is required");
             tokenField.setStyle("-fx-border-color: red;");
             return false;
         }

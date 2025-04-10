@@ -39,23 +39,43 @@ public class TicketRepositoryImp implements TicketRepository {
     }
 
     @Override
-    public List<Ticket> getById(int id) {
-        List<Ticket> tickets = new ArrayList<>();
+    public Ticket getById(int id) {
+        Ticket ticket = null;
         ResultSet resultSet = queryBuilder
                 .table("tickets")
                 .select("tickets.id", "tickets.event_id", "tickets.price", "tickets.description", "tickets.ticket_type_id, ticket_types.type as ticket_type, events.name as event_name, events.start_date as start_date, events.description as event_description, events.location as event_location")
                 .join("ticket_types", "ticket_types.id = tickets.ticket_type_id", "INNER")
                 .join("events", "events.id = tickets.event_id", "INNER")
-                .where("event_id", "=", id)
+                .where("tickets.id", "=", id)
                 .get();
 
         try {
             while (resultSet.next()) {
-                Ticket newTicket = mapModel(resultSet);
-                newTicket.setTicketType(new TicketType(resultSet.getString("ticket_type")));
+                ticket = mapModel(resultSet);
+                ticket.setTicketType(new TicketType(resultSet.getString("ticket_type")));
                 Event event = new Event(resultSet.getInt("event_id"), resultSet.getString("event_name"), resultSet.getTimestamp("start_date").toLocalDateTime(), resultSet.getString("event_location"), resultSet.getString("event_description"));
-                newTicket.setEvent(event);
-                tickets.add(newTicket);
+                ticket.setEvent(event);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return ticket;
+    }
+
+    @Override
+    public List<Ticket> getEventTickets(int eventId) {
+        List<Ticket> tickets = new ArrayList<>();
+
+        try (ResultSet rs = queryBuilder
+                .select("*")
+                .from("tickets")
+                .where("event_id","=",eventId)
+                .get()) {
+
+            while (rs != null && rs.next()) {
+                Ticket ticket = mapModel(rs);
+                tickets.add(ticket);
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
@@ -77,7 +97,22 @@ public class TicketRepositoryImp implements TicketRepository {
 
     @Override
     public List<Ticket> getAll() {
-        return List.of();
+        List<Ticket> tickets = new ArrayList<>();
+
+        try (ResultSet rs = queryBuilder
+                .select("*")
+                .from("tickets")
+                .get()) {
+
+            while (rs != null && rs.next()) {
+                Ticket ticket = mapModel(rs);
+                tickets.add(ticket);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return tickets;
     }
 
     @Override

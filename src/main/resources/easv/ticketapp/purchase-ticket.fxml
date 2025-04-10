@@ -52,7 +52,7 @@
                <String fx:value="main-btn-goback" />
             </styleClass>
             <graphic>
-               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../../images/arrow_go_back_fill_icon.png" />
                   </image>
@@ -61,37 +61,37 @@
          </Button>
         </VBox>
         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePrintTicketAction" prefHeight="50.0" prefWidth="50.0">
+            <Button alignment="TOP_LEFT" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePrintTicketAction" text="Export to PDF">
             <styleClass>
                <String fx:value="main-btn" />
                <String fx:value="main-btn-login" />
             </styleClass>
             <graphic>
-               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../../images/pdf_icon.png" />
                   </image>
                </ImageView>
             </graphic></Button>
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEmailTicketAction" prefHeight="50.0" prefWidth="50.0">
+            <Button alignment="TOP_LEFT" graphicTextGap="5.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEmailTicketAction" prefWidth="123.0" text="Send email">
             <styleClass>
                <String fx:value="main-btn" />
                <String fx:value="main-btn-login" />
             </styleClass>
             <graphic>
-               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../../images/send_email_icon.png" />
                   </image>
                </ImageView>
             </graphic></Button>
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePreviewTicketAction" prefHeight="50.0" prefWidth="50.0">
+            <Button alignment="TOP_LEFT" graphicTextGap="7.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePreviewTicketAction" prefHeight="38.0" prefWidth="123.0" text="Preview">
             <styleClass>
                <String fx:value="main-btn" />
                <String fx:value="main-btn-preview" />
             </styleClass>
             <graphic>
-               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../../images/preview_icon.png" />
                   </image>

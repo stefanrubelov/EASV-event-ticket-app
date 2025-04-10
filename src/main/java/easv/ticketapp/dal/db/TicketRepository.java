@@ -7,7 +7,7 @@ import easv.ticketapp.be.ticket.TicketType;
 import java.util.List;
 
 public interface TicketRepository extends BaseRepository<Ticket> {
-    //List<Ticket> getEventTickets(int eventId);
+    List<Ticket> getEventTickets(int eventId);
 
     default TicketType fetchTicketType(int ticketTypeId) {
         return new TicketType(ticketTypeId);

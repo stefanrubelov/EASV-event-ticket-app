@@ -53,22 +53,22 @@
                   <String fx:value="main-btn-goback" />
                </styleClass>
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/arrow_go_back_fill_icon.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
             <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#onSaveAction">
+            <Button mnemonicParsing="false" onAction="#onSaveAction" text="Save">
                <styleClass>
                   <String fx:value="main-btn" />
                   <String fx:value="main-btn-login" />
                </styleClass>
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/save_icon.png" />
+                        <Image url="@../../images/check-svgrepo-com.png" />
                      </image>
                   </ImageView>
                </graphic></Button>

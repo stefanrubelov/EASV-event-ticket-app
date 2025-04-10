@@ -28,7 +28,7 @@
                 <String fx:value="main-btn-login" />
             </styleClass>
          <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/buy_icon.png" />
                </image>
@@ -41,7 +41,7 @@
                 <String fx:value="main-btn-login" />
             </styleClass>
          <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/preview_icon.png" />
                </image>
@@ -54,7 +54,7 @@
                 <String fx:value="main-btn-delete" />
             </styleClass>
          <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/remove_icon.png" />
                </image>

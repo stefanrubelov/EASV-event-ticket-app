@@ -65,27 +65,27 @@
         </VBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="534.0" spacing="20.0" VBox.vgrow="NEVER">
             <children>
-            <Button alignment="TOP_LEFT" layoutX="414.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPreview">
+            <Button alignment="TOP_LEFT" layoutX="414.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPreview" text="Preview">
                <styleClass>
                   <String fx:value="main-btn" />
                   <String fx:value="main-btn-preview" />
                </styleClass>
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/preview_icon.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-                <Button mnemonicParsing="false" onAction="#onSubmit">
+                <Button mnemonicParsing="false" onAction="#onSubmit" text="Save">
                <styleClass>
                   <String fx:value="main-btn" />
                   <String fx:value="main-btn-login" />
                </styleClass>
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/save_icon.png" />
+                        <Image url="@../../images/check-svgrepo-com.png" />
                      </image>
                   </ImageView>
                </graphic></Button>

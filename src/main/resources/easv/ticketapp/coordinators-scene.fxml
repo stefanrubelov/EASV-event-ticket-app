@@ -31,13 +31,13 @@
             </font>
         </Text>
         <Region minWidth="-Infinity" HBox.hgrow="ALWAYS" />
-        <Button mnemonicParsing="false" onAction="#handleCreateCoordinatorBtn">
+        <Button mnemonicParsing="false" onAction="#handleCreateCoordinatorBtn" text="Add user">
          <styleClass>
             <String fx:value="main-btn" />
             <String fx:value="main-btn-login" />
          </styleClass>
          <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/person_plus_icon.png" />
                </image>

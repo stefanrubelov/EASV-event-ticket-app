@@ -6,6 +6,7 @@ import easv.ticketapp.dal.db.TicketRepositoryImp;
 import easv.ticketapp.dal.db.TicketTypeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TicketManager {
 
@@ -21,7 +22,7 @@ public class TicketManager {
     }
 
     public List<Ticket> getTicketsByEvent(int id) {
-        return ticketRepositoryImp.getById(id);
+        return ticketRepositoryImp.getEventTickets(id);
     }
 
     public void deleteTicket(Ticket ticket) {
