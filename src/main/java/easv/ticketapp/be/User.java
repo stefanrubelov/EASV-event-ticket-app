@@ -13,6 +13,7 @@ public class User {
     private int userType;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String picture;
 
     /**
      * @param id        int
@@ -22,8 +23,9 @@ public class User {
      * @param userType  int
      * @param createdAt LocalDateTime
      * @param updatedAt LocalDateTime
+     * @param picture String
      */
-    public User(int id, String name, String email, String password, int userType, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(int id, String name, String email, String password, int userType, LocalDateTime createdAt, LocalDateTime updatedAt, String picture) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -31,6 +33,7 @@ public class User {
         this.userType = userType;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.picture = picture;
     }
 
     public User(int id) {
@@ -50,13 +53,14 @@ public class User {
         this.userType = userType;
     }
 
-    public User(String name, String email, String password, int userType, LocalDateTime localDateTime, LocalDateTime localDateTime1) {
+    public User(String name, String email, String password, int userType, LocalDateTime localDateTime, LocalDateTime localDateTime1, String picture) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.userType = userType;
         this.createdAt = localDateTime;
         this.updatedAt = localDateTime1;
+        this.picture = picture;
     }
 
     public int getId() {
@@ -121,6 +125,14 @@ public class User {
 
     public boolean isCoordinator() {
         return userType == COORDINATOR_TYPE;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     @Override

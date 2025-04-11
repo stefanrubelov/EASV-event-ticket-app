@@ -61,6 +61,9 @@ public class PageManager {
 
             stage.centerOnScreen();
             stage.show();
+            // Close the old stage
+            Stage oldStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            oldStage.close();
 
             return sceneLoader;
         } catch (IOException e) {
@@ -94,10 +97,6 @@ public class PageManager {
     public static FXMLLoader coordinatorsView(ActionEvent event) {
         currentView = "events";
         return switchView("/easv/ticketapp/event-scene.fxml", event, "Events");
-    }
-
-    public static FXMLLoader ticketView(ActionEvent event) {
-        return switchView("/easv/ticketapp/ticket-scene.fxml", event, "Tickets");
     }
 
     public static FXMLLoader assignCoordinatorView(ActionEvent event) {

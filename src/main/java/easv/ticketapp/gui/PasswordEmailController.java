@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,7 +17,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import net.synedra.validatorfx.Validator;
 
-public class PasswordEmailController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PasswordEmailController implements Initializable {
     private final PasswordResetService passwordResetService = new PasswordResetService();
     private final UserService userService = new UserService();
     private final Validator validator = new Validator();
@@ -43,16 +47,6 @@ public class PasswordEmailController {
 
     @FXML
     private Button submitBtn;
-
-    @FXML
-    public void initialize() {
-        Platform.runLater(() -> {
-            Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
-            if (stage != null) {
-                stage.setResizable(false);
-            }
-        });
-    }
 
     @FXML
     public void handleSubmitAction(ActionEvent event) {
@@ -187,5 +181,15 @@ public class PasswordEmailController {
     @FXML
     public void backBtn(ActionEvent event) {
         PageManager.loginView(event);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Platform.runLater(() -> {
+            Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
+            if (stage != null) {
+                stage.setResizable(false);
+            }
+        });
     }
 }
