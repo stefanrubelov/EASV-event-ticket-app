@@ -55,6 +55,7 @@ public class UserRepository implements easv.ticketapp.dal.db.interaces.UserRepos
 
             while (rs != null && rs.next()) {
                 User user = mapModel(rs);
+                user.setId(rs.getInt("id"));
                 users.add(user);
             }
         } catch (SQLException e) {

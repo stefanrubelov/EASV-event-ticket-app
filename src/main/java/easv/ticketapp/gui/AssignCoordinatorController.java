@@ -49,7 +49,6 @@ public class AssignCoordinatorController {
     private void onSaveClicked() {
         Event selectedEvent = eventListView.getSelectionModel().getSelectedItem();
         User selectedCoordinator = coordinatorListView.getSelectionModel().getSelectedItem();
-
         if (selectedEvent == null || selectedCoordinator == null) {
             errorLbl.setText("Please select both an event and a coordinator.");
             return;
